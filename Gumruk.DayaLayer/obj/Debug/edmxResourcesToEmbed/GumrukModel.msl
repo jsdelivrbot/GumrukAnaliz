@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GumrukDBModelStoreContainer" CdmEntityContainer="GumrukDBContext">
+    <EntitySetMapping Name="app_module_procedures">
+      <EntityTypeMapping TypeName="GumrukDBModel.app_module_procedures">
+        <MappingFragment StoreEntitySet="app_module_procedures">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="db_schema_procedure_id" ColumnName="db_schema_procedure_id" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customs_articles">
+      <EntityTypeMapping TypeName="GumrukDBModel.customs_articles">
+        <MappingFragment StoreEntitySet="customs_articles">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="no" ColumnName="no" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customs_circulars">
+      <EntityTypeMapping TypeName="GumrukDBModel.customs_circulars">
+        <MappingFragment StoreEntitySet="customs_circulars">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customs_codes">
+      <EntityTypeMapping TypeName="GumrukDBModel.customs_codes">
+        <MappingFragment StoreEntitySet="customs_codes">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_b_column_types">
+      <EntityTypeMapping TypeName="GumrukDBModel.d_b_column_types">
+        <MappingFragment StoreEntitySet="d_b_column_types">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_b_schema_procedures">
+      <EntityTypeMapping TypeName="GumrukDBModel.d_b_schema_procedures">
+        <MappingFragment StoreEntitySet="d_b_schema_procedures">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_b_schemas">
+      <EntityTypeMapping TypeName="GumrukDBModel.d_b_schemas">
+        <MappingFragment StoreEntitySet="d_b_schemas">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="details" ColumnName="details" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_b_tables">
+      <EntityTypeMapping TypeName="GumrukDBModel.d_b_tables">
+        <MappingFragment StoreEntitySet="d_b_tables">
+          <ScalarProperty Name="isView" ColumnName="isView" />
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="d_b_schemasId" ColumnName="d_b_schemasId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="details" ColumnName="details" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="migrations">
+      <EntityTypeMapping TypeName="GumrukDBModel.migrations">
+        <MappingFragment StoreEntitySet="migrations">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="migration" ColumnName="migration" />
+          <ScalarProperty Name="batch" ColumnName="batch" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="GumrukDBModel.users">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="remember_token" ColumnName="remember_token" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="password_resets">
+      <EntityTypeMapping TypeName="GumrukDBModel.password_resets">
+        <MappingFragment StoreEntitySet="password_resets">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_b_columns">
+      <EntityTypeMapping TypeName="GumrukDBModel.d_b_columns">
+        <MappingFragment StoreEntitySet="d_b_columns">
+          <ScalarProperty Name="samenameexist" ColumnName="samenameexist" />
+          <ScalarProperty Name="tobe" ColumnName="tobe" />
+          <ScalarProperty Name="isprimary" ColumnName="isprimary" />
+          <ScalarProperty Name="distinctnum" ColumnName="distinctnum" />
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="precision" ColumnName="precision" />
+          <ScalarProperty Name="isunique" ColumnName="isunique" />
+          <ScalarProperty Name="d_b_tablesId" ColumnName="d_b_tablesId" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="isnull" ColumnName="isnull" />
+          <ScalarProperty Name="scale" ColumnName="scale" />
+          <ScalarProperty Name="length" ColumnName="length" />
+          <ScalarProperty Name="db_column_type_id" ColumnName="db_column_type_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_b_column_lookups">
+      <EntityTypeMapping TypeName="GumrukDBModel.d_b_column_lookups">
+        <MappingFragment StoreEntitySet="d_b_column_lookups">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="explanation" ColumnName="explanation" />
+          <ScalarProperty Name="column_to_id" ColumnName="column_to_id" />
+          <ScalarProperty Name="column_from_id" ColumnName="column_from_id" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_b_table_explanation">
+      <EntityTypeMapping TypeName="GumrukDBModel.d_b_table_explanation">
+        <MappingFragment StoreEntitySet="d_b_table_explanation">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="details" ColumnName="details" />
+          <ScalarProperty Name="db_table_id" ColumnName="db_table_id" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_b_column_explanations">
+      <EntityTypeMapping TypeName="GumrukDBModel.d_b_column_explanations">
+        <MappingFragment StoreEntitySet="d_b_column_explanations">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="details" ColumnName="details" />
+          <ScalarProperty Name="db_column_id" ColumnName="db_column_id" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="app_base_modules">
+      <EntityTypeMapping TypeName="GumrukDBModel.app_base_modules">
+        <MappingFragment StoreEntitySet="app_base_modules">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="app_module_operations">
+      <EntityTypeMapping TypeName="GumrukDBModel.app_module_operations">
+        <MappingFragment StoreEntitySet="app_module_operations">
+          <ScalarProperty Name="Explanation" ColumnName="Explanation" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="app_sub_module_id" ColumnName="app_sub_module_id" />
+          <ScalarProperty Name="query" ColumnName="query" />
+          <ScalarProperty Name="operation" ColumnName="operation" />
+          <ScalarProperty Name="d_b_tables_id" ColumnName="d_b_tables_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="app_sub_modules">
+      <EntityTypeMapping TypeName="GumrukDBModel.app_sub_modules">
+        <MappingFragment StoreEntitySet="app_sub_modules">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="app_base_module_id" ColumnName="app_base_module_id" />
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_b_column_links">
+      <EntityTypeMapping TypeName="GumrukDBModel.d_b_column_links">
+        <MappingFragment StoreEntitySet="d_b_column_links">
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="column_to_id" ColumnName="column_to_id" />
+          <ScalarProperty Name="column_from_id" ColumnName="column_from_id" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ERxml">
+      <EntityTypeMapping TypeName="GumrukDBModel.ERxml">
+        <MappingFragment StoreEntitySet="ERxml">
+          <ScalarProperty Name="ErName" ColumnName="ErName" />
+          <ScalarProperty Name="xmlData" ColumnName="xmlData" />
+          <ScalarProperty Name="tablesid" ColumnName="tablesid" />
+          <ScalarProperty Name="schemaid" ColumnName="schemaid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GumrukIdareleri">
+      <EntityTypeMapping TypeName="GumrukDBModel.GumrukIdareleri">
+        <MappingFragment StoreEntitySet="GumrukIdareleri">
+          <ScalarProperty Name="GumrukIdaresiAdi" ColumnName="GumrukIdaresiAdi" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KimlikTurleri">
+      <EntityTypeMapping TypeName="GumrukDBModel.KimlikTurleri">
+        <MappingFragment StoreEntitySet="KimlikTurleri">
+          <ScalarProperty Name="KimlikTuru" ColumnName="KimlikTuru" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Limanlar">
+      <EntityTypeMapping TypeName="GumrukDBModel.Limanlar">
+        <MappingFragment StoreEntitySet="Limanlar">
+          <ScalarProperty Name="LimanKodu" ColumnName="LimanKodu" />
+          <ScalarProperty Name="LimanAdi" ColumnName="LimanAdi" />
+          <ScalarProperty Name="UlkeID" ColumnName="UlkeID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OzelTuzelSahis">
+      <EntityTypeMapping TypeName="GumrukDBModel.OzelTuzelSahis">
+        <MappingFragment StoreEntitySet="OzelTuzelSahis">
+          <ScalarProperty Name="Faks" ColumnName="Faks" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="UlkeID" ColumnName="UlkeID" />
+          <ScalarProperty Name="PostaKodu" ColumnName="PostaKodu" />
+          <ScalarProperty Name="İlIlce" ColumnName="İlIlce" />
+          <ScalarProperty Name="CaddeSokak" ColumnName="CaddeSokak" />
+          <ScalarProperty Name="AdiUnvani" ColumnName="AdiUnvani" />
+          <ScalarProperty Name="VergiDairesiKodu" ColumnName="VergiDairesiKodu" />
+          <ScalarProperty Name="KimlikNo" ColumnName="KimlikNo" />
+          <ScalarProperty Name="KimlikTurID" ColumnName="KimlikTurID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OzetBeyan">
+      <EntityTypeMapping TypeName="GumrukDBModel.OzetBeyan">
+        <MappingFragment StoreEntitySet="OzetBeyan">
+          <ScalarProperty Name="Diger" ColumnName="Diger" />
+          <ScalarProperty Name="EmniyetGuvenlik" ColumnName="EmniyetGuvenlik" />
+          <ScalarProperty Name="Kurye" ColumnName="Kurye" />
+          <ScalarProperty Name="TirAtaKarneNo" ColumnName="TirAtaKarneNo" />
+          <ScalarProperty Name="GrupTasimaSenediNo" ColumnName="GrupTasimaSenediNo" />
+          <ScalarProperty Name="OncekiBeyanNoAnaKonsimentoNo" ColumnName="OncekiBeyanNoAnaKonsimentoNo" />
+          <ScalarProperty Name="TasitID" ColumnName="TasitID" />
+          <ScalarProperty Name="TasiyiciFirmaId" ColumnName="TasiyiciFirmaId" />
+          <ScalarProperty Name="BeyanSahibiId" ColumnName="BeyanSahibiId" />
+          <ScalarProperty Name="BosaltmaLimanıId" ColumnName="BosaltmaLimanıId" />
+          <ScalarProperty Name="BosaltmaUlkesiId" ColumnName="BosaltmaUlkesiId" />
+          <ScalarProperty Name="YukelemeLimaniId" ColumnName="YukelemeLimaniId" />
+          <ScalarProperty Name="YuklemeUlkesiId" ColumnName="YuklemeUlkesiId" />
+          <ScalarProperty Name="KapanisTarihi" ColumnName="KapanisTarihi" />
+          <ScalarProperty Name="OnayTarihi" ColumnName="OnayTarihi" />
+          <ScalarProperty Name="TescilTarihi" ColumnName="TescilTarihi" />
+          <ScalarProperty Name="IlkVarisCikisYeri" ColumnName="IlkVarisCikisYeri" />
+          <ScalarProperty Name="EkBelgeSayisi" ColumnName="EkBelgeSayisi" />
+          <ScalarProperty Name="KalemSayisi" ColumnName="KalemSayisi" />
+          <ScalarProperty Name="GumrukIdaresi" ColumnName="GumrukIdaresi" />
+          <ScalarProperty Name="TasimaSekli" ColumnName="TasimaSekli" />
+          <ScalarProperty Name="Rejim" ColumnName="Rejim" />
+          <ScalarProperty Name="BeyanTuruId" ColumnName="BeyanTuruId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TasimaSekilleri">
+      <EntityTypeMapping TypeName="GumrukDBModel.TasimaSekilleri">
+        <MappingFragment StoreEntitySet="TasimaSekilleri">
+          <ScalarProperty Name="TasimaSekli" ColumnName="TasimaSekli" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TasitBilgileri">
+      <EntityTypeMapping TypeName="GumrukDBModel.TasitBilgileri">
+        <MappingFragment StoreEntitySet="TasitBilgileri">
+          <ScalarProperty Name="VarisTarihiVeSaati" ColumnName="VarisTarihiVeSaati" />
+          <ScalarProperty Name="Uyruk2" ColumnName="Uyruk2" />
+          <ScalarProperty Name="DorseNo2" ColumnName="DorseNo2" />
+          <ScalarProperty Name="Uyruk" ColumnName="Uyruk" />
+          <ScalarProperty Name="DorseNo1" ColumnName="DorseNo1" />
+          <ScalarProperty Name="UlkeID" ColumnName="UlkeID" />
+          <ScalarProperty Name="ReferansNumarasi" ColumnName="ReferansNumarasi" />
+          <ScalarProperty Name="Numarasi" ColumnName="Numarasi" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ulkeler">
+      <EntityTypeMapping TypeName="GumrukDBModel.Ulkeler">
+        <MappingFragment StoreEntitySet="Ulkeler">
+          <ScalarProperty Name="UlkeAdi" ColumnName="UlkeAdi" />
+          <ScalarProperty Name="UlkeKodu" ColumnName="UlkeKodu" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BeyanTurleri">
+      <EntityTypeMapping TypeName="GumrukDBModel.BeyanTurleri">
+        <MappingFragment StoreEntitySet="BeyanTurleri">
+          <ScalarProperty Name="TasimaSekli" ColumnName="TasimaSekli" />
+          <ScalarProperty Name="Rejim" ColumnName="Rejim" />
+          <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+          <ScalarProperty Name="BeyanTurKodu" ColumnName="BeyanTurKodu" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DBErrorMessages">
+      <EntityTypeMapping TypeName="GumrukDBModel.DBErrorMessages">
+        <MappingFragment StoreEntitySet="DBErrorMessages">
+          <ScalarProperty Name="Descren" ColumnName="Descren" />
+          <ScalarProperty Name="Descrip" ColumnName="Descrip" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SQLProcedures">
+      <EntityTypeMapping TypeName="GumrukDBModel.SQLProcedures">
+        <MappingFragment StoreEntitySet="SQLProcedures">
+          <ScalarProperty Name="IfCount" ColumnName="IfCount" />
+          <ScalarProperty Name="CharCount" ColumnName="CharCount" />
+          <ScalarProperty Name="LineCount" ColumnName="LineCount" />
+          <ScalarProperty Name="sqlText" ColumnName="sqlText" />
+          <ScalarProperty Name="schema_id" ColumnName="schema_id" />
+          <ScalarProperty Name="isFormatted" ColumnName="isFormatted" />
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="formattedBody" ColumnName="formattedBody" />
+          <ScalarProperty Name="body" ColumnName="body" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SQLKeys">
+      <EntityTypeMapping TypeName="GumrukDBModel.SQLKeys">
+        <MappingFragment StoreEntitySet="SQLKeys">
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="SqlKey" ColumnName="SqlKey" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SQLProceduresComments">
+      <EntityTypeMapping TypeName="GumrukDBModel.SQLProceduresComments">
+        <MappingFragment StoreEntitySet="SQLProceduresComments">
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="SQLProceduresID" ColumnName="SQLProceduresID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SQLProceduresProcedure">
+      <EntityTypeMapping TypeName="GumrukDBModel.SQLProceduresProcedure">
+        <MappingFragment StoreEntitySet="SQLProceduresProcedure">
+          <ScalarProperty Name="innerSQLProcedureID" ColumnName="innerSQLProcedureID" />
+          <ScalarProperty Name="SQLProcedureID" ColumnName="SQLProcedureID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modules">
+      <EntityTypeMapping TypeName="GumrukDBModel.Modules">
+        <MappingFragment StoreEntitySet="Modules">
+          <ScalarProperty Name="modType" ColumnName="modType" />
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModulesFiles">
+      <EntityTypeMapping TypeName="GumrukDBModel.ModulesFiles">
+        <MappingFragment StoreEntitySet="ModulesFiles">
+          <ScalarProperty Name="LineCount" ColumnName="LineCount" />
+          <ScalarProperty Name="formattedBody" ColumnName="formattedBody" />
+          <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+          <ScalarProperty Name="SubModuleID" ColumnName="SubModuleID" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubModules">
+      <EntityTypeMapping TypeName="GumrukDBModel.SubModules">
+        <MappingFragment StoreEntitySet="SubModules">
+          <ScalarProperty Name="isempty" ColumnName="isempty" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SQLProcedureModules">
+      <EntityTypeMapping TypeName="GumrukDBModel.SQLProcedureModules">
+        <MappingFragment StoreEntitySet="SQLProcedureModules">
+          <ScalarProperty Name="lineNumber" ColumnName="lineNumber" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="SubModuleID" ColumnName="SubModuleID" />
+          <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+          <ScalarProperty Name="SQLProcedureID" ColumnName="SQLProcedureID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModulesTables">
+      <EntityTypeMapping TypeName="GumrukDBModel.ModulesTables">
+        <MappingFragment StoreEntitySet="ModulesTables">
+          <ScalarProperty Name="lineNumber" ColumnName="lineNumber" />
+          <ScalarProperty Name="fileID" ColumnName="fileID" />
+          <ScalarProperty Name="moduleID" ColumnName="moduleID" />
+          <ScalarProperty Name="subModuleID" ColumnName="subModuleID" />
+          <ScalarProperty Name="d_b_tablesID" ColumnName="d_b_tablesID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjType">
+      <EntityTypeMapping TypeName="GumrukDBModel.ObjType">
+        <MappingFragment StoreEntitySet="ObjType">
+          <ScalarProperty Name="objType1" ColumnName="objType" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DBObjects">
+      <EntityTypeMapping TypeName="GumrukDBModel.DBObjects">
+        <MappingFragment StoreEntitySet="DBObjects">
+          <ScalarProperty Name="schemaID" ColumnName="schemaID" />
+          <ScalarProperty Name="schemaName" ColumnName="schemaName" />
+          <ScalarProperty Name="objType" ColumnName="objType" />
+          <ScalarProperty Name="objName" ColumnName="objName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DBObjectsChilds">
+      <EntityTypeMapping TypeName="GumrukDBModel.DBObjectsChilds">
+        <MappingFragment StoreEntitySet="DBObjectsChilds">
+          <ScalarProperty Name="ChildID" ColumnName="ChildID" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InnerModule">
+      <EntityTypeMapping TypeName="GumrukDBModel.InnerModule">
+        <MappingFragment StoreEntitySet="InnerModule">
+          <ScalarProperty Name="SubContainsModuleID" ColumnName="SubContainsModuleID" />
+          <ScalarProperty Name="ContainFileName" ColumnName="ContainFileName" />
+          <ScalarProperty Name="Method" ColumnName="Method" />
+          <ScalarProperty Name="ModFileName" ColumnName="ModFileName" />
+          <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+          <ScalarProperty Name="ContainModuleID" ColumnName="ContainModuleID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

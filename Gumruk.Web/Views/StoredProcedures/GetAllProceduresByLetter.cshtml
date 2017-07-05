@@ -1,0 +1,44 @@
+﻿@model List<Gumruk.Entity.SQLProcedures>
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#sp" onclick="ChangeTab('sp')">SP's</a></li>
+    <li><a data-toggle="tab" href="#func" onclick="ChangeTab('func')">Functions</a></li>
+</ul>
+
+<div class="tab-content" style="padding-top:5px;">
+    <div id="sp" class="tab-pane fade in active">
+        @foreach (var item in Model)
+        {
+            string str = item.name.Substring(item.name.Length - 4);
+            string name = item.name.Substring(0, item.name.Length - 4);
+
+            if (str == ".prc")
+            {
+                <a href="javascript:void(0)" id="link_@item.ID" onclick="getProcedure('@item.ID')" style="text-decoration:none;">@name.ToUpperInvariant()</a><br />
+            }
+        }
+    </div>
+
+
+    <div id="func" class="tab-pane fade">
+        @foreach (var item in Model)
+        {
+            string str = item.name.Substring(item.name.Length - 4);
+            string name = item.name.Substring(0, item.name.Length - 4);
+
+            if (str == ".fnc")
+            {<a href="javascript:void(0)" id="link_@item.ID" onclick="getProcedure('@item.ID')" style="text-decoration:none;">@name.ToUpperInvariant()</a><br />}
+        }
+    </div>
+</div>
+@*<br /><br />
+        <a href="#" title="Read Me Notes" data-toggle="popover" data-trigger="hover" data-content="Ilk tıklamada Code Ekranı açılmaz ise tekrar tıklayınız." class="btn-xs">Read Me</a>*@
+
+
+
+
+    <script>
+        function ChangeTab(tab) {
+            $("#tabsSelected").val(tab);
+        }
+    </script>

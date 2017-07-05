@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/webix/webix.css" type="text/css">
+    <script src="~/webix/webix.js" type="text/javascript"></script>
+</head>
+<body>
+    <script type="text/javascript" charset="utf-8">
+        webix.ui({
+            view: "window",
+            width: 300,
+            height: 200,
+            position: "center",
+            head: "Giriş Yap",
+            body: {
+                view: "form",
+                id: "login_form",
+                width: 300,
+                elements: [
+                    { view: "text", label: "Kullanıcı Adı", name: "loginname" },
+                    { view: "text", type: "password", name: "password", label: "Şifre" },
+                    {
+                        margin: 5, cols: [
+                          {
+                              view: "button", value: "Login",name:"loginbutton", type: "form",
+                              click: function () {
+                                  var formValues = $$('login_form').getValues();
+
+                                  //webix.ajax().post("Login", formValues);
+
+                                  webix.ajax().post("Login",formValues ,{
+                                      error: function (text, data, XmlHttpRequest) {
+                                          alert("Kullanıcı adı ve/veya şifre hatalı");
+                                      },
+                                      success: function (text, data, XmlHttpRequest) {
+                                          window.location.href = "GetShemasPage";
+                                      }
+                                  });
+                              }
+                          }
+                        ]
+                    }
+                ]
+            }
+        }).show();
+    </script>
+</body>
+</html>
+
+

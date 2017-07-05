@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="http://172.30.12.209/Gumruk.Web" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\4S\ Projeler\\4SOperations\\Gumruk\.Web\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\4S\ Projeler\\4SOperations\\Gumruk\.Web\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="GumrukWebContext-Web.config Connection String" description="" value="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|GumrukWebContext-20161216134624.mdf;Initial Catalog=GumrukWebContext-20161216134624;Integrated Security=True;MultipleActiveResultSets=True;User Instance=True" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\4S\ Projeler\\4SOperations\\Gumruk\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GumrukWebContext']/@connectionString" />
+  </parameter>
+  <parameter name="GumrukDBContext-Web.config Connection String" description="GumrukDBContext Connection String used in web.config by the application to access the database." value="metadata=res://*/GumrukModel.csdl|res://*/GumrukModel.ssdl|res://*/GumrukModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=172.30.12.209;initial catalog=GumrukWikiDB;persist security info=True;user id=sa;password=Kartal2314;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\4S\ Projeler\\4SOperations\\Gumruk\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GumrukDBContext']/@connectionString" />
+  </parameter>
+</parameters>

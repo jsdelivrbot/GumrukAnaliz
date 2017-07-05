@@ -1,0 +1,21 @@
+﻿@model ICollection<Gumruk.Entity.d_b_columns>
+
+<div class="table-responsive" style="background-color:#0094ff;color:#fff; max-height:400px;overflow-y:auto;padding-left:25px;overflow-x:hidden;">
+    <div class="row">
+        <div class="col-lg-3"><strong>Name</strong></div>
+        <div class="col-lg-9"><strong>Açıklamalar</strong></div>
+    </div>
+    @foreach (var itemColumn in Model)
+            {
+        <div class="row">
+            <div class="col-lg-3">@itemColumn.name</div>
+            <div class="col-lg-9">
+                @foreach (var item2 in itemColumn.d_b_column_explanations)
+                {
+                    @item2.details<br />
+                }
+            </div>
+        </div>
+    }
+</div>
+

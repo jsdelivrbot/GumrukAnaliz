@@ -1,0 +1,66 @@
+﻿@model ICollection<Gumruk.Entity.d_b_tables>
+
+@if (bool.Parse(ViewData["checkBox"].ToString()) == false)
+{<span><strong>table count</strong> @Model.Count</span>}
+
+<div>
+    @foreach (var itemTable in Model)
+    {
+        if (bool.Parse(ViewData["checkBox"].ToString()) == true)
+        {
+            <input type="checkbox" id="chkTable_@itemTable.id" value="@itemTable.id" />
+            <a href="javascript:void(0)" data-toggle="collapse" data-target="#tblColumns_@itemTable.id" style="font-size:12px;">@itemTable.name</a>
+        }
+        else //databaseobjects'ten çağırılıyorsa bu kısım kullanılır.
+        {
+            <a href="javascript:void(0)" class="btn-xs" style="color:#d1d1d1;"><span class="glyphicon glyphicon-plus" id="plus_@itemTable.id" data-toggle="collapse" data-target="#tblColumns_@itemTable.id" onclick="plusClicked(@itemTable.id)"></span></a>
+            <a href="javascript:void(0)" style="font-size:12px;" onclick="TableSelected(@itemTable.id,'@itemTable.name')" id="table_@itemTable.id">@itemTable.name</a>
+            <span class="pull-right" style="font-size:11px;" data-toggle="tooltip" title="column count @itemTable.d_b_columns.Count" data-placement="bottom">CC @itemTable.d_b_columns.Count</span>
+        }
+        <div id="tblColumns_@itemTable.id" class="collapse">
+            <div class="padding-left40">
+                @foreach (var item2 in itemTable.d_b_columns)
+                {
+                    if (bool.Parse(ViewData["checkBox"].ToString()) == true)
+                    {
+                        @item2.name<br />
+                    }
+                    else
+                    {
+                        <a href="javascript:void(0)" onclick="ColumnSelected(@item2.id)" id="column_@item2.id"> <span>@item2.name</span></a><br />
+                    }
+                }
+            </div>
+        </div>
+        <br />
+    }
+    <input type="hidden" id="hdnCheckedTables" />
+</div>
+
+
+<script>
+    function plusClicked(ID) {
+        var link = "#plus_" + ID;
+        var columnsLink = "#tblColumns_" + ID;
+
+        if ($(columnsLink).is(':visible') == false) {
+            $(link).removeClass("glyphicon glyphicon-plus");
+            $(link).addClass("glyphicon glyphicon-minus");
+        }
+        else if ($(columnsLink).is(':visible') == true) {
+            $(link).removeClass("glyphicon glyphicon-minus");
+            $(link).addClass("glyphicon glyphicon-plus");
+        }
+
+    }
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+
+
+
+
+

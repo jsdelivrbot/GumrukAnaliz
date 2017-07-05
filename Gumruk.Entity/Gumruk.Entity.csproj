@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{255C0E16-74B8-483F-8D9F-B8B5C53F9D96}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gumruk.Entity</RootNamespace>
+    <AssemblyName>Gumruk.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="app_base_modules.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="app_module_operations.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="app_module_procedures.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="app_sub_modules.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BeyanTurleri.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
+    <Compile Include="customs_articles.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="customs_circulars.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="customs_codes.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBErrorMessages.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBObjects.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBObjectsChilds.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="d_b_columns.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="d_b_column_explanations.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="d_b_column_links.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="d_b_column_lookups.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="d_b_column_types.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="d_b_schemas.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="d_b_schema_procedures.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="d_b_tables.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="d_b_table_explanation.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EFMetaData\DBObject.cs" />
+    <Compile Include="EFMetaData\InnerModule_MetaData.cs" />
+    <Compile Include="EFMetaData\Limanlar.cs" />
+    <Compile Include="EFMetaData\SQLProcedureComments.cs" />
+    <Compile Include="EFMetaData\SQLProcedures.cs" />
+    <Compile Include="EFMetaData\Ulkeler.cs" />
+    <Compile Include="EFMetaData\d_b_column_lookups.cs" />
+    <Compile Include="EFMetaData\d_b_schemas_MetaData.cs" />
+    <Compile Include="EFMetaData\d_b_columns_MetaData.cs" />
+    <Compile Include="EFMetaData\d_b_tables_MetaData.cs" />
+    <Compile Include="EFMetaData\OzelTuzelSahis.cs" />
+    <Compile Include="ERxml.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GumrukEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GumrukIdareleri.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InnerModule.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KimlikTurleri.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Limanlar.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="migrations.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ColumnToExcel.cs" />
+    <Compile Include="Model\DataColumn.cs" />
+    <Compile Include="Model\DataSchema.cs" />
+    <Compile Include="Model\DataTable.cs" />
+    <Compile Include="Model\LookUpModel.cs" />
+    <Compile Include="Model\ProceduresSearchResult.cs" />
+    <Compile Include="Model\SearchResult.cs" />
+    <Compile Include="Modules.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModulesFiles.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModulesTables.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ObjType.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OzelTuzelSahis.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OzetBeyan.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="password_resets.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLKeys.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SQLProcedureModules.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SQLProcedures.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SQLProceduresComments.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SQLProceduresProcedure.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubModules.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TasimaSekilleri.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TasitBilgileri.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ulkeler.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="users.cs">
+      <DependentUpon>GumrukEntity.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GumrukEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GumrukEntity.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,89 @@
+﻿{
+  "form": "OzetBeyan",
+  "url": "OzetBeyanKaydet",
+  "id": "OzetBeyanForm",
+  "pageTitle":  "Özet Beyan",
+  "items": [
+    {
+      "type": "title",
+      "display": "Belge",
+      "id": "belgeTitle",
+      "lenght": 12
+    },
+    {
+      "type": "dropdown",
+      "display": "Beyan Türü",
+      "id": "beyanTuruId",
+      "lenght": 3,
+      "url": "GumrukOperations/BeyanTurleri",
+      "key": "ID",
+      "value": "BeyanTurKodu",
+      "required": true
+    },
+    {
+      "type": "textbox",
+      "display": "Rejim",
+      "id": "Rejim",
+      "lenght": 1,
+      "required": true
+    },
+    {
+      "type": "textbox",
+      "display": "Taşıma Şekli",
+      "id": "TasimaSekli",
+      "lenght": 4
+    },
+    {
+      "type": "textbox",
+      "display": "Gümrük İdaresi",
+      "id": "GumrukIdaresi",
+      "lenght": 6
+    },
+    {
+      "type": "number",
+      "display": "Kalem Sayısı",
+      "id": "KalemSayisi",
+      "lenght": 6
+    },
+    {
+      "type": "number",
+      "display": "Ek Belge Sayısı",
+      "id": "EkBelgeSayisi",
+      "lenght": 6
+    },
+    {
+      "type": "dropdown",
+      "display": "Ilk Varış/Çıkış Yeri",
+      "id": "IlkVarisCikisYeri",
+      "lenght": 6,
+      "url": "GumrukOperations/GumrukIdareleri",
+      "key": "ID",
+      "value": "GumrukIdaresiAdi"
+    },
+    {
+      "type": "date",
+      "display": "Tescil Tarihi",
+      "id": "TescilTarihi",
+      "lenght": 4
+    },
+    {
+      "type": "date",
+      "display": "Onay Tarihi",
+      "id": "OnayTarihi",
+      "lenght": 4
+    },
+    {
+      "type": "date",
+      "display": "Kapanış Tarihi",
+      "id": "KapanisTarihi",
+      "lenght": 4,
+      "required": true
+    },
+    {
+      "type": "button",
+      "display": "Kaydet",
+      "id": "btnSubmit",
+      "lenght": 2
+    }
+  ]
+}

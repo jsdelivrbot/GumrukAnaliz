@@ -1,0 +1,109 @@
+﻿@model List<Gumruk.Entity.BeyanTurleri>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tur Kodu</th>
+            <th colspan="2">Açıklama</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><span id="BeyanKodu_@item.ID">@item.BeyanTurKodu</span></td>
+                <td>
+                    <span>@item.Aciklama</span>
+                </td>
+                <td><button id="sec" class="btn btn-primary" onclick="BeyanTuruSecildi(@item.ID,'@item.Rejim',@item.TasimaSekli)">Seç</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+</div>
+<input type="hidden" id="beyanTurKodu" />
+
+<script>
+    function BeyanTuruSecildi(ID, rejim, tasimasekli) {
+        $("#hdnRejim").val(ID);
+
+        var beyanKodu = "#" + "BeyanKodu_" + ID;
+
+        $("#txtBeyanTuru").val($(beyanKodu).text());
+        $("#hdnBeyanTuru").val(ID);
+
+        if (tasimasekli != 0)
+            $("#txtTasimaSekli").val(tasimasekli);
+        else {
+            $("#txtTasimaSekli").val('');
+            $("#txtTasimaSekli").prop('disabled', false);
+            $("#btnTasimaSekli").prop('disabled', false);
+        }
+
+        $("#txtRejim").val(rejim);
+        $("#txtEkBelgeSayisi").prop('disabled', false);
+        $("#txtIlkVarisCikisYeri").prop('disabled', false);
+        $("#btnIlkCikisVarisYeri").prop('disabled', false);
+
+        $("#txtYuklemeUlkesi").prop('disabled', false);
+        $("#btnYuklemeUlkesi").prop('disabled', false);
+
+        $("#txtBosaltmaUlkesi").prop('disabled', false);
+        $("#btnBosaltmaUlkesi").prop('disabled', false);
+
+        $("#txtYuklemeLimani").prop('disabled', false);
+        $("#btnYuklemeLimani").prop('disabled', false);
+
+        $("#txtBosaltmaLimani").prop('disabled', false);
+        $("#btnBosaltmaLimani").prop('disabled', false);
+
+        $("#txtBosaltmaUlkesi").prop('disabled', false);
+        $("#btnBosaltmaUlkesi").prop('disabled', false);
+
+        $("#txtBeyanSahibi").prop('disabled', false);
+        $("#btnBeyanSahibi").prop('disabled', false);
+
+        $("#txtVergiNo").prop('disabled', false);
+        $("#txtVergiNoTasiyiciFirma").prop('disabled', false);
+
+        $("#txtTasiyiciFirma").prop('disabled', false);
+        $("#btnTasiyiciFirma").prop('disabled', false);
+
+        $("#txtTasiyiciFirma").prop('disabled', false);
+        $("#btnTasiyiciFirma").prop('disabled', false);
+
+        $("#txtBeyanSahibi").prop('disabled', false);
+        $("#btnBeyanSahibi").prop('disabled', false);
+
+        $("#txtVergiNo").prop('disabled', false);
+
+        $("#txtTasiyiciFirma").prop('disabled', false);
+        $("#btnTasiyiciFirma").prop('disabled', false);
+
+        $("#txtVergiNoTasiyiciFirma").prop('disabled', false);
+
+        $("#txtTasitinAdi").prop('disabled', false);
+        $("#txtTasitinNumarasi").prop('disabled', false);
+
+        $("#txtTasitinReferansNumarasi").prop('disabled', false);
+        
+        $("#txtTasitinUlkesi").prop('disabled', false);
+        $("#btnTasitinUlkesi").prop('disabled', false);
+
+        $("#txtTirAtaKarneNo").prop('disabled', false);
+
+        $("#txtKonsimentoNo").prop('disabled', false);
+        $("#chkKurye").prop('disabled', false);
+        //$("#chkEmniyet").prop('disabled', false);
+        $("#txtDiger").prop('disabled', false);
+        
+        $("#btnTasitinUlkesi").prop('disabled', false);
+
+        $("#myModal").modal('hide');
+    }
+</script>
+
+

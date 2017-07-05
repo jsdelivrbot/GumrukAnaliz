@@ -1,0 +1,33 @@
+﻿@model List<Gumruk.Web.Models.ColumnDetails>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Explanation</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.explanation</td>
+                <td>@item.User</td>
+                <td>@item.Date</td>
+                <td><a href="javascript:void()" onclick="expDelete(@item.ExpID)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<style>
+    .button a {
+        color:#ff0000;
+    }
+
+    .button a:hover , a:focus {
+        color:#0094ff;
+    }
+</style>

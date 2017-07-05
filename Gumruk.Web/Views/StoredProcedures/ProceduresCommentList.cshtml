@@ -1,0 +1,54 @@
+﻿@model List<Gumruk.Entity.SQLProceduresComments>
+
+
+<div class="table-responsive" id="sqlcommentsresult">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Comment</th>
+                <th>User</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="tr_@item.ID">
+                    <td>
+                        @item.Details
+                    </td>
+                    <td>
+                        @item.user.name
+                    </td>
+                    <td>
+                        @item.created_at
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" onclick="DeleteComment(@item.ID,@item.SQLProceduresID)"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a href="javascript:void(0)" class="btn btn-info btn-xs" onclick="Update(@item.ID,@item.SQLProceduresID)"><span class="glyphicon glyphicon-edit"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function DeleteComment(ID,procID) {
+        $.ajax({
+            url: 'DeleteComment',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { ID: ID ,procedureID :procID },
+            success: function (data) {
+                $("#sqlcommentsresult").html(data);
+                getProcedure(procID);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,35 @@
+﻿@model List<Gumruk.Entity.SQLProcedureModules>
+
+
+<div class="table-responsive" id="sqlcommentsresult">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Module Name</th>
+                <th>File Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    if(item!=null)
+                    { 
+                    <tr id="tr_@item.ID">
+                        <td>
+                            @item.ModulesFiles.SubModules.Modules.Name<br />
+                            @item.ModulesFiles.SubModules.Name
+                        </td>
+                        <td>
+                            @item.ModulesFiles.Name<br />
+                            <span style="font-size:10px;font-weight:bold;color:#c2c2c2;">line </span> @item.lineNumber
+                        </td>
+                    </tr>
+                    }
+                }
+            }
+            
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,23 @@
+﻿<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.dynatable.js"></script>
+<link href="~/Scripts/jquery.dynatable.css" rel="stylesheet" />
+<table id="my-final-table">
+    <thead>
+    <th>DOSYANO</th>
+    <th>YURTDISI</th>
+    <th>TUR</th>
+    </thead>
+    <tbody></tbody>
+</table>
+<script>
+    $.ajax({
+        url: '/Gumruk.Web/data/simplified/ABIST.ABIST_ABISTATISTIK.json',
+        success: function (data) {
+            $('#my-final-table').dynatable({
+                dataset: {
+                    records: data
+                }
+            });
+        }
+    });
+</script>

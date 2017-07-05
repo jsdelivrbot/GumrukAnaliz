@@ -1,0 +1,226 @@
+﻿@using Gumruk.Web.Models
+<div class="col-lg-2">
+    <div class="row padding-left5" style="margin-bottom:0px;margin-top:5px;">
+        @Html.Dropdown4S("schemas", "", "false", "false", "", 12, "Home/GetSchemaNames?getTableCount=false", "id", "value")
+    </div>
+    <div class="row padding-left5 overflowY" id="tables" style="margin-top:-10px;height:800px;max-height:800px;">
+
+    </div>
+</div>
+
+<div class="col-lg-10 marginTop15">
+    <div class="row">
+        <div class="col-lg-7" id="tableEXPS">
+            <div class="panel panel-primary">
+                <div class="panel-heading info"><a data-toggle="collapse" href="#exp" class="white">Explanations</a></div>
+                <div class="panel-collapse collapse in" id="exp">
+                    <div class="panel-body padding25" id="tableExplanations" style="max-height:600px;overflow-y:auto;margin-bottom:10px;">
+
+                    </div>
+                </div>
+                <div class="panel panel-footer">
+                    <div class="input-group">
+                        <input type="text" class="form-control" style="background-color:#fff;color:#0094ff;display:block;font-size:12px;" id="txtExplanation">
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning" type="button" onclick="AddComment()">ADD</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="panel panel-primary">
+                <div class="panel-heading info"><a data-toggle="collapse" href="#mod" class="white">Modules</a></div>
+                <div class="panel-collapse collapse in" id="mod">
+                    <div class="panel-body padding25" id="tableModules" style="max-height:600px;overflow-y:auto;margin-bottom:10px;">
+
+                    </div>
+                </div>
+                <div class="panel panel-footer">
+                    <span style="font-size:10px;">table'ın kullanıldığı moduller.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+
+    </div>
+</div>
+<input type="hidden" id="hdnID" />
+<input type="hidden" id="objectType" />
+
+
+<script>
+    function loadDataGrid(table, f) {
+        $$("table_data_grid").clearAll();
+
+
+        $$("table_data_grid").load("/Gumruk.Web/data/simplified/" + $('#schemas option:selected').text() + "." + table + ".json", function (text, data, req) {
+            var table_data_grid = $$("table_data_grid");
+            var tableColData = JSON.parse(text)[0];
+
+            /*{ id:"rank",    header:"",              width:50},
+             { id:"title",   header:"Film title",    width:200},
+             { id:"year",    header:"Released",      width:80},
+             { id:"votes",   header:"Votes",         width:100}*/
+
+            var colData = [];
+            Object.keys(tableColData).forEach(function (key) {
+                colData.push({ id: key, header: [key, { content: "selectFilter" }] });
+                //console.log(key);
+                //console.log(tableColData[key]);
+            });
+            //console.log(colData);
+            table_data_grid.config.columns = colData;
+            table_data_grid.refreshColumns();
+            if (f !== undefined) {
+                f();
+            }
+
+        });
+
+    }
+
+    $("#schemas").change(function () {
+        if (($("#schemas").val() > 0))
+            SchemaDegisti();
+    });
+
+    function SchemaDegisti() {
+        //$("#area").html("");
+        var letter = $("#hdnLetter").val();
+
+        $.ajax({
+            url: "@Url.Action("GetSchemasTables", "ER")",
+            type: "POST",
+            cache: false,
+            async: true,
+            data: { schemaID: $("#schemas").val(), getCheckBox: false },
+            success: function (text, data) {
+                $("#tables").html(text);
+                //$('#resultSQL').html("");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function TableSelected(ID, name) {
+        removeCSSTables("table_", ID);
+        $("#objectType").val("table");
+        $("#hdnID").val(ID);
+
+        getExplanations(ID);
+        GetTablesModules(ID);
+        loadDataGrid(name);
+    }
+
+    function getExplanations(ID) {
+        var type = $("#objectType").val();
+
+        if (type == "table") {
+            $.ajax({
+                url: "@Url.Action("GetTableExplanationsByTableID", "Home")",
+                type: "POST",
+                cache: false,
+                async: true,
+                data: { ID: ID },
+                success: function (text, data) {
+                    $("#tableExplanations").html(text);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("bir hata oluştu");
+                }
+            });
+        }
+        else {
+            $.ajax({
+                url: "@Url.Action("GetColumnExplanationsByColumnsID", "Home")",
+                type: "POST",
+                cache: false,
+                async: true,
+                data: { ID: ID },
+                success: function (text, data) {
+                    $("#tableExplanations").html(text);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("bir hata oluştu");
+                }
+            });
+        }
+
+    }
+
+    function GetTablesModules(ID) {
+        $.ajax({
+            url: "@Url.Action("GetTablesModules", "Home")",
+            type: "POST",
+            cache: false,
+            async: true,
+            data: { ID: ID },
+            success: function (text, data) {
+                $("#tableModules").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function ColumnSelected(ID) {
+        removeCSSTables("column_", ID);
+        $("#hdnID").val(ID);
+        $("#objectType").val("column");
+
+        getExplanations(ID);
+    }
+
+    function removeCSSTables(name, ID) {
+        var link = "#" + name + ID;
+        $("#tables a").removeClass("btn-sm btn-primary");
+        $(link).addClass("btn-sm btn-primary");
+    }
+
+    function AddComment() {
+        var ID = $("#hdnID").val();
+        var type = $("#objectType").val();
+        var expla = $("#txtExplanation").val();
+
+        $.ajax({
+            url: "@Url.Action("AddExplanation", "Home")",
+            type: "POST",
+            cache: false,
+            async: true,
+            data: { objectID: ID, type: type, exp: expla },
+            success: function (text, data) {
+                getExplanations(ID);
+                $("#txtExplanation").val("");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function expDelete(ID) {
+        var objectID = $("#hdnID").val();
+        var type = $("#objectType").val();
+
+
+        $.ajax({
+            url: "@Url.Action("DeleteTableColumnExp", "Home")",
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { ExpID: ID, type: type },
+            success: function (text, data) {
+                getExplanations(objectID);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+</script>

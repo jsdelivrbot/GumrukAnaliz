@@ -1,0 +1,58 @@
+﻿@model List<Gumruk.Entity.Modules>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td><a href="javascript:void(0)" onclick="showModulesModal(@item.ID)">@item.Name</a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div id="moduleModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modules Properties</h4>
+            </div>
+            <div class="modal-body" id="moduleModalBody">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function showModulesModal(ID) {
+
+        $.ajax({
+            url: "@Url.Action("SubModulesFiles", "Modules")",
+            type: "POST",
+        cache: false,
+        async: true,
+        data: { subModuleID: ID },
+        success: function (text, data) {
+            $("#moduleModalBody").html(text);
+            $("#moduleModal").modal();
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            alert("bir hata oluştu");
+        }
+    });
+    }
+</script>

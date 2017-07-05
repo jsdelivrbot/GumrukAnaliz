@@ -1,0 +1,14 @@
+D:\4S Projeler\4SOperations\Gumruk.Repository\bin\Release\Gumruk.Repository.dll.config
+D:\4S Projeler\4SOperations\Gumruk.Repository\bin\Release\Gumruk.Repository.dll
+D:\4S Projeler\4SOperations\Gumruk.Repository\bin\Release\Gumruk.Repository.pdb
+D:\4S Projeler\4SOperations\Gumruk.Repository\bin\Release\EntityFramework.dll
+D:\4S Projeler\4SOperations\Gumruk.Repository\bin\Release\EntityFramework.SqlServer.dll
+D:\4S Projeler\4SOperations\Gumruk.Repository\bin\Release\Gumruk.DayaLayer.dll
+D:\4S Projeler\4SOperations\Gumruk.Repository\bin\Release\Gumruk.Entity.dll
+D:\4S Projeler\4SOperations\Gumruk.Repository\bin\Release\Gumruk.DayaLayer.pdb
+D:\4S Projeler\4SOperations\Gumruk.Repository\bin\Release\Gumruk.Entity.pdb
+D:\4S Projeler\4SOperations\Gumruk.Repository\bin\Release\EntityFramework.xml
+D:\4S Projeler\4SOperations\Gumruk.Repository\bin\Release\EntityFramework.SqlServer.xml
+D:\4S Projeler\4SOperations\Gumruk.Repository\obj\Release\Gumruk.Repository.csprojResolveAssemblyReference.cache
+D:\4S Projeler\4SOperations\Gumruk.Repository\obj\Release\Gumruk.Repository.dll
+D:\4S Projeler\4SOperations\Gumruk.Repository\obj\Release\Gumruk.Repository.pdb

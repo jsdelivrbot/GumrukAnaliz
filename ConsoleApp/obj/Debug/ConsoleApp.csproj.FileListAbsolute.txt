@@ -1,0 +1,6 @@
+D:\4S Projeler\4SOperations\ConsoleApp\bin\Debug\ConsoleApp.exe.config
+D:\4S Projeler\4SOperations\ConsoleApp\bin\Debug\ConsoleApp.exe
+D:\4S Projeler\4SOperations\ConsoleApp\bin\Debug\ConsoleApp.pdb
+D:\4S Projeler\4SOperations\ConsoleApp\obj\Debug\ConsoleApp.csprojResolveAssemblyReference.cache
+D:\4S Projeler\4SOperations\ConsoleApp\obj\Debug\ConsoleApp.exe
+D:\4S Projeler\4SOperations\ConsoleApp\obj\Debug\ConsoleApp.pdb

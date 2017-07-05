@@ -1,0 +1,961 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GumrukDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="app_module_procedures">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="db_schema_procedure_id" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="isempty" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="customs_articles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="no" Type="Int32" Nullable="false" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="isempty" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="customs_circulars">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="isempty" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="customs_codes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="isempty" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="d_b_column_types">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="isempty" Type="Boolean" />
+    <NavigationProperty Name="d_b_columns" Relationship="GumrukDBModel.FK_d_b_columns_d_b_column_types" FromRole="d_b_column_types" ToRole="d_b_columns" />
+  </EntityType>
+  <EntityType Name="d_b_schema_procedures">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="isempty" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="d_b_schemas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="isempty" Type="Boolean" />
+    <NavigationProperty Name="d_b_tables" Relationship="GumrukDBModel.FK_d_b_tables_d_b_schemas" FromRole="d_b_schemas" ToRole="d_b_tables" />
+    <NavigationProperty Name="SQLProcedures" Relationship="GumrukDBModel.FK_SQLProcedures_d_b_schemas" FromRole="d_b_schemas" ToRole="SQLProcedures" />
+  </EntityType>
+  <EntityType Name="d_b_tables">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="d_b_schemasId" Type="Int32" Nullable="false" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="isempty" Type="Boolean" />
+    <NavigationProperty Name="d_b_schemas" Relationship="GumrukDBModel.FK_d_b_tables_d_b_schemas" FromRole="d_b_tables" ToRole="d_b_schemas" />
+    <NavigationProperty Name="d_b_columns" Relationship="GumrukDBModel.FK_d_b_columns_d_b_tables" FromRole="d_b_tables" ToRole="d_b_columns" />
+    <NavigationProperty Name="d_b_table_explanation" Relationship="GumrukDBModel.FK_d_b_table_explanation_d_b_tables" FromRole="d_b_tables" ToRole="d_b_table_explanation" />
+    <Property Name="isView" Type="Boolean" />
+    <NavigationProperty Name="app_module_operations" Relationship="GumrukDBModel.FK_app_module_operations_d_b_tables" FromRole="d_b_tables" ToRole="app_module_operations" />
+    <NavigationProperty Name="ModulesTables" Relationship="GumrukDBModel.FK_ModulesTables_d_b_tables" FromRole="d_b_tables" ToRole="ModulesTables" />
+  </EntityType>
+  <EntityType Name="migrations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="migration" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="batch" Type="Int32" Nullable="false" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="isempty" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="remember_token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="isempty" Type="Boolean" />
+    <NavigationProperty Name="d_b_table_explanation" Relationship="GumrukDBModel.FK_d_b_table_explanation_users" FromRole="users" ToRole="d_b_table_explanation" />
+    <NavigationProperty Name="d_b_column_explanations" Relationship="GumrukDBModel.FK_d_b_column_explanations_users" FromRole="users" ToRole="d_b_column_explanations" />
+  </EntityType>
+  <EntityContainer Name="GumrukDBContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="app_module_procedures" EntityType="Self.app_module_procedures" />
+    <EntitySet Name="customs_articles" EntityType="Self.customs_articles" />
+    <EntitySet Name="customs_circulars" EntityType="Self.customs_circulars" />
+    <EntitySet Name="customs_codes" EntityType="Self.customs_codes" />
+    <EntitySet Name="d_b_column_types" EntityType="Self.d_b_column_types" />
+    <EntitySet Name="d_b_schema_procedures" EntityType="Self.d_b_schema_procedures" />
+    <EntitySet Name="d_b_schemas" EntityType="Self.d_b_schemas" />
+    <EntitySet Name="d_b_tables" EntityType="Self.d_b_tables" />
+    <EntitySet Name="migrations" EntityType="Self.migrations" />
+    <EntitySet Name="users" EntityType="Self.users" />
+    <EntitySet Name="password_resets" EntityType="GumrukDBModel.password_resets" />
+    <EntitySet Name="d_b_columns" EntityType="GumrukDBModel.d_b_columns" />
+    <AssociationSet Name="FK_d_b_tables_d_b_schemas" Association="GumrukDBModel.FK_d_b_tables_d_b_schemas">
+      <End Role="d_b_schemas" EntitySet="d_b_schemas" />
+      <End Role="d_b_tables" EntitySet="d_b_tables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_columns_d_b_tables" Association="GumrukDBModel.FK_d_b_columns_d_b_tables">
+      <End Role="d_b_tables" EntitySet="d_b_tables" />
+      <End Role="d_b_columns" EntitySet="d_b_columns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_columns_d_b_column_types" Association="GumrukDBModel.FK_d_b_columns_d_b_column_types">
+      <End Role="d_b_column_types" EntitySet="d_b_column_types" />
+      <End Role="d_b_columns" EntitySet="d_b_columns" />
+    </AssociationSet>
+    <EntitySet Name="d_b_column_lookups" EntityType="GumrukDBModel.d_b_column_lookups" />
+    <EntitySet Name="d_b_table_explanation" EntityType="GumrukDBModel.d_b_table_explanation" />
+    <AssociationSet Name="FK_d_b_table_explanation_users" Association="GumrukDBModel.FK_d_b_table_explanation_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="d_b_table_explanation" EntitySet="d_b_table_explanation" />
+    </AssociationSet>
+    <EntitySet Name="d_b_column_explanations" EntityType="GumrukDBModel.d_b_column_explanations" />
+    <AssociationSet Name="FK_d_b_column_explanations_users" Association="GumrukDBModel.FK_d_b_column_explanations_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="d_b_column_explanations" EntitySet="d_b_column_explanations" />
+    </AssociationSet>
+    <EntitySet Name="app_base_modules" EntityType="GumrukDBModel.app_base_modules" />
+    <EntitySet Name="app_module_operations" EntityType="GumrukDBModel.app_module_operations" />
+    <EntitySet Name="app_sub_modules" EntityType="GumrukDBModel.app_sub_modules" />
+    <AssociationSet Name="FK_app_sub_modules_app_base_modules" Association="GumrukDBModel.FK_app_sub_modules_app_base_modules">
+      <End Role="app_base_modules" EntitySet="app_base_modules" />
+      <End Role="app_sub_modules" EntitySet="app_sub_modules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_app_module_operations_app_sub_modules" Association="GumrukDBModel.FK_app_module_operations_app_sub_modules">
+      <End Role="app_sub_modules" EntitySet="app_sub_modules" />
+      <End Role="app_module_operations" EntitySet="app_module_operations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_column_explanations_d_b_columns" Association="GumrukDBModel.FK_d_b_column_explanations_d_b_columns">
+      <End Role="d_b_columns" EntitySet="d_b_columns" />
+      <End Role="d_b_column_explanations" EntitySet="d_b_column_explanations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_table_explanation_d_b_tables" Association="GumrukDBModel.FK_d_b_table_explanation_d_b_tables">
+      <End Role="d_b_tables" EntitySet="d_b_tables" />
+      <End Role="d_b_table_explanation" EntitySet="d_b_table_explanation" />
+    </AssociationSet>
+    <EntitySet Name="d_b_column_links" EntityType="GumrukDBModel.d_b_column_links" />
+    <AssociationSet Name="FK_d_b_column_links_d_b_columns" Association="GumrukDBModel.FK_d_b_column_links_d_b_columns">
+      <End Role="d_b_columns" EntitySet="d_b_columns" />
+      <End Role="d_b_column_links" EntitySet="d_b_column_links" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_column_lookups_d_b_columns" Association="GumrukDBModel.FK_d_b_column_lookups_d_b_columns">
+      <End Role="d_b_columns" EntitySet="d_b_columns" />
+      <End Role="d_b_column_lookups" EntitySet="d_b_column_lookups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_app_module_operations_d_b_tables" Association="GumrukDBModel.FK_app_module_operations_d_b_tables">
+      <End Role="d_b_tables" EntitySet="d_b_tables" />
+      <End Role="app_module_operations" EntitySet="app_module_operations" />
+    </AssociationSet>
+    <EntitySet Name="ERxml" EntityType="GumrukDBModel.ERxml" />
+    <EntitySet Name="GumrukIdareleri" EntityType="GumrukDBModel.GumrukIdareleri" />
+    <EntitySet Name="KimlikTurleri" EntityType="GumrukDBModel.KimlikTurleri" />
+    <EntitySet Name="Limanlar" EntityType="GumrukDBModel.Limanlar" />
+    <EntitySet Name="OzelTuzelSahis" EntityType="GumrukDBModel.OzelTuzelSahis" />
+    <EntitySet Name="OzetBeyan" EntityType="GumrukDBModel.OzetBeyan" />
+    <EntitySet Name="TasimaSekilleri" EntityType="GumrukDBModel.TasimaSekilleri" />
+    <EntitySet Name="TasitBilgileri" EntityType="GumrukDBModel.TasitBilgileri" />
+    <EntitySet Name="Ulkeler" EntityType="GumrukDBModel.Ulkeler" />
+    <EntitySet Name="BeyanTurleri" EntityType="GumrukDBModel.BeyanTurleri" />
+    <EntitySet Name="DBErrorMessages" EntityType="GumrukDBModel.DBErrorMessages" />
+    <EntitySet Name="SQLProcedures" EntityType="GumrukDBModel.SQLProcedures" />
+    <EntitySet Name="SQLKeys" EntityType="GumrukDBModel.SQLKeys" />
+    <EntitySet Name="SQLProceduresComments" EntityType="GumrukDBModel.SQLProceduresComments" />
+    <EntitySet Name="SQLProceduresProcedure" EntityType="GumrukDBModel.SQLProceduresProcedure" />
+    <EntitySet Name="Modules" EntityType="GumrukDBModel.Modules" />
+    <EntitySet Name="ModulesFiles" EntityType="GumrukDBModel.ModulesFiles" />
+    <EntitySet Name="SubModules" EntityType="GumrukDBModel.SubModules" />
+    <AssociationSet Name="FK_SubModules_Modules" Association="GumrukDBModel.FK_SubModules_Modules">
+      <End Role="Modules" EntitySet="Modules" />
+      <End Role="SubModules" EntitySet="SubModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModulesFiles_SubModules" Association="GumrukDBModel.FK_ModulesFiles_SubModules">
+      <End Role="SubModules" EntitySet="SubModules" />
+      <End Role="ModulesFiles" EntitySet="ModulesFiles" />
+    </AssociationSet>
+    <EntitySet Name="SQLProcedureModules" EntityType="GumrukDBModel.SQLProcedureModules" />
+    <AssociationSet Name="FK_SQLProcedureModules_SQLProcedures" Association="GumrukDBModel.FK_SQLProcedureModules_SQLProcedures">
+      <End Role="SQLProcedures" EntitySet="SQLProcedures" />
+      <End Role="SQLProcedureModules" EntitySet="SQLProcedureModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SQLProcedureModules_SubModules" Association="GumrukDBModel.FK_SQLProcedureModules_SubModules">
+      <End Role="SubModules" EntitySet="SubModules" />
+      <End Role="SQLProcedureModules" EntitySet="SQLProcedureModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Modules_Modules" Association="GumrukDBModel.FK_Modules_Modules">
+      <End Role="Modules" EntitySet="Modules" />
+      <End Role="Modules1" EntitySet="Modules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubModules_SubModules" Association="GumrukDBModel.FK_SubModules_SubModules">
+      <End Role="SubModules" EntitySet="SubModules" />
+      <End Role="SubModules1" EntitySet="SubModules" />
+    </AssociationSet>
+    <EntitySet Name="ModulesTables" EntityType="GumrukDBModel.ModulesTables" />
+    <AssociationSet Name="FK_ModulesTables_d_b_tables" Association="GumrukDBModel.FK_ModulesTables_d_b_tables">
+      <End Role="d_b_tables" EntitySet="d_b_tables" />
+      <End Role="ModulesTables" EntitySet="ModulesTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SQLProcedures_d_b_schemas" Association="GumrukDBModel.FK_SQLProcedures_d_b_schemas">
+      <End Role="d_b_schemas" EntitySet="d_b_schemas" />
+      <End Role="SQLProcedures" EntitySet="SQLProcedures" />
+    </AssociationSet>
+    <EntitySet Name="ObjType" EntityType="GumrukDBModel.ObjType" />
+    <EntitySet Name="DBObjects" EntityType="GumrukDBModel.DBObjects" />
+    <EntitySet Name="DBObjectsChilds" EntityType="GumrukDBModel.DBObjectsChilds" />
+    <AssociationSet Name="FK_DBObjects_ObjType" Association="GumrukDBModel.FK_DBObjects_ObjType">
+      <End Role="ObjType" EntitySet="ObjType" />
+      <End Role="DBObjects" EntitySet="DBObjects" />
+    </AssociationSet>
+    <EntitySet Name="InnerModule" EntityType="GumrukDBModel.InnerModule" />
+    <AssociationSet Name="FK_SQLProcedureModules_ModulesFiles" Association="GumrukDBModel.FK_SQLProcedureModules_ModulesFiles">
+      <End Role="ModulesFiles" EntitySet="ModulesFiles" />
+      <End Role="SQLProcedureModules" EntitySet="SQLProcedureModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModulesTables_ModulesFiles" Association="GumrukDBModel.FK_ModulesTables_ModulesFiles">
+      <End Role="ModulesFiles" EntitySet="ModulesFiles" />
+      <End Role="ModulesTables" EntitySet="ModulesTables" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="password_resets">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="token" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="isempty" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="d_b_columns">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="db_column_type_id" Type="Int32" Nullable="false" />
+    <Property Name="length" Type="Int32" Nullable="false" />
+    <Property Name="scale" Type="Int32" Nullable="false" />
+    <Property Name="isnull" Type="Boolean" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="d_b_tablesId" Type="Int32" Nullable="false" />
+    <Property Name="isunique" Type="Boolean" />
+    <Property Name="precision" Type="Int32" />
+    <Property Name="isempty" Type="Boolean" />
+    <NavigationProperty Name="d_b_tables" Relationship="GumrukDBModel.FK_d_b_columns_d_b_tables" FromRole="d_b_columns" ToRole="d_b_tables" />
+    <NavigationProperty Name="d_b_column_types" Relationship="GumrukDBModel.FK_d_b_columns_d_b_column_types" FromRole="d_b_columns" ToRole="d_b_column_types" />
+    <NavigationProperty Name="d_b_column_explanations" Relationship="GumrukDBModel.FK_d_b_column_explanations_d_b_columns" FromRole="d_b_columns" ToRole="d_b_column_explanations" />
+    <NavigationProperty Name="d_b_column_links" Relationship="GumrukDBModel.FK_d_b_column_links_d_b_columns" FromRole="d_b_columns" ToRole="d_b_column_links" />
+    <Property Name="distinctnum" Type="Int32" />
+    <Property Name="isprimary" Type="Boolean" />
+    <NavigationProperty Name="d_b_column_lookups" Relationship="GumrukDBModel.FK_d_b_column_lookups_d_b_columns" FromRole="d_b_columns" ToRole="d_b_column_lookups" />
+    <Property Name="tobe" Type="Boolean" />
+    <Property Name="samenameexist" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_d_b_tables_d_b_schemas">
+    <End Type="GumrukDBModel.d_b_schemas" Role="d_b_schemas" Multiplicity="1" />
+    <End Type="GumrukDBModel.d_b_tables" Role="d_b_tables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_schemas">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_tables">
+        <PropertyRef Name="d_b_schemasId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_columns_d_b_tables">
+    <End Type="GumrukDBModel.d_b_tables" Role="d_b_tables" Multiplicity="1" />
+    <End Type="GumrukDBModel.d_b_columns" Role="d_b_columns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_tables">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_columns">
+        <PropertyRef Name="d_b_tablesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_columns_d_b_column_types">
+    <End Type="GumrukDBModel.d_b_column_types" Role="d_b_column_types" Multiplicity="1" />
+    <End Type="GumrukDBModel.d_b_columns" Role="d_b_columns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_column_types">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_columns">
+        <PropertyRef Name="db_column_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="d_b_column_lookups">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="column_from_id" Type="Int32" Nullable="false" />
+    <Property Name="column_to_id" Type="Int32" Nullable="false" />
+    <Property Name="explanation" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="isempty" Type="Boolean" />
+    <NavigationProperty Name="d_b_columns" Relationship="GumrukDBModel.FK_d_b_column_lookups_d_b_columns" FromRole="d_b_column_lookups" ToRole="d_b_columns" />
+  </EntityType>
+  <EntityType Name="d_b_table_explanation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="db_table_id" Type="Int32" Nullable="false" />
+    <Property Name="details" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="isempty" Type="Boolean" />
+    <Property Name="userId" Type="Int32" />
+    <NavigationProperty Name="users" Relationship="GumrukDBModel.FK_d_b_table_explanation_users" FromRole="d_b_table_explanation" ToRole="users" />
+    <NavigationProperty Name="d_b_tables" Relationship="GumrukDBModel.FK_d_b_table_explanation_d_b_tables" FromRole="d_b_table_explanation" ToRole="d_b_tables" />
+  </EntityType>
+  <Association Name="FK_d_b_table_explanation_users">
+    <End Type="GumrukDBModel.users" Role="users" Multiplicity="0..1" />
+    <End Type="GumrukDBModel.d_b_table_explanation" Role="d_b_table_explanation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_table_explanation">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="d_b_column_explanations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="db_column_id" Type="Int32" Nullable="false" />
+    <Property Name="details" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="isempty" Type="Boolean" />
+    <Property Name="userId" Type="Int32" />
+    <NavigationProperty Name="users" Relationship="GumrukDBModel.FK_d_b_column_explanations_users" FromRole="d_b_column_explanations" ToRole="users" />
+    <NavigationProperty Name="d_b_columns" Relationship="GumrukDBModel.FK_d_b_column_explanations_d_b_columns" FromRole="d_b_column_explanations" ToRole="d_b_columns" />
+  </EntityType>
+  <Association Name="FK_d_b_column_explanations_users">
+    <End Type="GumrukDBModel.users" Role="users" Multiplicity="0..1" />
+    <End Type="GumrukDBModel.d_b_column_explanations" Role="d_b_column_explanations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_column_explanations">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="app_base_modules">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="isempty" Type="Boolean" />
+    <NavigationProperty Name="app_sub_modules" Relationship="GumrukDBModel.FK_app_sub_modules_app_base_modules" FromRole="app_base_modules" ToRole="app_sub_modules" />
+  </EntityType>
+  <EntityType Name="app_module_operations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="d_b_tables_id" Type="Int32" Nullable="false" />
+    <Property Name="operation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="query" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="app_sub_module_id" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="app_sub_modules" Relationship="GumrukDBModel.FK_app_module_operations_app_sub_modules" FromRole="app_module_operations" ToRole="app_sub_modules" />
+    <Property Name="Explanation" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="d_b_tables" Relationship="GumrukDBModel.FK_app_module_operations_d_b_tables" FromRole="app_module_operations" ToRole="d_b_tables" />
+  </EntityType>
+  <EntityType Name="app_sub_modules">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="isempty" Type="Boolean" />
+    <Property Name="app_base_module_id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="app_base_modules" Relationship="GumrukDBModel.FK_app_sub_modules_app_base_modules" FromRole="app_sub_modules" ToRole="app_base_modules" />
+    <NavigationProperty Name="app_module_operations" Relationship="GumrukDBModel.FK_app_module_operations_app_sub_modules" FromRole="app_sub_modules" ToRole="app_module_operations" />
+  </EntityType>
+  <Association Name="FK_app_sub_modules_app_base_modules">
+    <End Type="GumrukDBModel.app_base_modules" Role="app_base_modules" Multiplicity="1" />
+    <End Type="GumrukDBModel.app_sub_modules" Role="app_sub_modules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="app_base_modules">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="app_sub_modules">
+        <PropertyRef Name="app_base_module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_app_module_operations_app_sub_modules">
+    <End Type="GumrukDBModel.app_sub_modules" Role="app_sub_modules" Multiplicity="1" />
+    <End Type="GumrukDBModel.app_module_operations" Role="app_module_operations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="app_sub_modules">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="app_module_operations">
+        <PropertyRef Name="app_sub_module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_column_explanations_d_b_columns">
+    <End Type="GumrukDBModel.d_b_columns" Role="d_b_columns" Multiplicity="1" />
+    <End Type="GumrukDBModel.d_b_column_explanations" Role="d_b_column_explanations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_columns">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_column_explanations">
+        <PropertyRef Name="db_column_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_table_explanation_d_b_tables">
+    <End Type="GumrukDBModel.d_b_tables" Role="d_b_tables" Multiplicity="1" />
+    <End Type="GumrukDBModel.d_b_table_explanation" Role="d_b_table_explanation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_tables">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_table_explanation">
+        <PropertyRef Name="db_table_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="d_b_column_links">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="column_from_id" Type="Int32" Nullable="false" />
+    <Property Name="column_to_id" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="d_b_columns" Relationship="GumrukDBModel.FK_d_b_column_links_d_b_columns" FromRole="d_b_column_links" ToRole="d_b_columns" />
+  </EntityType>
+  <Association Name="FK_d_b_column_links_d_b_columns">
+    <End Type="GumrukDBModel.d_b_columns" Role="d_b_columns" Multiplicity="1" />
+    <End Type="GumrukDBModel.d_b_column_links" Role="d_b_column_links" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_columns">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_column_links">
+        <PropertyRef Name="column_from_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_column_lookups_d_b_columns">
+    <End Type="GumrukDBModel.d_b_columns" Role="d_b_columns" Multiplicity="1" />
+    <End Type="GumrukDBModel.d_b_column_lookups" Role="d_b_column_lookups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_columns">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_column_lookups">
+        <PropertyRef Name="column_from_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_app_module_operations_d_b_tables">
+    <End Type="GumrukDBModel.d_b_tables" Role="d_b_tables" Multiplicity="1" />
+    <End Type="GumrukDBModel.app_module_operations" Role="app_module_operations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_tables">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="app_module_operations">
+        <PropertyRef Name="d_b_tables_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ERxml">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="schemaid" Type="Int32" />
+    <Property Name="tablesid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="xmlData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ErName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="GumrukIdareleri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GumrukIdaresiAdi" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="KimlikTurleri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KimlikTuru" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Limanlar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UlkeID" Type="Int32" />
+    <Property Name="LimanAdi" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="LimanKodu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="OzelTuzelSahis">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KimlikTurID" Type="Int32" />
+    <Property Name="KimlikNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="VergiDairesiKodu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AdiUnvani" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CaddeSokak" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="İlIlce" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PostaKodu" Type="Int32" />
+    <Property Name="UlkeID" Type="Int32" />
+    <Property Name="Telefon" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="Faks" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="OzetBeyan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BeyanTuruId" Type="Int32" />
+    <Property Name="Rejim" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="TasimaSekli" Type="Int32" />
+    <Property Name="GumrukIdaresi" Type="Int32" />
+    <Property Name="KalemSayisi" Type="Int32" />
+    <Property Name="EkBelgeSayisi" Type="Int32" />
+    <Property Name="IlkVarisCikisYeri" Type="Int32" />
+    <Property Name="TescilTarihi" Type="DateTime" Precision="3" />
+    <Property Name="OnayTarihi" Type="DateTime" Precision="3" />
+    <Property Name="KapanisTarihi" Type="DateTime" Precision="3" />
+    <Property Name="YuklemeUlkesiId" Type="Int32" />
+    <Property Name="YukelemeLimaniId" Type="Int32" />
+    <Property Name="BosaltmaUlkesiId" Type="Int32" />
+    <Property Name="BosaltmaLimanıId" Type="Int32" />
+    <Property Name="BeyanSahibiId" Type="Int32" />
+    <Property Name="TasiyiciFirmaId" Type="Int32" />
+    <Property Name="TasitID" Type="Int32" />
+    <Property Name="OncekiBeyanNoAnaKonsimentoNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="GrupTasimaSenediNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TirAtaKarneNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Kurye" Type="Boolean" />
+    <Property Name="EmniyetGuvenlik" Type="Boolean" />
+    <Property Name="Diger" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TasimaSekilleri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="TasimaSekli" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TasitBilgileri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Numarasi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ReferansNumarasi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UlkeID" Type="Int32" />
+    <Property Name="DorseNo1" Type="Int32" />
+    <Property Name="Uyruk" Type="Int32" />
+    <Property Name="DorseNo2" Type="Int32" />
+    <Property Name="Uyruk2" Type="Int32" />
+    <Property Name="VarisTarihiVeSaati" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Ulkeler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UlkeKodu" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="UlkeAdi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="BeyanTurleri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="BeyanTurKodu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Aciklama" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Rejim" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="TasimaSekli" Type="Int16" />
+  </EntityType>
+  <EntityType Name="DBErrorMessages">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Descrip" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Descren" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SQLProcedures">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="formattedBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="mid" Type="Int32" />
+    <Property Name="isFormatted" Type="Boolean" />
+    <Property Name="schema_id" Type="Int32" />
+    <Property Name="sqlText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LineCount" Type="Int32" />
+    <Property Name="CharCount" Type="Int32" />
+    <Property Name="IfCount" Type="Int32" />
+    <NavigationProperty Name="SQLProcedureModules" Relationship="GumrukDBModel.FK_SQLProcedureModules_SQLProcedures" FromRole="SQLProcedures" ToRole="SQLProcedureModules" />
+    <NavigationProperty Name="d_b_schemas" Relationship="GumrukDBModel.FK_SQLProcedures_d_b_schemas" FromRole="SQLProcedures" ToRole="d_b_schemas" />
+  </EntityType>
+  <EntityType Name="SQLKeys">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SqlKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SQLProceduresComments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Details" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="userID" Type="Int32" />
+    <Property Name="SQLProceduresID" Type="Int32" />
+    <Property Name="position" Type="Int32" />
+  </EntityType>
+  <EntityType Name="SQLProceduresProcedure">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SQLProcedureID" Type="Int32" />
+    <Property Name="innerSQLProcedureID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Modules">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="isempty" Type="Boolean" />
+    <NavigationProperty Name="SubModules" Relationship="GumrukDBModel.FK_SubModules_Modules" FromRole="Modules" ToRole="SubModules" />
+    <NavigationProperty Name="Modules1" Relationship="GumrukDBModel.FK_Modules_Modules" FromRole="Modules" ToRole="Modules1" />
+    <NavigationProperty Name="Modules2" Relationship="GumrukDBModel.FK_Modules_Modules" FromRole="Modules1" ToRole="Modules" />
+    <Property Name="modType" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ModulesFiles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SubModuleID" Type="Int32" />
+    <Property Name="ModuleID" Type="Int32" />
+    <NavigationProperty Name="SubModules" Relationship="GumrukDBModel.FK_ModulesFiles_SubModules" FromRole="ModulesFiles" ToRole="SubModules" />
+    <NavigationProperty Name="SQLProcedureModules" Relationship="GumrukDBModel.FK_SQLProcedureModules_ModulesFiles" FromRole="ModulesFiles" ToRole="SQLProcedureModules" />
+    <Property Name="formattedBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LineCount" Type="Int32" />
+    <NavigationProperty Name="ModulesTables" Relationship="GumrukDBModel.FK_ModulesTables_ModulesFiles" FromRole="ModulesFiles" ToRole="ModulesTables" />
+  </EntityType>
+  <EntityType Name="SubModules">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ModuleID" Type="Int32" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="isempty" Type="Boolean" />
+    <NavigationProperty Name="Modules" Relationship="GumrukDBModel.FK_SubModules_Modules" FromRole="SubModules" ToRole="Modules" />
+    <NavigationProperty Name="ModulesFiles" Relationship="GumrukDBModel.FK_ModulesFiles_SubModules" FromRole="SubModules" ToRole="ModulesFiles" />
+    <NavigationProperty Name="SQLProcedureModules" Relationship="GumrukDBModel.FK_SQLProcedureModules_SubModules" FromRole="SubModules" ToRole="SQLProcedureModules" />
+    <NavigationProperty Name="SubModules1" Relationship="GumrukDBModel.FK_SubModules_SubModules" FromRole="SubModules" ToRole="SubModules1" />
+    <NavigationProperty Name="SubModules2" Relationship="GumrukDBModel.FK_SubModules_SubModules" FromRole="SubModules1" ToRole="SubModules" />
+  </EntityType>
+  <Association Name="FK_SubModules_Modules">
+    <End Type="GumrukDBModel.Modules" Role="Modules" Multiplicity="0..1" />
+    <End Type="GumrukDBModel.SubModules" Role="SubModules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modules">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubModules">
+        <PropertyRef Name="ModuleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModulesFiles_SubModules">
+    <End Type="GumrukDBModel.SubModules" Role="SubModules" Multiplicity="0..1" />
+    <End Type="GumrukDBModel.ModulesFiles" Role="ModulesFiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubModules">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ModulesFiles">
+        <PropertyRef Name="SubModuleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SQLProcedureModules">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SQLProcedureID" Type="Int32" />
+    <Property Name="ModuleID" Type="Int32" Nullable="false" />
+    <Property Name="SubModuleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SQLProcedures" Relationship="GumrukDBModel.FK_SQLProcedureModules_SQLProcedures" FromRole="SQLProcedureModules" ToRole="SQLProcedures" />
+    <NavigationProperty Name="SubModules" Relationship="GumrukDBModel.FK_SQLProcedureModules_SubModules" FromRole="SQLProcedureModules" ToRole="SubModules" />
+    <Property Name="FileID" Type="Int32" />
+    <Property Name="lineNumber" Type="Int32" />
+    <NavigationProperty Name="ModulesFiles" Relationship="GumrukDBModel.FK_SQLProcedureModules_ModulesFiles" FromRole="SQLProcedureModules" ToRole="ModulesFiles" />
+  </EntityType>
+  <Association Name="FK_SQLProcedureModules_SQLProcedures">
+    <End Type="GumrukDBModel.SQLProcedures" Role="SQLProcedures" Multiplicity="0..1" />
+    <End Type="GumrukDBModel.SQLProcedureModules" Role="SQLProcedureModules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SQLProcedures">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SQLProcedureModules">
+        <PropertyRef Name="SQLProcedureID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SQLProcedureModules_SubModules">
+    <End Type="GumrukDBModel.SubModules" Role="SubModules" Multiplicity="1" />
+    <End Type="GumrukDBModel.SQLProcedureModules" Role="SQLProcedureModules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubModules">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SQLProcedureModules">
+        <PropertyRef Name="SubModuleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Modules_Modules">
+    <End Type="GumrukDBModel.Modules" Role="Modules" Multiplicity="1" />
+    <End Type="GumrukDBModel.Modules" Role="Modules1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Modules">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Modules1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubModules_SubModules">
+    <End Type="GumrukDBModel.SubModules" Role="SubModules" Multiplicity="1" />
+    <End Type="GumrukDBModel.SubModules" Role="SubModules1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SubModules">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubModules1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ModulesTables">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="d_b_tablesID" Type="Int32" />
+    <Property Name="subModuleID" Type="Int32" />
+    <Property Name="moduleID" Type="Int32" />
+    <NavigationProperty Name="d_b_tables" Relationship="GumrukDBModel.FK_ModulesTables_d_b_tables" FromRole="ModulesTables" ToRole="d_b_tables" />
+    <Property Name="fileID" Type="Int32" />
+    <Property Name="lineNumber" Type="Int32" />
+    <NavigationProperty Name="ModulesFiles" Relationship="GumrukDBModel.FK_ModulesTables_ModulesFiles" FromRole="ModulesTables" ToRole="ModulesFiles" />
+  </EntityType>
+  <Association Name="FK_ModulesTables_d_b_tables">
+    <End Type="GumrukDBModel.d_b_tables" Role="d_b_tables" Multiplicity="0..1" />
+    <End Type="GumrukDBModel.ModulesTables" Role="ModulesTables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_tables">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ModulesTables">
+        <PropertyRef Name="d_b_tablesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SQLProcedures_d_b_schemas">
+    <End Type="GumrukDBModel.d_b_schemas" Role="d_b_schemas" Multiplicity="0..1" />
+    <End Type="GumrukDBModel.SQLProcedures" Role="SQLProcedures" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_schemas">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SQLProcedures">
+        <PropertyRef Name="schema_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ObjType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="objType1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DBObjects" Relationship="GumrukDBModel.FK_DBObjects_ObjType" FromRole="ObjType" ToRole="DBObjects" />
+  </EntityType>
+  <EntityType Name="DBObjects">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="objName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="objType" Type="Int32" />
+    <Property Name="schemaName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="schemaID" Type="Int32" />
+    <NavigationProperty Name="ObjType1" Relationship="GumrukDBModel.FK_DBObjects_ObjType" FromRole="DBObjects" ToRole="ObjType" />
+  </EntityType>
+  <EntityType Name="DBObjectsChilds">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="ChildID" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_DBObjects_ObjType">
+    <End Type="GumrukDBModel.ObjType" Role="ObjType" Multiplicity="0..1" />
+    <End Type="GumrukDBModel.DBObjects" Role="DBObjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DBObjects">
+        <PropertyRef Name="objType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InnerModule">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContainModuleID" Type="Int32" />
+    <Property Name="ModuleID" Type="Int32" />
+    <Property Name="ModFileName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Method" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="ContainFileName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="SubContainsModuleID" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_SQLProcedureModules_ModulesFiles">
+    <End Type="GumrukDBModel.ModulesFiles" Role="ModulesFiles" Multiplicity="0..1" />
+    <End Type="GumrukDBModel.SQLProcedureModules" Role="SQLProcedureModules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ModulesFiles">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SQLProcedureModules">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModulesTables_ModulesFiles">
+    <End Type="GumrukDBModel.ModulesFiles" Role="ModulesFiles" Multiplicity="0..1" />
+    <End Type="GumrukDBModel.ModulesTables" Role="ModulesTables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ModulesFiles">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ModulesTables">
+        <PropertyRef Name="fileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

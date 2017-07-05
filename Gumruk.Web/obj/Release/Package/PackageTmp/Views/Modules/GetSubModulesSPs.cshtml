@@ -1,0 +1,106 @@
+﻿@model List<Gumruk.Entity.SQLProcedureModules>
+
+<div class="container-fluid" style="overflow-x:auto;">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Procedure Name</th>
+                <th>File Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (var item in Model)
+            {
+
+                string[] spname = item.SQLProcedures.name.Split('.');
+                <tr>
+                    <td>
+                        <a href="javascript:void(0)" onclick="GetSP(@item.SQLProcedures.ID)">@spname[0]</a><br />
+                        <span style="font-size:8px;">@item.SQLProcedures.schemas.name</span>
+                    </td>
+                    <td>
+                        <span>@item.ModulesFiles.Name</span><br />
+                        <span>@item.lineNumber</span>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" onclick="highLight('@spname[0]')" class="btn btn-xs btn-default" data-toggle="tooltip" title="Mark in text" data-placement="bottom"><span class="glyphicon glyphicon-search"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div id="divSQLProcedure" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="sqlHeader"></h4>
+            </div>
+            <div class="modal-body">
+                <pre id="resultSQL" style="height:800px;overflow-x:auto;overflow-y:auto;" onkeydown="return GirisYapildi(event)"> </pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function highLight(spName) {
+
+        // Read the keyword
+        var keyword = spName;
+
+        console.log(keyword);
+        // Determine selected options
+        var options = {};
+        //$("input[name='opt[]']").each(function () {
+        //    options[$(this).val()] = $(this).is(":checked");
+        //});
+
+        // Remove previous marked elements and mark
+        // the new keyword inside the context
+        $("#moduleBody").unmark({
+            done: function () {
+                $("#moduleBody").mark(keyword, options);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    function GetSP(ID) {
+
+        $.ajax({
+            url: 'StoredProcedures/GetProcedureByID',
+            type: "POST",
+            cache: false,
+            async: true,
+            data: { id: ID, TXT: "" },
+            success: function (text, data) {
+                $("#sqlHeader").html(text["name"]);
+
+                if (text["formattedBody"] != null)
+                    $("#resultSQL").html(text["formattedBody"]);
+                else
+                    $("#resultSQL").html(text["body"]);
+
+                $("#divSQLProcedure").modal();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+
+    }
+</script>

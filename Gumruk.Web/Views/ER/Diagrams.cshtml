@@ -1,0 +1,14 @@
+﻿@model ICollection<Gumruk.Entity.ERxml>
+
+<div id="savedDiagrams" style="margin-top:5px;">
+    @foreach (var itemDiagram in Model)
+    {
+        <a id="diagram_@itemDiagram.id" href="javascript:void(0)" style="font-size:12px;" onclick="LoadErDiagram(@itemDiagram.id)">@itemDiagram.ErName</a><br />
+    }
+</div>
+
+
+
+
+
+

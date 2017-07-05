@@ -1,0 +1,247 @@
+﻿@model Gumruk.Entity.Model.ProceduresSearchResult
+<style>
+    hr {
+        border-top: 4px solid #dedede;
+    }
+</style>
+@if (Model.fromLayout)
+{
+    <a href="#" class="close" aria-label="close" onclick="CloseSearhWindow()">&times;</a>
+}
+@if ((Model._schemas != null && Model._schemas.Count == 0) && (Model._tables != null && Model._tables.Count == 0) && (Model._procedures != null && Model._procedures.Count == 0) && (Model._columns != null && Model._columns.Count == 0) && (Model._errorMessages != null && Model._errorMessages.Count == 0))
+{
+    <h5 style="color:#0094ff;font-style:italic;">Herhangi bir sonuç bulunamadı.</h5>
+}
+
+@if (Model._schemas != null && Model._schemas.Count > 0)
+{<h5 style="color:#0094ff;font-style:italic;">Schemas</h5>
+    <div class="table-responsive" style="max-height:400px;overflow-y:auto;overflow-x:hidden;">
+
+        <div class="row">
+            <div class="col-lg-2">
+                <strong>Name</strong>
+            </div>
+            <div class="col-lg-10 ">
+                <strong>Açıklamalar</strong>
+            </div>
+
+        </div>
+
+        @foreach (var item in Model._schemas)
+                {
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#tables_@item.id">@item.name</a>
+
+                    <div id="tables_@item.id" class="collapse">
+                        @Html.Partial("TablesView", item.d_b_tables)
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <span class="darkyellow">tables count : @item.d_b_tables.Count</span>
+                </div>
+                <div class="col-lg-3">
+                    @item.details
+                </div>
+
+            </div>
+        }
+    </div>
+    <hr />
+}
+
+
+@if (Model._tables != null && Model._tables.Count > 0)
+{
+    <h5 style="color:##0560a2;font-style:italic;">Tables</h5>
+    <div class="table-responsive" style="max-height:400px;overflow-y:auto;overflow-x:hidden;">
+        <div class="row">
+            <div class="col-lg-2"><strong>Schema Name</strong></div>
+            <div class="col-lg-6"><strong>Name</strong></div>
+            <div class="col-lg-4"><strong>Açıklamalar</strong></div>
+        </div>
+
+        @foreach (var item in Model._tables)
+                {
+            <div class="row">
+                <div class="col-lg-2">
+                    @item.d_b_schemas.name
+                </div>
+                <div class="col-lg-6">
+                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#columns_@item.id">@item.name</a>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; <span class="darkyellow">column count : @item.d_b_columns.Count</span>
+                    <div id="columns_@item.id" class="collapse">
+                        @Html.Partial("ColumnsView", item.d_b_columns)
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    @foreach (var item2 in item.d_b_table_explanation)
+                    {
+                        @item2.details<br />
+                    }
+                </div>
+            </div>
+        }
+    </div>
+    <hr />
+}
+
+
+
+
+@if (Model._columns != null && Model._columns.Count > 0)
+{
+    <h5 style="color:#0560a2;font-style:italic;">Columns</h5>
+    <div class="table-responsive" style="max-height:400px;overflow-y:auto;overflow-x:hidden;">
+        <div class="row">
+            <div class="col-lg-2"><strong>Schema Name</strong></div>
+            <div class="col-lg-2"><strong>Table Name</strong></div>
+            <div class="col-lg-2"><strong>Name</strong></div>
+            <div class="col-lg-2"><strong>Açıklamalar</strong></div>
+        </div>
+
+        @foreach (var item in Model._columns)
+                {
+            <div class="row">
+                <div class="col-lg-2">
+                    @item.d_b_tables.d_b_schemas.name
+                </div>
+                <div class="col-lg-2">
+                    @item.d_b_tables.name
+                </div>
+                <div class="col-lg-2">
+                    @item.name
+                </div>
+                <div class="col-lg-6">
+                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#columnsexp_@item.id">Aciklamalar</a>
+                    <div id="columnsexp_@item.id" class="collapse">
+                        @foreach (var item2 in item.d_b_column_explanations)
+                        {
+                            @item2.details<br />
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+}
+
+@if (Model._procedures != null && Model._procedures.Count > 0)
+{
+    <h5 style="color:#0560a2;font-style:italic;">Procedures and Funcstions</h5>
+    <div class="table-responsive" style="max-height:400px;overflow-y:auto;overflow-x:hidden;">
+
+        <div class="row">
+            @if (!Model.fromLayout)
+            {
+                <div class="col-lg-1"></div>
+            }
+            <div class="col-lg-9"><strong>Procedures/Function Name</strong></div>
+            <div class="col-lg-2"><strong>Schema</strong></div>
+        </div>
+
+
+        @foreach (var item in Model._procedures)
+                {
+            <div class="row">
+                @if (!Model.fromLayout)
+                {
+                    <div class="col-lg-1"><a href="javascript:void(0)" onclick="Git(@item.ID,@item.schema_id,'@item.name')">go !</a></div>
+                }
+                <div class="col-lg-9">
+                    @if (!Model.fromLayout)
+                    {
+                        <a href="javascript:void(0)" data-toggle="collapse" data-target="#body_@item.ID" onclick="showBody(@item.ID)">@item.name</a>
+                        <div id="body_@item.ID" class="collapse">
+                            <pre id="pre_@item.ID">
+                                        @item.formattedBody
+                                </pre>
+                        </div>
+                    }
+                    else
+                    {
+                        @item.name
+                    }
+
+                </div>
+                <div class="col-lg-2">
+                    @item.schemas.name
+                </div>
+            </div>
+        }
+
+    </div>
+    <input type="hidden" id="hdnNumber" />
+    <script>
+        function Git(ID, schemaID, name) {
+            $('#myModal').modal('toggle');
+            $('#schemas').val(schemaID);
+
+            SchemaDegisti();
+            getProcedure(ID, "");
+        }
+
+        function changeTab(last4) {
+            if (last4 == ".prc") {
+                $('.nav-tabs a[href="#sp"]').tab('show');
+            }
+            else {
+                $('.nav-tabs a[href="#func"]').tab('show');
+            }
+        }
+        $(document).ready(function myfunction() {
+            $("#hdnNumber").val("0");
+        })
+
+        function showBody(ID) {
+            var divPre = "#pre_" + ID;
+
+            var txtHhtml = $(divPre).text();
+            if ($("#hdnNumber").val() == "0")
+                $(divPre).html(txtHhtml);
+
+            $("#hdnNumber").val("1");
+            //$.ajax({
+            //    url: 'GetProcedureByID',
+            //    type: "POST",
+            //    cache: false,
+            //    async: false,
+            //    data: { id: ID, TXT: "" },
+            //    success: function (text, data) {
+            //        console.log("dana");
+            //        console.log(text["formattedBody"]);
+
+            //        $(divPre).html(text["formattedBody"]);
+            //    },
+            //    error: function (jqXhr, textStatus, errorThrown) {
+            //        alert("bir hata oluştu");
+            //    }
+            //});
+        }
+    </script>
+
+}
+
+@if (Model._errorMessages != null && Model._errorMessages.Count > 0)
+{
+    <h5 style="color:#0560a2;font-style:italic;">Error Messages</h5>
+    <div class="table-responsive" style="max-height:400px;overflow-y:auto;overflow-x:hidden;">
+
+        <div class="row">
+            <div class="col-lg-2"><strong>Error Code</strong></div>
+            <div class="col-lg-8"><strong>Description</strong></div>
+            <div class="col-lg-2"><strong>Descren</strong></div>
+        </div>
+
+        @foreach (var item in Model._errorMessages)
+                {
+            <div class="row">
+                <div class="col-lg-2">@item.Code</div>
+                <div class="col-lg-8">@item.Descrip</div>
+                <div class="col-lg-2">@item.Descren</div>
+            </div>
+        }
+    </div>
+}
+

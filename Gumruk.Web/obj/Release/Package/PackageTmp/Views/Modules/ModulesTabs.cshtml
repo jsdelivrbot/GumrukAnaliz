@@ -1,0 +1,37 @@
+﻿@model List<Gumruk.Entity.Modules>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#tfs">TFS Modules</a></li>
+    <li><a data-toggle="tab" href="#egweb">EG Web Services</a></li>
+</ul>
+
+<div id="modulesDiv" class="tab-content">
+    <div id="tfs" class="tab-pane fade in active">
+        @foreach (var item in Model.Where(p => p.modType == 0))
+            {
+            <a href="javascript:void(0)" data-toggle="collapse" data-target="#subModules_@item.ID" onclick="GetModulesFiles(@item.ID)" id="linkModule_@item.ID">@item.Name</a><br>
+            <div id="subModules_@item.ID" class="collapse">
+                <div class="collapseDiv">
+                    @foreach (var subItem in item.SubModules)
+                {
+                        <a href="javascript:void(0)" onclick="GetSubModulesFiles(@subItem.ID)" id="linkModuleFile_@subItem.ID">@subItem.Name</a><br />
+                    }
+                </div>
+            </div>
+        }
+
+    </div>
+    <div id="egweb" class="tab-pane fade">
+        @foreach (var item in Model.Where(p => p.modType == 1))
+            {
+            <a href="javascript:void(0)" data-toggle="collapse" data-target="#subModules_@item.ID" onclick="GetModulesFiles(@item.ID)" id="linkModule_@item.ID">@item.Name</a><br>
+            <div id="subModules_@item.ID" class="collapse">
+                <div class="collapseDiv">
+                    @foreach (var subItem in item.SubModules)
+                {
+                        <a href="javascript:void(0)" onclick="GetSubModulesFiles(@subItem.ID)" id="linkModuleFile_@subItem.ID">@subItem.Name</a><br />
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

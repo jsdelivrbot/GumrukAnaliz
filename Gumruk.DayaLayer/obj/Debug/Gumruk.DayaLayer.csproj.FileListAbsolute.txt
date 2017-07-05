@@ -1,0 +1,12 @@
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\bin\Debug\Gumruk.DayaLayer.dll.config
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\bin\Debug\Gumruk.DayaLayer.dll
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\bin\Debug\Gumruk.DayaLayer.pdb
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\bin\Debug\EntityFramework.dll
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\bin\Debug\EntityFramework.SqlServer.dll
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\bin\Debug\Gumruk.Entity.dll
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\bin\Debug\Gumruk.Entity.pdb
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\bin\Debug\EntityFramework.xml
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\bin\Debug\EntityFramework.SqlServer.xml
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\obj\Debug\Gumruk.DayaLayer.csprojResolveAssemblyReference.cache
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\obj\Debug\Gumruk.DayaLayer.dll
+D:\4S Projeler\4SOperations\Gumruk.DayaLayer\obj\Debug\Gumruk.DayaLayer.pdb

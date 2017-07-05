@@ -1,0 +1,338 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Gümrük Bakanlığı ER Designer</title>
+    <link rel="stylesheet" href="/Gumruk.Web/sqlViewer/styles/style.css" media="all" />
+    <link rel="stylesheet" href="/Gumruk.Web/sqlViewer/styles/print.css" type="text/css" media="print" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <style>
+        .red {
+            color: #ff0000;
+        }
+
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+            height: 450px;
+        }
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        
+    </style>
+
+    <script src="/Gumruk.Web/sqlViewer/js/oz.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/config.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/globals.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/visual.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/row.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/table.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/relation.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/key.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/rubberband.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/map.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/toggle.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/io.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/tablemanager.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/rowmanager.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/keymanager.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/window.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/options.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/wwwsqldesigner.js"></script>
+    <script src="/Gumruk.Web/sqlViewer/js/xml2json.js"></script>
+
+
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse" style="position:relative;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-2 sidenav">
+                <p><a href="#">Link</a></p>
+                <p><a href="#">Link</a></p>
+                <p><a href="#">Link</a></p>
+            </div>
+            <div class="col-sm-10 text-left">
+                <!--designer bu kısımda yer alır-->
+                <div id="area"></div>	<div id="controls">
+                    <div id="bar" style="display:block;">
+                        <div id="toggle"></div>
+                        <input type="button" id="saveload" />
+                        <hr />
+                        <input type="button" id="addtable" />
+                        <input type="button" id="edittable" />
+                        <input type="button" id="tablekeys" />
+                        <input type="button" id="removetable" />
+                        <input type="button" id="aligntables" />
+                        <input type="button" id="cleartables" />
+                        <hr />
+                        <input type="button" id="addrow" />
+                        <input type="button" id="editrow" />
+                        <input type="button" id="uprow" class="small" /><input type="button" id="downrow" class="small" />
+                        <input type="button" id="foreigncreate" />
+                        <input type="button" id="foreignconnect" />
+                        <input type="button" id="foreigndisconnect" />
+                        <input type="button" id="removerow" />
+                        <hr />
+                        <input type="button" id="options" />
+                        <a href="https://github.com/ondras/wwwsqldesigner/wiki" target="_blank"><input type="button" id="docs" value="" /></a>
+                    </div>
+
+                    <div id="rubberband"></div>
+
+                    <div id="minimap"></div>
+
+                    <div id="background"></div>
+
+                    <div id="window">
+
+                        <div id="windowtitle"><img id="throbber" src="images/throbber.gif" alt="" title="" /></div>
+                        <div id="windowcontent"></div>
+                        <input type="button" id="windowok" />
+                        <input type="button" id="windowcancel" />
+                    </div>
+                </div>
+                <div id="opts">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label id="language" for="optionlocale"></label>
+                                </td>
+                                <td>
+                                    <select id="optionlocale"><option></option></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="db" for="optiondb"></label>
+                                </td>
+                                <td>
+                                    <select id="optiondb"><option></option></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="snap" for="optionsnap"></label>
+                                </td>
+                                <td>
+                                    <input type="text" size="4" id="optionsnap" />
+                                    <span class="small" id="optionsnapnotice"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="pattern" for="optionpattern"></label>
+                                </td>
+                                <td>
+                                    <input type="text" size="6" id="optionpattern" />
+                                    <span class="small" id="optionpatternnotice"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="hide" for="optionhide"></label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" id="optionhide" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="vector" for="optionvector"></label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" id="optionvector" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="showsize" for="optionshowsize"></label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" id="optionshowsize" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="showtype" for="optionshowtype"></label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" id="optionshowtype" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr />
+                    <span class="small" id="optionsnotice"></span>
+                </div>
+                <div id="io">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style="width:60%">
+                                    <fieldset>
+                                        <legend id="client"></legend>
+                                        <div id="singlerow">
+
+                                            <input type="button" id="clientsave" />
+                                            <input type="button" id="clientload" />
+                                        </div>
+                                        <div id="singlerow">
+                                            <input type="button" id="clientlocalsave" />
+                                            <input type="button" id="clientlocalload" />
+                                            <input type="button" id="clientlocallist" />
+                                        </div>
+                                        <hr />
+                                        <input type="button" id="clientsql" />
+                                    </fieldset>
+                                </td>
+                                <td style="width:40%">
+                                    <fieldset>
+                                        <legend id="server"></legend>
+                                        <label for="backend" id="backendlabel"></label> <select id="backend"><option></option></select>
+                                        <hr />
+                                        <input type="button" id="serversave" />
+                                        <input type="button" id="quicksave" />
+                                        <input type="button" id="serverload" />
+                                        <input type="button" id="serverlist" />
+                                        <input type="button" id="serverimport" />
+                                    </fieldset>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <fieldset>
+                                        <legend id="output"></legend>
+                                        <textarea id="textarea" rows="1" cols="1"></textarea><!--modified by javascript later-->
+                                    </fieldset>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="keys">
+                    <fieldset>
+                        <legend id="keyslistlabel"></legend>
+                        <select id="keyslist"><option></option></select>
+                        <input type="button" id="keyadd" />
+                        <input type="button" id="keyremove" />
+                    </fieldset>
+                    <fieldset>
+                        <legend id="keyedit"></legend>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="keytype" id="keytypelabel"></label>
+                                        <select id="keytype"><option></option></select>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <label for="keyname" id="keynamelabel"></label>
+                                        <input type="text" id="keyname" size="10" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><hr /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="keyfields" id="keyfieldslabel"></label><br />
+                                        <select id="keyfields" size="5" multiple="multiple"><option></option></select>
+                                    </td>
+                                    <td>
+                                        <input type="button" id="keyleft" value="&lt;&lt;" /><br />
+                                        <input type="button" id="keyright" value="&gt;&gt;" /><br />
+                                    </td>
+                                    <td>
+                                        <label for="keyavail" id="keyavaillabel"></label><br />
+                                        <select id="keyavail" size="5" multiple="multiple"><option></option></select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+                <div id="table">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label id="tablenamelabel" for="tablename"></label>
+                                </td>
+                                <td>
+                                    <input id="tablename" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="tablecommentlabel" for="tablecomment"></label>
+                                </td>
+                                <td>
+                                    <textarea rows="5" cols="40" id="tablecomment"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--designer bitiş -->
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        var d = new SQL.Designer();
+    </script>
+</body>
+</html>

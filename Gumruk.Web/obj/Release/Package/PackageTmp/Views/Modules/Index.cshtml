@@ -1,0 +1,95 @@
+﻿@*@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/webix/webix.css" type="text/css">
+    <script src="~/webix/webix.js" type="text/javascript"></script>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+    <style>
+        .red {
+            color: #0474c4;
+            background-color: #fff;
+            font-family: Calibri;
+            font-size: 1.2em;
+        }
+    </style>
+@*</head>
+<body>*@
+    <script>
+        var column_types = ["Varchar", "Integer", "Etc"];
+        webix.ui({
+            rows: [
+            {
+                type: "wide",
+                cols: [{
+                    view: "tree",
+                    select: true,
+                    height:930,
+                    url: "Modules/GetModulesList",
+                    on: {
+                        "onItemClick": function (e, w, t) {
+                            var selectedItem = this.getItem(e);
+
+                            $$('module_datatable').clearAll();
+
+                            if (selectedItem.$level === 2) {
+                                $$('module_datatable').load("Modules/GetOperationsForModule?subModuleID=" + selectedItem.id);
+                            }
+
+                            $$('module_tables').clearAll();
+                            if (selectedItem.$level === 2) {
+                                $$('module_tables').load("Modules/GetTablesByModuleID?subModuleID=" + selectedItem.id);
+                            }
+                        }
+                    }
+                },
+                {
+                    view: 'layout',
+                    gravity: 3,
+                    rows: [
+                    {
+                        cols: [
+                        {
+                            view: "datatable",
+                            gravity: 2,
+                            id: "module_datatable",
+                            columns: [
+                                { id: "table_name", header: ["Tablo", { content: "textFilter" }], width: 200 },
+                                { id: "operation", header: ["İşlem", { content: "textFilter" }] },
+                                { id: "query", header: ["Sorgu", { content: "textFilter" }], width: 1200 }
+                            ],
+                            fixedRowHeight: false, scrollAlignY: true, scrollAlignX: true,
+                        },
+                        {
+                            view: "datatable",
+                            id: "module_tables",
+                            gravity: 1,
+                            nameWidth: 200,
+                            columns: [
+                                { id: "schema_name", header: ["Schema"], width: 200 },
+                                { id: "table_name", header: ["Table"], width: 200 }
+                            ]
+                        }
+                        ]
+                    }
+                    ]
+                }
+                ]
+
+
+            }
+            ]
+        });
+
+    </script>
+
+
+@*</body>
+</html>*@

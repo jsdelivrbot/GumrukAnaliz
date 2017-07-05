@@ -1,0 +1,97 @@
+﻿@model List<Gumruk.Entity.ModulesFiles>
+
+
+<div class="col-lg-3  col-md-2 col-sm-2 col-xs-3 padding15 constantDiv overflowX" id="modFiles">
+    <h5>Files</h5>
+    @foreach (var item in Model)
+    {
+        <a href="javascript:void(0)" onclick="GetModuleFilesDetail(@item.ID)" id="modFileLink_@item.ID" data-toggle="tooltip" data-placement="top" title="Line Count  : @item.LineCount">@item.Name</a><br />
+        @*<input type="hidden" id="hdnModuleFile_@item.ID" value="@item.Body" />*@
+    }
+</div>
+<div class="col-lg-9 col-md-10 col-sm-10 col-xs-9 padding15" id="modulesFileProperty">
+    <pre class="constantDiv" style="height:800px;overflow-x:auto;overflow-y:auto;background-color:#f9f9f9;border:0px;" id="moduleBody">
+</pre>
+
+</div>
+<style>
+    .highlight {
+        background-color: yellow;
+    }
+</style>
+
+<script>
+    function GetModuleFilesDetail(ID) {
+        //var body = "#hdnModuleFile_" + ID;
+
+        var lineCount = "#line_" + ID;
+        removeCSS("modFileLink_", ID);
+
+        $.ajax({
+            url: '@Url.Action("GetModuleFileByID", "Modules")',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { ID: ID },
+            success: function (text, data) {
+                $("#moduleBody").html(text["formattedBody"]);
+                $(lineCount).text(text["LineCount"]);
+                GetFileTables(ID);
+                GetSQlProceduresByFile(ID);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+
+
+    }
+
+    function GetFileTables(ID) {
+        $.ajax({
+            url: 'Modules/GetFileTables',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { FileID: ID },
+            success: function (text, data) {
+                console.log($("#divTables"));
+
+                $("#divTables").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function GetSQlProceduresByFile(ID) {
+        $.ajax({
+            url: 'Modules/GetSubModulesSPsByFileID',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { FileID: ID },
+            success: function (text, data) {
+                $("#divSPs").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function removeCSS(name, ID) {
+        var link = "#" + name + ID;
+
+        $("#modFiles a").removeClass("btn-sm btn-primary");
+        $(link).addClass("btn-sm btn-primary");
+    }
+
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+</script>
+

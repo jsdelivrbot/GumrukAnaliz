@@ -1,0 +1,13 @@
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\bin\Debug\Gumruk.UnitOfWork.dll
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\bin\Debug\Gumruk.UnitOfWork.pdb
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\bin\Debug\Gumruk.Entity.dll
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\bin\Debug\Gumruk.Repository.dll
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\bin\Debug\Gumruk.DayaLayer.dll
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\bin\Debug\EntityFramework.dll
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\bin\Debug\Gumruk.Entity.pdb
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\bin\Debug\Gumruk.Repository.pdb
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\bin\Debug\Gumruk.DayaLayer.pdb
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\bin\Debug\EntityFramework.xml
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\obj\Debug\Gumruk.UnitOfWork.csprojResolveAssemblyReference.cache
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\obj\Debug\Gumruk.UnitOfWork.dll
+D:\4S Projeler\4SOperations\Gumruk.UnitOfWork\obj\Debug\Gumruk.UnitOfWork.pdb

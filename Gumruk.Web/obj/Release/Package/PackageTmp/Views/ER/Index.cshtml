@@ -1,0 +1,907 @@
+﻿@using Gumruk.Web.Models;
+@*@{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>*@
+@*<meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/webix/webix.css" type="text/css">
+    <script src="~/webix/webix.js" type="text/javascript"></script>*@
+
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+<style>
+    .webix_tree_item.webix_selected {
+        background-color: #27ae60;
+    }
+
+    .absolute {
+        height: 800px;
+    }
+
+    .red {
+        color: #0474c4;
+        background-color: #fff;
+        font-family: Calibri;
+        font-size: 1.2em;
+    }
+
+    .overflow {
+        overflow: auto;
+    }
+
+    .table {
+        width: auto;
+    }
+</style>
+<script src="~/Scripts/html2canvas.js"></script>
+<script src="~/Scripts/canvas2image.js"></script>
+<link rel="stylesheet" href="~/sqlViewer/styles/style.css" media="all" />
+<link rel="stylesheet" href="~/sqlViewer/styles/print.css" type="text/css" media="print" />
+<script src="~/sqlViewer/js/oz.js"></script>
+<script src="~/sqlViewer/js/config.js"></script>
+<script src="~/sqlViewer/js/globals.js"></script>
+<script src="~/sqlViewer/js/visual.js"></script>
+<script src="~/sqlViewer/js/row.js"></script>
+<script src="~/sqlViewer/js/table.js"></script>
+<script src="~/sqlViewer/js/relation.js"></script>
+<script src="~/sqlViewer/js/key.js"></script>
+<script src="~/sqlViewer/js/rubberband.js"></script>
+<script src="~/sqlViewer/js/map.js"></script>
+<script src="~/sqlViewer/js/toggle.js"></script>
+<script src="~/sqlViewer/js/io.js"></script>
+<script src="~/sqlViewer/js/tablemanager.js"></script>
+<script src="~/sqlViewer/js/rowmanager.js"></script>
+<script src="~/sqlViewer/js/keymanager.js"></script>
+<script src="~/sqlViewer/js/window.js"></script>
+<script src="~/sqlViewer/js/options.js"></script>
+<script src="~/sqlViewer/js/wwwsqldesigner.js"></script>
+<script src="~/sqlViewer/js/xml2json.js"></script>
+@*</head>
+    <body>*@
+<div class="row padding15">
+    <div class="col-lg-2">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                @Html.Dropdown4S("schemas", "", "false", "false", "", 10, "Home/GetSchemaNames?getTableCount=false", "id", "value")
+            </div>
+        </div>
+        <div class="row" style="padding:0px;padding-left:15px;margin-bottom:5px;">
+            <div class="btn-group btn-group-justified">
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm" title="Show" onclick="showErDiagram(1)"><span class="glyphicon glyphicon-eye-open"></span></a>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm" title="Relations" onclick="showErDiagram(2)"><span class="glyphicon glyphicon-repeat"></span></a>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm" title="Save" onclick="saveErDesigner()"><span class="glyphicon glyphicon-saved"></span></a>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm" title="Delete" onclick="deleteErDiagram()"><span class="glyphicon glyphicon-trash"></span></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:800px;max-height:800px;overflow-y:auto;">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tables" onclick="tablesClicked()">Tables</a></li>
+                    <li><a data-toggle="tab" href="#diagrams">Saved Diagrams</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tables" class="tab-pane fade in active">
+
+                    </div>
+                    <div id="diagrams" class="tab-pane fade">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+        <div class="row">
+
+            <div id="area" style="width:5000px;height:5000px;"></div>	<div id="controls">
+                <div id="bar" style="display:none;">
+                    <div id="toggle"></div>
+                    <input type="button" id="saveload" />
+                    <hr />
+                    <input type="button" id="addtable" />
+                    <input type="button" id="edittable" />
+                    <input type="button" id="tablekeys" />
+                    <input type="button" id="removetable" />
+                    <input type="button" id="aligntables" />
+                    <input type="button" id="cleartables" />
+                    <hr />
+                    <input type="button" id="addrow" />
+                    <input type="button" id="editrow" />
+                    <input type="button" id="uprow" class="small" /><input type="button" id="downrow" class="small" />
+                    <input type="button" id="foreigncreate" />
+                    <input type="button" id="foreignconnect" />
+                    <input type="button" id="foreigndisconnect" />
+                    <input type="button" id="removerow" />
+                    <hr />
+                    <input type="button" id="options" />
+                    <a href="https://github.com/ondras/wwwsqldesigner/wiki" target="_blank"><input type="button" id="docs" value="" /></a>
+                </div>
+
+                <div id="rubberband"></div>
+
+                <div id="minimap" style="display:none;"></div>
+
+                <div id="background"></div>
+
+                <div id="window">
+                    <div id="windowtitle"><img id="throbber" src="images/throbber.gif" alt="" title="" /></div>
+                    <div id="windowcontent"></div>
+                    <input type="button" id="windowok" />
+                    <input type="button" id="windowcancel" />
+                </div>
+            </div>
+            <div id="opts">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                * <label id="language" for="optionlocale"></label>
+                            </td>
+                            <td>
+                                <select id="optionlocale"><option></option></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                * <label id="db" for="optiondb"></label>
+                            </td>
+                            <td>
+                                <select id="optiondb"><option></option></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label id="snap" for="optionsnap"></label>
+                            </td>
+                            <td>
+                                <input type="text" size="4" id="optionsnap" />
+                                <span class="small" id="optionsnapnotice"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label id="pattern" for="optionpattern"></label>
+                            </td>
+                            <td>
+                                <input type="text" size="6" id="optionpattern" />
+                                <span class="small" id="optionpatternnotice"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label id="hide" for="optionhide"></label>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="optionhide" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                * <label id="vector" for="optionvector"></label>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="optionvector" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                * <label id="showsize" for="optionshowsize"></label>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="optionshowsize" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                * <label id="showtype" for="optionshowtype"></label>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="optionshowtype" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr />
+                * <span class="small" id="optionsnotice"></span>
+            </div>
+            <div id="io">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="width:60%">
+                                <fieldset>
+                                    <legend id="client"></legend>
+                                    <div id="singlerow">
+                                        <input type="button" id="clientsave" />
+                                        <input type="button" id="clientload" />
+                                    </div>
+                                    <div id="singlerow">
+                                        <input type="button" id="clientlocalsave" />
+                                        <input type="button" id="clientlocalload" />
+                                        <input type="button" id="clientlocallist" />
+                                    </div>
+                                    <hr />
+                                    <input type="button" id="clientsql" />
+                                </fieldset>
+                            </td>
+                            <td style="width:40%">
+                                <fieldset>
+                                    <legend id="server"></legend>
+                                    <label for="backend" id="backendlabel"></label> <select id="backend"><option></option></select>
+                                    <hr />
+                                    <input type="button" id="serversave" />
+                                    <input type="button" id="quicksave" />
+                                    <input type="button" id="serverload" />
+                                    <input type="button" id="serverlist" />
+                                    <input type="button" id="serverimport" />
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <fieldset>
+                                    <legend id="output"></legend>
+                                    <textarea id="textarea" rows="1" cols="1"></textarea><!--modified by javascript later-->
+                                </fieldset>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="keys">
+                <fieldset>
+                    <legend id="keyslistlabel"></legend>
+                    <select id="keyslist"><option></option></select>
+                    <input type="button" id="keyadd" />
+                    <input type="button" id="keyremove" />
+                </fieldset>
+                <fieldset>
+                    <legend id="keyedit"></legend>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label for="keytype" id="keytypelabel"></label>
+                                    <select id="keytype"><option></option></select>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <label for="keyname" id="keynamelabel"></label>
+                                    <input type="text" id="keyname" size="10" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><hr /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="keyfields" id="keyfieldslabel"></label><br />
+                                    <select id="keyfields" size="5" multiple="multiple"><option></option></select>
+                                </td>
+                                <td>
+                                    <input type="button" id="keyleft" value="&lt;&lt;" /><br />
+                                    <input type="button" id="keyright" value="&gt;&gt;" /><br />
+                                </td>
+                                <td>
+                                    <label for="keyavail" id="keyavaillabel"></label><br />
+                                    <select id="keyavail" size="5" multiple="multiple"><option></option></select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+            <div id="table">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label id="tablenamelabel" for="tablename"></label>
+                            </td>
+                            <td>
+                                <input id="tablename" type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label id="tablecommentlabel" for="tablecomment"></label>
+                            </td>
+                            <td>
+                                <textarea rows="5" cols="40" id="tablecomment"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="schemaID" value="78" />
+<input type="hidden" id="columnID" />
+<input type="hidden" id="diagramID" />
+<input type="hidden" id="expID" />
+
+<input type="hidden" id="zoomCount" />
+
+<div id="img-out">
+
+</div>
+
+#<!-- #region Eski Kod -->
+@*<script type="text/javascript" charset="utf-8">
+        var column_types = ["Varchar", "Integer", "Etc"];
+        webix.ui({
+            rows: [
+                {
+
+                    type: "wide",
+                    cols: [
+                        {
+                            rows: [
+                                {
+                                    width: 300,
+                                    view: "richselect",
+                                    id: "schema_id",
+                                    label: "Schema",
+                                    value: "78",
+                                    options: "Home/GetSchemaNames"
+                                },
+                                {
+                                    view: "text",
+                                    id: "treeFilter",
+
+                                },
+                            {
+                                cols: [
+                                    {
+                                        height: 50,
+                                        label: 'Show',
+                                        view: 'button',
+                                        click: function () {
+                                            showErDiagram(1);
+                                        }
+                                    },
+                                    {
+                                        height: 50,
+                                        label: 'Save',
+                                        view: 'button',
+                                        click: function () {
+                                            saveErDesigner();
+                                        }
+                                    },
+                                     {
+                                         height: 50,
+                                         label: 'Delete',
+                                         view: 'button',
+                                         click: function () {
+                                             deleteErDiagram();
+                                         }
+                                     },
+                                     {
+                                         height: 50,
+                                         label: 'Relations',
+                                         view: 'button',
+                                         click: function () {
+                                             showErDiagram(2);
+                                         }
+                                     }
+                                ],
+                            },
+                                {
+                                    autoheight: false,
+                                    height: 800,
+                                    scroll: "xy",
+                                    view: "tree",
+                                    id: "schemaTree",
+                                    select: true,
+                                    template: "{common.icon()} {common.checkbox()} {common.folder()} #value#",
+                                    filterMode: {
+                                        showSubItems: true
+                                    },
+                                    url: "ER/GetSchemas?schema_id=78",
+                                    on: {
+                                        "onItemClick": function (e, w, t) {
+                                            var selectedItem = this.getItem(e);
+                                            //console.log(selectedItem);
+
+                                            var schema = null;
+                                            var table = null;
+                                            var column = null;
+
+                                            if (selectedItem.$level === 1) {
+                                                schema = this.getItem(selectedItem.$parent);
+                                                table = selectedItem;
+                                                document.getElementById("tableID").value = selectedItem.id;
+                                                document.getElementById("columnID").value = "0";
+
+                                                LoadErDiagram(schema, selectedItem.id);
+                                            }
+                                        }
+                                    }
+                                },
+
+                            ]
+                        },
+                        {
+                            view: 'layout',
+                            gravity: 3,
+                            rows: [
+
+                                {
+                                    css: "overflow",
+                                    id: "divErDiagram",
+                                    template: '<div id="area" style="width:6000px;height:6000px;"></div>	<div id="controls" >\
+                                                        <div id="bar" style="display:none;">\
+                                                        <div id="toggle"></div>\
+                                                        <input type="button" id="saveload" />\
+                                                        <hr/>\
+                                                        <input type="button" id="addtable" />\
+                                                        <input type="button" id="edittable" />\
+                                                        <input type="button" id="tablekeys" />\
+                                                        <input type="button" id="removetable" />\
+                                                        <input type="button" id="aligntables" />\
+                                                        <input type="button" id="cleartables" />\
+                                                        <hr/>\
+                                                        <input type="button" id="addrow" />\
+                                                        <input type="button" id="editrow" />\
+                                                        <input type="button" id="uprow" class="small" /><input type="button" id="downrow" class="small"/>\
+                                                        <input type="button" id="foreigncreate" />\
+                                                        <input type="button" id="foreignconnect" />\
+                                                        <input type="button" id="foreigndisconnect" />\
+                                                        <input type="button" id="removerow" />\
+                                                        <hr/>\
+                                                        <input type="button" id="options" />\
+                                                        <a href="https://github.com/ondras/wwwsqldesigner/wiki" target="_blank"><input type="button" id="docs" value="" /></a>\
+                                                        </div>\
+                                                        \
+                                                        <div id="rubberband"></div>\
+                                                        \
+                                                        <div id="minimap" style="display:none;"></div>\
+                                                        \
+                                                        <div id="background"></div>\
+                                                        \
+                                                        <div id="window">\
+                                                            <div id="windowtitle"><img id="throbber" src="images/throbber.gif" alt="" title=""/></div>\
+                                                            <div id="windowcontent"></div>\
+                                                            <input type="button" id="windowok" />\
+                                                            <input type="button" id="windowcancel" />\
+                                                        </div>\
+                                                </div>\
+                                                <div id="opts">\
+                                                <table>\
+                                                    <tbody>\
+                                                        <tr>\
+                                                            <td>\
+                                                                * <label id="language" for="optionlocale"></label>\
+                                                            </td>\
+                                                            <td>\
+                                                                <select id="optionlocale"><option></option></select>\
+                                                            </td>\
+                                                        </tr>\
+                                                        <tr>\
+                                                            <td>\
+                                                                * <label id="db" for="optiondb"></label> \
+                                                            </td>\
+                                                            <td>\
+                                                                <select id="optiondb"><option></option></select>\
+                                                            </td>\
+                                                        </tr>\
+                                                        <tr>\
+                                                            <td>\
+                                                                <label id="snap" for="optionsnap"></label> \
+                                                            </td>\
+                                                            <td>\
+                                                                <input type="text" size="4" id="optionsnap" />\
+                                                                <span class="small" id="optionsnapnotice"></span>\
+                                                            </td>\
+                                                        </tr>\
+                                                        <tr>\
+                                                            <td>\
+                                                                <label id="pattern" for="optionpattern"></label> \
+                                                            </td>\
+                                                            <td>\
+                                                                <input type="text" size="6" id="optionpattern" />\
+                                                                <span class="small" id="optionpatternnotice"></span>\
+                                                            </td>\
+                                                        </tr>\
+                                                        <tr>\
+                                                            <td>\
+                                                                <label id="hide" for="optionhide"></label> \
+                                                            </td>\
+                                                            <td>\
+                                                                <input type="checkbox" id="optionhide" />\
+                                                            </td>\
+                                                        </tr>\
+                                                        <tr>\
+                                                            <td>\
+                                                                * <label id="vector" for="optionvector"></label> \
+                                                            </td>\
+                                                            <td>\
+                                                                <input type="checkbox" id="optionvector" />\
+                                                            </td>\
+                                                        </tr>\
+                                                        <tr>\
+                                                            <td>\
+                                                                * <label id="showsize" for="optionshowsize"></label> \
+                                                            </td>\
+                                                            <td>\
+                                                                <input type="checkbox" id="optionshowsize" />\
+                                                            </td>\
+                                                        </tr>\
+                                                        <tr>\
+                                                            <td>\
+                                                                * <label id="showtype" for="optionshowtype"></label> \
+                                                            </td>\
+                                                            <td>\
+                                                                <input type="checkbox" id="optionshowtype" />\
+                                                            </td>\
+                                                        </tr>\
+                                                    </tbody>\
+                                                </table>\
+                                                <hr />\
+                                                * <span class="small" id="optionsnotice"></span>\
+                                            </div>\
+                                            <div id="io">\
+                                                <table>\
+                                                    <tbody>\
+                                                        <tr>\
+                                                            <td style="width:60%">\
+                                                                <fieldset>\
+                                                                    <legend id="client"></legend>\
+                                                                    <div id="singlerow">\
+                                                                    <input type="button" id="clientsave" /> \
+                                                                    <input type="button" id="clientload" />\
+                                                                    </div>\
+                                                                    <div id="singlerow">\
+                                                                    <input type="button" id="clientlocalsave" />\
+                                                                    <input type="button" id="clientlocalload" />\
+                                                                    <input type="button" id="clientlocallist" />\
+                                                                    </div>\
+                                                                    <hr/>\
+                                                                    <input type="button" id="clientsql" />\
+                                                                </fieldset>\
+                                                            </td>\
+                                                            <td style="width:40%">\
+                                                                <fieldset>\
+                                                                    <legend id="server"></legend>\
+                                                                    <label for="backend" id="backendlabel"></label> <select id="backend"><option></option></select>\
+                                                                    <hr/>\
+                                                                    <input type="button" id="serversave" /> \
+                                                                    <input type="button" id="quicksave" /> \
+                                                                    <input type="button" id="serverload" /> \
+                                                                    <input type="button" id="serverlist" /> \
+                                                                    <input type="button" id="serverimport" />\
+                                                                    </fieldset>\
+                                                            </td>\
+                                                        </tr>\
+                                                        <tr>\
+                                                            <td colspan="2">\
+                                                                <fieldset>\
+                                                                    <legend id="output"></legend>\
+                                                                    <textarea id="textarea" rows="1" cols="1"></textarea><!--modified by javascript later-->\
+                                                                </fieldset>\
+                                                            </td>\
+                                                        </tr>\
+                                                    </tbody>\
+                                                </table>\
+                                            </div>\
+                                            <div id="keys">\
+                                                <fieldset>\
+                                                    <legend id="keyslistlabel"></legend> \
+                                                    <select id="keyslist"><option></option></select>\
+                                                    <input type="button" id="keyadd" />\
+                                                    <input type="button" id="keyremove" />\
+                                                </fieldset>\
+                                                <fieldset>\
+                                                    <legend id="keyedit"></legend>\
+                                                    <table>\
+                                                        <tbody>\
+                                                            <tr>\
+                                                                <td>\
+                                                                    <label for="keytype" id="keytypelabel"></label>\
+                                                                    <select id="keytype"><option></option></select>\
+                                                                </td>\
+                                                                <td></td>\
+                                                                <td>\
+                                                                    <label for="keyname" id="keynamelabel"></label>\
+                                                                    <input type="text" id="keyname" size="10" />\
+                                                                </td>\
+                                                            </tr>\
+                                                            <tr>\
+                                                                <td colspan="3"><hr/></td>\
+                                                            </tr>\
+                                                            <tr>\
+                                                                <td>\
+                                                                    <label for="keyfields" id="keyfieldslabel"></label><br/>\
+                                                                    <select id="keyfields" size="5" multiple="multiple"><option></option></select>\
+                                                                </td>\
+                                                                <td>\
+                                                                    <input type="button" id="keyleft" value="&lt;&lt;" /><br/>\
+                                                                    <input type="button" id="keyright" value="&gt;&gt;" /><br/>\
+                                                                </td>\
+                                                                <td>\
+                                                                    <label for="keyavail" id="keyavaillabel"></label><br/>\
+                                                                    <select id="keyavail" size="5" multiple="multiple"><option></option></select>\
+                                                                </td>\
+                                                            </tr>\
+                                                        </tbody>\
+                                                    </table>\
+                                                </fieldset>\
+                                            </div>\
+                                            <div id="table">\
+                                                <table>\
+                                                    <tbody>\
+                                                        <tr>\
+                                                            <td>\
+                                                                <label id="tablenamelabel" for="tablename"></label>\
+                                                            </td>\
+                                                            <td>\
+                                                                <input id="tablename" type="text" />\
+                                                            </td>\
+                                                        </tr>\
+                                                        <tr>\
+                                                            <td>\
+                                                                <label id="tablecommentlabel" for="tablecomment"></label> \
+                                                            </td>\
+                                                            <td>\
+                                                                <textarea rows="5" cols="40" id="tablecomment"></textarea>\
+                                                            </td>\
+                                                        </tr>\
+                                                    </tbody>\
+                                                </table>\
+                                            </div>'
+
+                                },
+                                {
+                                    view: "label",
+                                    label: "designed By 4S Bilgi Teknolojileri",
+                                    css: "red",
+                                    id: "messageBox"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        });
+    </script>*@
+<!-- #endregion -->
+<script>
+
+    function removeCSS() {
+        $("#savedDiagrams a").removeClass("btn btn-sm btn-primary");
+    }
+    function showErDiagram(type) {
+        removeCSS();
+
+        var checkedTables = [];
+        $('#tables input:checked').each(function () {
+            checkedTables.push($(this).val());
+        });
+
+        var fixedTables = [];
+        var tables = "";
+
+        for (var i = 0; i < checkedTables.length; i++) {
+            tables += "," + checkedTables[i];
+        }
+
+        var xml;
+        $.ajax({
+            url: 'ER/XMLCreate',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { tables: tables, type: type },
+            success: function (text, data) {
+                xml = text;
+                d.io.fromXMLText(xml);
+                d.alignTables();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+
+
+        document.getElementById("diagramID").value = 0;
+        //d.toXML(); // bu kayıt edilecek.
+    }
+
+    function deleteErDiagram() {
+        removeCSS();
+        var diagramID = document.getElementById("diagramID").value;
+       
+        if (diagramID >0) {
+            $.ajax({
+                url: 'ER/DeleteErDiagram',
+                type: "POST",
+                cache: false,
+                async: true,
+                data: { ID: diagramID },
+                success: function (text, data) {
+                    alert("Record deleted.");
+                    document.getElementById("diagramID").value = 0;
+                    GetSavedDiagrams();
+                    //$("#area").html("");
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("bir hata oluştu");
+                }
+            });
+        }
+
+        //d.toXML(); // bu kayıt edilecek.
+    }
+
+    function saveErDesigner() {
+        var xmlData = d.toXML();
+        //var x2js = new X2JS();
+        ////console.log(JSON.stringify(x2js.xml_str2json(xmlData))); // xml datayı
+        //var sendingData = JSON.stringify(x2js.xml_str2json(xmlData));
+        ////json'a çevir.
+
+        //var savingData = JSON.stringify(sendingData).toString();
+        //console.log(savingData);
+        var diagramID = document.getElementById("diagramID").value;
+        if (diagramID >= 0)
+            var diagramName = prompt("Please enter diagram name");
+
+        if (diagramName != "") {
+            $.ajax({
+                url: 'ER/XMLSave',
+                type: "POST",
+                cache: false,
+                async: true,
+                data: { XMLdata: xmlData, diagramName: diagramName, diagramID: diagramID },
+                success: function (text, data) {
+                    alert("Diagram saved.");
+                    GetSavedDiagrams();
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("bir hata oluştu");
+                }
+            });
+        }
+    }
+
+    function LoadErDiagram(table) {
+        var linkname = "#diagram_" + table;
+
+        $("#savedDiagrams a").removeClass("btn btn-sm btn-primary");
+        $(linkname).addClass("btn btn-sm btn-primary");
+
+        $.ajax({
+            url: 'ER/GetEr',
+            type: "POST",
+            cache: false,
+            async: true,
+            data: { erid: table },
+            success: function (text, data) {
+                //var jsondata = JSON.parse(text);
+                $("#diagramID").val(table);
+                var xml = text["xmlData"];
+                d.io.fromXMLText(xml);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    //SQL DESIGNER INITIALIZER
+    var d = new SQL.Designer();
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#exportButton").show();
+        $("#saveButton").show();
+        $("#li_zoomOut").show();
+        $("#li_zoomIn").show();
+        $("#li_zoomNumber").show();
+        $("#zoomCount").val("1");
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+
+    $(function () {
+        $("#btnSave").click(function () {
+            var zoom = $("#zoomCount").val();
+            var newdiv = $("#area");
+
+            html2canvas(newdiv, {
+                onrendered: function (canvas) {
+                    //document.body.appendChild(canvas);
+                    // Convert and download as image
+                    Canvas2Image.saveAsPNG(canvas);
+                    //$("#img-out").append(canvas);
+                    // Clean up
+                    //document.body.removeChild(canvas);
+                }
+            });
+        });
+    });
+
+    $(function () {
+        $("#zoomIn").click(function () {
+            var zoomin = $("#zoomCount").val();
+            zoomin = parseFloat(zoomin) - 0.1;
+
+            $("#area").animate({ 'zoom': zoomin }, 400);
+            $("#zoomCount").val(zoomin);
+            var percent = "% " + Math.floor(zoomin * 100);
+
+            $("#zoomNumber").html(percent);
+        })
+    });
+
+    $(function () {
+        $("#zoomOut").click(function () {
+            var zoom = $("#zoomCount").val();
+            zoom = parseFloat(zoom) + 0.1;
+
+            $("#area").animate({ 'zoom': zoom }, 400);
+            $("#zoomCount").val(zoom);
+            var percent = "% " + Math.floor(zoom * 100);
+
+            $("#zoomNumber").html(percent);
+        })
+    });
+</script>
+
+<script>
+    $("#schemas").change(function () {
+        if (($("#schemas").val() > 0))
+            SchemaDegisti();
+    });
+
+    function SchemaDegisti() {
+        //$("#area").html("");
+        var letter = $("#hdnLetter").val();
+
+        $.ajax({
+            url: 'ER/GetSchemasTables',
+            type: "POST",
+            cache: false,
+            async: true,
+            data: { schemaID: $("#schemas").val(), getCheckBox:true },
+            success: function (text, data) {
+                $("#tables").html(text);
+                GetSavedDiagrams();
+                //$('#resultSQL').html("");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function GetSavedDiagrams() {
+
+        $.ajax({
+            url: 'ER/GetSavedDiagramsBySchemaID',
+            type: "POST",
+            cache: false,
+            async: true,
+            data: { schemaID: $("#schemas").val() },
+            success: function (text, data) {
+                $("#diagrams").html(text);
+                //$('#resultSQL').html("");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+
+    }
+</script>

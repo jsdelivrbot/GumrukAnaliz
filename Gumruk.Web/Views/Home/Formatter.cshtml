@@ -1,0 +1,84 @@
+﻿<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/Style.css" rel="stylesheet" />
+<div class="container">
+    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+        <textarea id="sql" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-control" style="min-height:300px;"></textarea>
+        <input type="hidden" id="hdnID" value="0" />
+    </div>
+
+    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:5px;">
+        <a href="javascript:void(0)" id="formatter" class="btn btn-warning">Format</a>
+        <a href="javascript:void(0)" id="next" class="btn btn-warning">sonraki</a>
+    </div>
+    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <pre id="result" class="sqlOutput" style="display:none;">
+            
+        </pre>
+    </div>
+</div>
+
+
+<script>
+    function sleep(miliseconds) {
+        var currentTime = new Date().getTime();
+        while (currentTime + miliseconds >= new Date().getTime()) {
+        }
+    }
+    $('#next').click(function () {
+      
+        document.getElementById("next").disabled = true;
+
+            myfunction();
+      
+            
+    })
+
+    function myfunction() {
+        var id = parseInt($("#hdnID").val(), 10);
+        id = id + 1;
+        $("#hdnID").val(id);
+        console.log($("#hdnID").val());
+        
+        $.ajax({
+            url: 'GetProcedureByID',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { id: id },
+            success: function (text, data) {
+                $.ajax({
+                    url: 'http://sqlformat.org/api/v1/format',
+                    type: 'POST',
+                    dataType: 'json',
+                    crossDomain: true,
+                    data: { sql: text["body"], reindent: 1 },
+                    success: onSuccess,
+                });
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+    function onSuccess(data) {
+        $('#result').show();
+        $('#result').text(data['result']);
+
+        $.ajax({
+            url: 'SaveFormattedSQL',
+            type: 'POST',
+            dataType: 'json',
+            async: false,
+            data: { ID: $('#hdnID').val(), sql: data["result"] },
+            success: function myfunction2() {
+                document.getElementById("next").disabled = false;
+            }
+        });
+
+        
+    }
+
+
+</script>

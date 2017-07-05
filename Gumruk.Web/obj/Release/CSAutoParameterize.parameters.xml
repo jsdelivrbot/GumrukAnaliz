@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="GumrukDBContext-Web.config Connection String" description="GumrukDBContext Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/GumrukModel.csdl|res://*/GumrukModel.ssdl|res://*/GumrukModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=172.30.12.209;initial catalog=GumrukWikiDB;persist security info=True;user id=sa;password=Kartal2314;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\4S\ Projeler\\4SOperations\\Gumruk\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GumrukDBContext']/@connectionString" />
+  </parameter>
+  <parameter name="GumrukWebContext-Web.config Connection String" description="GumrukWebContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|GumrukWebContext-20161216134624.mdf;Initial Catalog=GumrukWebContext-20161216134624;Integrated Security=True;MultipleActiveResultSets=True;User Instance=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\4S\ Projeler\\4SOperations\\Gumruk\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GumrukWebContext']/@connectionString" />
+  </parameter>
+</parameters>

@@ -1,0 +1,100 @@
+﻿{
+  "form": "TasitBilgileri",
+  "url": "TasitKaydet",
+  "id": "Tasit",
+  "databaseOBJ": "TasitBilgileri",
+  "pageGroup": [
+   {
+      "title": "Taşıt Bilgileri",
+      "items": [
+        {
+          "type": "textbox",
+          "display": "Adı",
+          "id": "Ad",
+          "lenght": 6,
+          "required": true,
+          "disabled": false
+        },
+        {
+          "type": "textbox",
+          "display": "Numarası",
+          "id": "Numarasi",
+          "lenght": 6,
+          "required": true,
+          "disabled": false
+        },
+        {
+          "type": "textbox",
+          "display": "Referans Numarası",
+          "id": "ReferansNumarasi",
+          "lenght": 6,
+          "required": true,
+          "disabled": false
+        },
+        {
+          "type": "dropdown",
+          "display": "Ülkesi",
+          "id": "UlkeID",
+          "lenght": 4,
+          "url": "GumrukOperations/GetUlkeler",
+          "key": "ID",
+          "value": "UlkeTamAdi",
+          "required": true,
+          "disabled": false
+        },
+        {
+          "type": "textbox",
+          "display": "Dorse No1",
+          "id": "DorseNo1",
+          "lenght": 4,
+          "required": true,
+          "disabled": true
+        },
+        {
+          "type": "dropdown",
+          "display": "Uyruğu",
+          "id": "Uyruk",
+          "lenght": 4,
+          "url": "GumrukOperations/GetUlkeler",
+          "key": "ID",
+          "value": "UlkeTamAdi",
+          "required": true,
+          "disabled": true
+        },
+        {
+          "type": "textbox",
+          "display": "Dorse No2",
+          "id": "DorseNo2",
+          "lenght": 4,
+          "required": true,
+          "disabled": true
+        },
+        {
+          "type": "dropdown",
+          "display": "Uyruğu",
+          "id": "Uyruk2",
+          "lenght": 5,
+          "url": "GumrukOperations/GetUlkeler",
+          "key": "ID",
+          "value": "UlkeTamAdi",
+          "required": true,
+          "disabled": true
+        },
+        {
+          "type": "textbox",
+          "display": "Varış Tarihi Ve Saati",
+          "id": "VarisTarihiVeSaati",
+          "lenght": 5,
+          "required": true,
+          "disabled": true
+        },
+         {
+          "type": "submit",
+          "display": "Taşıt Kaydet",
+          "id": "btnTasitKaydet",
+          "lenght": 4
+        }
+      ]
+    }
+  ]
+}

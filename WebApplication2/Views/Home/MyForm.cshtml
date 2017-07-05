@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "MyForm";
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<h2>MyForm</h2>
+<div id="myform">
+
+</div>
+<script>
+    $('#myform').jsonForm({
+        schema: {
+            name: {
+                type: 'string',
+                title: 'Name',
+                required: true
+            },
+            age: {
+                type: 'number',
+                title: 'Age'
+            }
+        }
+    });
+</script>

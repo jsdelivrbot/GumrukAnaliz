@@ -1,0 +1,519 @@
+﻿@*@{
+    Layout = null;
+}*@
+
+@*<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/webix/webix.css" type="text/css">
+    <script src="~/webix/webix.js" type="text/javascript"></script>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .red {
+            color: #0474c4;
+            background-color: #fff;
+            font-family: Calibri;
+            font-size: 1.2em;
+        }
+    </style>
+@*</head>
+<body>*@
+    <script type="text/javascript" charset="utf-8">
+        var column_types = ["Varchar", "Integer", "Etc"];
+        webix.ui({
+            rows: [
+                {
+                    cols: [
+                        {
+                            rows: [
+                                {
+                                    view: "richselect",
+                                    id: "schema_id",
+                                    value: "78",
+                                    options: "GetSchemaNames",
+                                },
+                                {
+                                view: "text",
+                                id: "treeFilter"
+                                },
+                                {
+                                    cols: [
+                                         {
+                                             view: "button", type: "icon", icon: "cog", label: "Export", width: 200,
+                                             on: {
+                                                 "onItemClick": function () {
+                                                     var tableID = document.getElementById("tableID").value;
+                                                     excelexport(tableID);
+                                                 }
+                                             }
+                                         },
+                                         {
+                                             view: "uploader",
+                                             value: 'Excel Import',
+                                             name: "files",
+                                             type: "icon",
+                                             icon: "cog",
+                                             label: "Import",
+                                             width: 200,
+                                             upload: "/Gumruk.Web/Home/ExcelImport"
+                                         }
+                                    ]
+                                },
+                                {
+                                    view: "tree",
+                                    id: "schemaTree",
+                                    select: true,
+                                    height:800,
+                                    //template:"{common.icon()} {common.checkbox()} {common.folder()} #value#",
+                                    filterMode: {
+                                        showSubItems: true
+                                    },
+                                    url: "GetSchemas?schema_id=78",
+                                    on: {
+                                        "onItemClick": function (e, w, t) {
+                                            var selectedItem = this.getItem(e);
+                                            //console.log(selectedItem);
+
+                                            var schema = null;
+                                            var table = null;
+                                            var column = null;
+
+                                            if (selectedItem.$level === 1) {
+                                                schema = this.getItem(selectedItem.$parent);
+                                                table = selectedItem;
+                                                loadDataGrid(schema, table);
+                                                $$("table_data_grid_lookUps").clearAll();
+                                                $$("table_data_grid_Explanations").clearAll();
+                                                $$("buttonSave").disable();
+
+                                                document.getElementById("tableID").value = selectedItem.id;
+                                                document.getElementById("columnID").value = "0";
+                                                $$("buttonSave").enable();
+
+                                                $$("table_data_grid_lookUps_header").hide();
+                                                $$("table_data_grid_lookUps").hide();
+
+                                                $$("modules_data_grid_header").show();
+                                                $$("table_data_grid_modules").show();
+
+                                                LoadTableExplanationGrid(selectedItem.id);
+                                                LoadModulesGrid(selectedItem.id);
+
+                                                webix.ajax("/Gumruk.Web/Home/GetTableById?tableID=" + selectedItem.id, function (text, data, XmlHttpRequest) {
+
+                                                    var jsondata = JSON.parse(text);
+
+                                                    $$('table_properties').setValues({
+                                                        'table_name': jsondata["TableName"],
+                                                        'property_table_schema': jsondata["SchemaName"],
+                                                        'property_tablecolumn_count': jsondata["ColumnCount"],
+                                                    });
+
+                                                    document.getElementById("schemaID").value = jsondata["SchemaID"];
+                                                    //$$("property_relatedtables").setValue(jsondata["RelatedTables"]);
+                                                });
+
+                                                $$("column_properties").hide();
+                                                $$("table_properties").show();
+                                                $$("messageBox").setValue("designed By 4S Bilgi Teknolojileri");
+                                            }
+                                            if (selectedItem.$level === 2) {
+                                                schema = this.getItem(this.getItem(selectedItem.$parent).id);
+                                                table = this.getItem(selectedItem.$parent);
+                                                column = selectedItem;
+                                                loadDataGrid(schema, table, function () { $$("table_data_grid").select(column.value) });
+                                                //alert(selectedItem.id);
+
+                                                //var dataGridColumnAciklamalar = $$("table_data_grid_Explanations");
+                                                //dataGridColumnAciklamalar.clearAll();
+                                                //dataGridColumnAciklamalar.load("/Gumruk.Web/Home/GetDetails?ColumnID=" + selectedItem.id);
+                                                $$("explanation").setValue("");
+                                                LoadLookupsGrid(selectedItem.id);
+                                                LoadExplanationGrid(selectedItem.id);
+
+                                                $$("buttonSave").enable();
+
+                                                $$("table_data_grid_lookUps_header").show();
+                                                $$("table_data_grid_lookUps").show();
+
+                                                $$("modules_data_grid_header").hide();
+                                                $$("table_data_grid_modules").hide();
+
+                                                $$("column_properties").show();
+                                                $$("table_properties").hide();
+
+                                                document.getElementById("columnID").value = selectedItem.id;
+                                                document.getElementById("tableID").value = "0";
+
+                                                webix.ajax("/Gumruk.Web/Home/GetColumnById?columnID=" + selectedItem.id, function (text, data, XmlHttpRequest) {
+
+                                                    var jsondata = JSON.parse(text);
+
+                                                    $$('column_properties').setValues({
+                                                        'property_column_name': jsondata["Name"],
+                                                        'property_column_length': jsondata["Length"],
+                                                        'property_column_scale': jsondata["Scale"],
+                                                        'property_column_precision': jsondata["Precision"],
+                                                        'property_column_null': jsondata["isNull"],
+                                                        'property_column_unique': jsondata["Unique"],
+                                                        'property_column_type': jsondata["DataType"]
+                                                    });
+
+                                                    document.getElementById("schemaID").value = jsondata["schemaID"];
+                                                    $$("messageBox").setValue("designed By 4S Bilgi Teknolojileri");
+                                                });
+                                            }
+                                        }
+                                    }
+                                }/*,
+                                {
+                                    height: 50,
+                                    label:'ER GÖSTER',
+                                    view: 'button',
+                                    click: function () {
+                                        var checkedTables = $$("schemaTree").getChecked();
+                                        var fixedTables = [];
+                                        for (var i = 0; i < checkedTables.length; i++) {
+                                            var fix = checkedTables[i] / 0.123123;
+
+                                            if (fix % 1 === 0) {
+                                                fixedTables.push(fix);
+                                            }
+
+                                        }
+                                        console.log(fixedTables);
+                                    }
+
+                                }*/
+                            ]
+                        },
+                        {
+                            view: 'layout',
+                            gravity: 3,
+                            rows: [
+                                {
+                                    cols: [
+                                        {
+                                            rows: [
+                                                {
+                                                    view: "property",
+                                                    id: "column_properties",
+                                                    //nameWidth: 100,
+                                                    height: 250,
+                                                    hidden: true,
+                                                    elements: [
+                                                        { label: "Column Properties", type: "label" },
+                                                        { label: "Adı", type: "text", id: "property_column_name" },
+                                                        {
+                                                            label: "Uzunluğu",
+                                                            type: "text",
+                                                            id: "property_column_length",
+                                                            attributes: { type: "number" }
+                                                        },
+                                                        { label: "Scale", type: "text", id: "property_column_scale" },
+                                                        { label: "Precision", type: "text", id: "property_column_precision" },
+                                                        { label: "Null?", type: "text", id: "property_column_null" },
+                                                        { label: "Unique?", type: "text", id: "property_column_unique" },
+                                                        {
+                                                            label: "Türü",
+                                                            type: "select",
+                                                            options: column_types,
+                                                            id: "property_column_type"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    rows: [
+                                                        {
+                                                            view: "property",
+                                                            id: "table_properties",
+                                                            nameWidth: 100,
+                                                            height: 250,
+                                                            elements: [
+                                                                { label: "Table Properties", type: "label" },
+                                                                { label: "Schema", id: "property_table_schema" },
+                                                                { label: "Name", id: "table_name", width: 100 },
+                                                                { label: "Column Count", id: "property_tablecolumn_count" },
+                                                            ],
+                                                        },
+                                                    //{ view: "label", label: "Related Tables", id: "property_relatedtables", width: 500 },
+                                                    ]
+                                                },
+
+                                            ]
+                                        },
+                                        {
+                                            rows: [
+
+                                                {
+                                                    view: "form",
+                                                    id: "form_details",
+                                                    height: 250,
+                                                    elements: [
+
+                                                        //{ view: "textarea", label: "Şema", height: 50 },
+                                                        //{ view: "textarea", label: "Tablo", height: 50 },
+                                                        { view: "textarea", label: "Açıklama", height: 150, id: "explanation" },
+                                                        {
+                                                            view: "button", value: "Kaydet", css: "btn btn-default", id: "buttonSave", disabled: true,
+                                                            on: {
+                                                                "onItemClick": function (id, e, trg) {
+                                                                    AddExplanation();
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+
+                                        },
+                                    ]
+                                },
+                                {
+                                    cols: [
+                                            {
+                                                rows: [
+                                                    { view: "template", template: "Lookups", type: "header", id: "table_data_grid_lookUps_header", hidden: true },
+                                                    {
+                                                        container: "form",
+                                                        view: "datatable",
+                                                        id: "table_data_grid_lookUps",
+                                                        header: "Lookup",
+                                                        hidden: true,
+                                                        columns: [
+                                                            { id: "SchemaNameFrom", header: "Schema From", width: 100 },
+                                                            { id: "TableNameFrom", header: "Table From", width: 100 },
+                                                            { id: "ColumnNameFrom", header: "Column From", width: 100 },
+                                                            { id: "SchemaNameTo", header: "Schema To", width: 100 },
+                                                            { id: "TableNameTo", header: "Table To", width: 100 },
+                                                            { id: "ColumnNameTo", header: "Column To", width: 100 }
+                                                        ],
+
+                                                    },
+                                                    { view: "template", template: "Modules", type: "header", id: "modules_data_grid_header", hidden: true },
+                                                    {
+                                                        container: "form",
+                                                        view: "datatable",
+                                                        id: "table_data_grid_modules",
+                                                        header: "Modules",
+                                                        height: 250,
+                                                        hidden: true,
+                                                        columns: [
+                                                            { id: "ModuleName", header: "Base Module", width: 100 },
+                                                            { id: "SubModuleName", header: "Sub Module", width: 100 },
+                                                            { id: "Operation", header: "Operaion", width: 100 },
+                                                            { id: "Query", header: "Query", width: 1000 },
+                                                        ],
+                                                        resizeColumn: true,
+                                                    }]
+
+                                            },
+                                        {
+                                            rows: [
+                                                 { view: "template", template: "Açıklamalar", type: "header" },
+                                                 {
+                                                     container: "box",
+                                                     view: "datatable",
+                                                     height: 250,
+                                                     id: "table_data_grid_Explanations",
+                                                     columns: [
+                                                         { id: "explanation", header: "Açıklama", width: 250, template: "<span id=exp_#ExpID#  onclick=selectExp(#ExpID#)>#explanation#</span>" },
+                                                         { id: "User", header: "Kullanıcı", width: 150 },
+                                                         { id: "Date", header: "Tarih", width: 100 },
+                                                         //{ id: "ExpID", header: "ID", width: 100 },
+                                                         { id: "ExpID", header: "&nbsp;", template: "<button value=#ExpID# class='btn btn-danger btn-xs' onclick=expDelete(#ExpID#)><i class='glyphicon glyphicon-trash'></i></button>" }
+                                                     ]
+                                                 }
+                                            ]
+                                            ,
+                                            resizeColumn: true
+                                        }
+                                        //{
+                                        //    view: "property",
+                                        //    id: "data",
+                                        //    elements: [
+                                        //       { view: "template", template: "Açıklamalar", type: "header" },
+                                        //       { view: "textarea", label: "Şema", height: 50 },
+                                        //       { view: "textarea", label: "Tablo", height: 50 },
+                                        //       { view: "textarea", label: "Sutun", height: 50 }
+                                        //    ]
+                                        //}
+                                    ]
+                                },
+                                {
+                                    view: "datatable",
+                                    id: "table_data_grid",
+                                    select: "column",
+                                    resizeColumn: true
+                                },
+                                {
+                                    view: "label",
+                                    label: "designed By 4S Bilgi Teknolojileri",
+                                    css: "red",
+                                    id: "messageBox"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        });
+
+        $$("schema_id").attachEvent("onChange", function (newv, oldv) {
+            //webix.message("Value changed from: " + oldv + " to: " + newv);
+
+            document.getElementById("schemaID").value = newv;
+
+            var data = new webix.DataCollection({
+                url: "GetSchemas?schema_id=" + newv //load data from an external file
+            });
+
+            $$("schemaTree").sync(data);
+
+        });
+
+        function excelexport(tableID) {
+            if (tableID == 0.0) {
+                alert("Tablo Seçiniz Lütfen");
+                return;
+            }
+
+            window.location.replace("/Gumruk.Web/Home/TableExcelExport?tableID=" + tableID + "&isSchema=0");
+
+        }
+        function loadDataGrid(schema, table, f) {
+            $$("table_data_grid").clearAll();
+
+            $$("table_data_grid").load("/Gumruk.Web/data/simplified/" + $$('schema_id').data.text.split(' ')[0] + "." + table.value.split(" ")[0] + ".json", function (text, data, req) {
+                var table_data_grid = $$("table_data_grid");
+                var tableColData = JSON.parse(text)[0];
+
+                /*{ id:"rank",    header:"",              width:50},
+                 { id:"title",   header:"Film title",    width:200},
+                 { id:"year",    header:"Released",      width:80},
+                 { id:"votes",   header:"Votes",         width:100}*/
+
+                var colData = [];
+                Object.keys(tableColData).forEach(function (key) {
+                    colData.push({ id: key, header: [key, { content: "selectFilter" }] });
+                    //console.log(key);
+                    //console.log(tableColData[key]);
+                });
+                //console.log(colData);
+                table_data_grid.config.columns = colData;
+                table_data_grid.refreshColumns();
+                if (f !== undefined) {
+                    f();
+                }
+
+            });
+
+        }
+        function LoadExplanationGrid(columnID) {
+            var dataGridColumnAciklamalar = $$("table_data_grid_Explanations");
+            dataGridColumnAciklamalar.clearAll();
+            dataGridColumnAciklamalar.load("/Gumruk.Web/Home/GetDetails?ColumnID=" + columnID);
+
+        }
+
+        function LoadTableExplanationGrid(tableID) {
+            var dataGridColumnAciklamalar = $$("table_data_grid_Explanations");
+            dataGridColumnAciklamalar.clearAll();
+
+            dataGridColumnAciklamalar.load("/Gumruk.Web/Home/GetTableExplanations?tableID=" + tableID);
+
+        }
+
+        function LoadLookupsGrid(columnID) {
+            var dataGridColumnLookups = $$("table_data_grid_lookUps");
+            dataGridColumnLookups.clearAll();
+            dataGridColumnLookups.load("/Gumruk.Web/Home/GetLookUps?ColumnID=" + columnID);
+
+        }
+
+        function LoadModulesGrid(tableID) {
+            var dataGridColumnLookups = $$("table_data_grid_modules");
+            dataGridColumnLookups.clearAll();
+            dataGridColumnLookups.load("/Gumruk.Web/Home/GetTableModules?tableID=" + tableID);
+
+        }
+
+        function expDelete(lookUpID) {
+            var columnID = document.getElementById("columnID").value;
+            var tableID = document.getElementById("tableID").value;
+
+            if (tableID == "0") {
+                webix.ajax("/Gumruk.Web/Home/DeleteExp?ExpID=" + lookUpID + "&ColumnID=" + columnID, function () {
+                    LoadExplanationGrid(columnID);
+                });
+            }
+
+            if (columnID == "0") {
+                webix.ajax("/Gumruk.Web/Home/DeleteTableExp?ExpID=" + lookUpID + "&tableID=" + tableID, function () {
+                    LoadTableExplanationGrid(tableID);
+                });
+            }
+
+            document.getElementById("expID").value = "0";
+
+        }
+
+        $$("treeFilter").attachEvent("onTimedKeyPress", function () {
+            $$("schemaTree").filter("#value#", this.getValue());
+            $$("messageBox").setValue("designed By 4S Bilgi Teknolojileri");
+        })
+
+        function AddExplanation() {
+            var columnID = document.getElementById("columnID").value;
+            var tableID = document.getElementById("tableID").value;
+
+            var explanation = $$("explanation").getValue();
+
+            if (tableID == "0") {
+                webix.ajax("/Gumruk.Web/Home/AddColumnExplanation?column_id=" + columnID + "&Exp=" + explanation, function () {
+                    LoadExplanationGrid(columnID);
+                    LoadLookupsGrid(columnID);
+                    $$("explanation").setValue("");
+                });
+            }
+
+            if (columnID == "0") {
+                webix.ajax("/Gumruk.Web/Home/AddTableExplanation?table_id=" + tableID + "&Exp=" + explanation, function () {
+                    LoadTableExplanationGrid(tableID);
+
+                    $$("explanation").setValue("");
+                });
+            }
+
+            if (explanation == "!unused")
+                $$("messageBox").setValue("Column boş olarak update edildi.Tablo görünümü yenilendiği zaman görülebilir.");
+
+
+
+            //alert("Column boş olarak update edildi.Tablo görünümü yenilendiği zaman görülebilir.");
+        }
+
+        function selectExp(expID) {
+            var expName = "exp_" + expID;
+
+            var explanation = document.getElementById(expName).innerHTML;
+
+            $$("explanation").setValue(explanation);
+
+            document.getElementById("expID").value = expID;
+            $$("messageBox").setValue("designed By 4S Bilgi Teknolojileri");
+        }
+
+
+
+    </script>
+    <input type="hidden" id="schemaID" />
+    <input type="hidden" id="columnID" />
+    <input type="hidden" id="tableID" />
+    <input type="hidden" id="expID" />
+@*</body>
+</html>*@

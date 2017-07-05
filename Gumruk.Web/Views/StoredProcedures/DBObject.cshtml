@@ -1,0 +1,155 @@
+﻿@model Gumruk.Entity.DBObjects
+
+<div class="padding5">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#dbObjectTables">Tables</a></li>
+        <li><a data-toggle="tab" href="#dbObjectProcedures">Procedures</a></li>
+        <li><a data-toggle="tab" href="#divOthers">Other Objects</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="dbObjectTables" class="tab-pane fade in active">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Object Name</th>
+                        <th>Schema Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.ChildDBObject != null && Model.ChildDBObject.Count > 0)
+            {
+                foreach (var item in Model.ChildDBObject.Where(p => p.ObjType1.objType1 == "TABLE"))
+                {
+                            <tr id="tr_@item.ID">
+                                <td>
+                                    <a href="javascript:void(0)" onclick="ObjectSearch('@item.objName','@item.schemaName','table')">@item.objName</a>
+                                </td>
+                                <td>
+                                    @item.schemaName
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="dbObjectProcedures" class="tab-pane fade">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Object Name</th>
+                        <th>Schema Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ChildDBObject.Where(p => p.ObjType1.objType1 == "PROCEDURE"))
+            {
+                        <tr id="tr_@item.ID">
+                            <td>
+                                <a href="javascript:void(0)" onclick="ObjectSearch('@item.objName','@item.schemaName','procedure')">@item.objName</a>
+                            </td>
+                            <td>
+                                @item.schemaName
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="divOthers" class="tab-pane fade">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Object Name</th>
+                        <th>Schema Name</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ChildDBObject.Where(p => p.ObjType1.objType1 != "TABLE" && p.ObjType1.objType1 != "PROCEDURE"))
+            {
+                        <tr id="tr_@item.ID">
+                            <td>
+                                @item.objName
+                            </td>
+                            <td>
+                                @item.schemaName
+                            </td>
+                            <td>
+                                @item.ObjType1.objType1
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function ObjectSearch(name, schemaName, type) {
+
+        if (type == "table") {
+            $.ajax({
+                url: '@Url.Action("GetTablePropertiesByNameSchemaName", "StoredProcedures")',
+                type: "POST",
+                cache: false,
+                async: false,
+                data: { tableName: name, schemaName: schemaName },
+                success: function (text, data) {
+                    $("#genericModalBody").html(text);
+                    $("#genericModal").modal();
+                    $("#modalTitle").text(name);
+                    $(".modal-dialog").css("width", "900px");
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+        else if (type == "procedure") {
+            $.ajax({
+                url: '@Url.Action("GetProcedureID", "StoredProcedures")',
+                type: "POST",
+                cache: false,
+                async: false,
+                data: { name: name, schemaName: schemaName },
+                success: function (text, data) {
+                    GetSP(text["ID"]);
+                    $(".modal-dialog").css("width", "1250px");
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+    }
+
+    function GetSP(ID) {
+
+        $.ajax({
+            url: '@Url.Action("GetProcedureByID", "StoredProcedures")',
+            type: "POST",
+            cache: false,
+            async: true,
+            data: { id: ID, TXT: "" },
+            success: function (text, data) {
+                $("#modalTitle").html(text["name"]);
+                var pre = "<pre id='resultSQL'></pre>";
+                $("#genericModalBody").html(pre);
+                if (text["formattedBody"] != null)
+                    $("#resultSQL").html(text["formattedBody"]);
+                else
+                    $("#resultSQL").html(text["body"]);
+
+                $("#genericModal").modal();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+
+    }
+</script>

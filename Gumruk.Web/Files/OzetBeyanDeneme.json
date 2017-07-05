@@ -1,0 +1,216 @@
+﻿{
+  "form": "OzetBeyan",
+  "url": "OzetBeyanKaydet",
+  "id": "OzetBeyanForm",
+  "pageTitle": "Özet Beyan",
+  "pageGroup": [
+    {
+      "title": "Belge",
+      "items": [
+        {
+          "type": "dropdown",
+          "display": "Beyan Türü",
+          "id": "BeyanTuruId",
+          "lenght": 3,
+          "url": "GumrukOperations/BeyanTurleri",
+          "key": "ID",
+          "value": "BeyanTurKodu",
+          "required": true
+        },
+        {
+          "type": "textbox",
+          "display": "Rejim",
+          "id": "Rejim",
+          "lenght": 1,
+          "required": true,
+          "disabled": false
+        },
+        {
+          "type": "textbox",
+          "display": "Taşıma Şekli",
+          "id": "TasimaSekli",
+          "lenght": 4,
+          "placeholder": "Taşıma Şekli Giriniz"
+        },
+        {
+          "type": "textbox",
+          "display": "Gümrük İdaresi",
+          "id": "GumrukIdaresi",
+          "lenght": 6,
+          "placeholder": "Gümrük İdaresi Giriniz"
+        },
+        {
+          "type": "number",
+          "display": "Kalem Sayısı",
+          "id": "KalemSayisi",
+          "lenght": 6
+        },
+        {
+          "type": "number",
+          "display": "Ek Belge Sayısı",
+          "id": "EkBelgeSayisi",
+          "lenght": 6
+        },
+        {
+          "type": "dropdown",
+          "display": "Ilk Varış/Çıkış Yeri",
+          "id": "IlkVarisCikisYeri",
+          "lenght": 6,
+          "url": "GumrukOperations/GumrukIdareleri",
+          "key": "ID",
+          "value": "GumrukIdaresiAdi"
+        },
+        {
+          "type": "date",
+          "display": "Tescil Tarihi",
+          "id": "TescilTarihi",
+          "lenght": 4
+        },
+        {
+          "type": "date",
+          "display": "Onay Tarihi",
+          "id": "OnayTarihi",
+          "lenght": 4
+        },
+        {
+          "type": "date",
+          "display": "Kapanış Tarihi",
+          "id": "KapanisTarihi",
+          "lenght": 4,
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "Yükleme/Bosaltma Bilgileri",
+      "items": [
+        {
+          "type": "dropdown",
+          "display": "Yükleme Ülkesi",
+          "id": "YuklemeUlkesiId",
+          "lenght": 3,
+          "url": "GumrukOperations/GetUlkeler",
+          "key": "ID",
+          "value": "UlkeTamAdi",
+          "required": true,
+          "disabled": false
+        },
+        {
+          "type": "dropdown",
+          "display": "Yükleme Limanı",
+          "id": "YukelemeLimaniId",
+          "lenght": 4,
+          "url": "GumrukOperations/GetLimanlar",
+          "parameter": "ulkeID",
+          "key": "ID",
+          "value": "LimanTamAdi",
+          "required": true,
+          "master": "YuklemeUlkesiId"
+        },
+        {
+          "type": "dropdown",
+          "display": "Boşaltma Ulkesi",
+          "id": "BosaltmaUlkesiId",
+          "lenght": 3,
+          "url": "GumrukOperations/GetUlkeler",
+          "key": "ID",
+          "value": "UlkeTamAdi",
+          "required": true,
+          "disabled": false
+        },
+        {
+          "type": "dropdown",
+          "display": "Boşaltma Limanı",
+          "id": "BosaltmaLimanıId",
+          "lenght": 4,
+          "url": "GumrukOperations/GetLimanlar",
+          "parameter": "ulkeID",
+          "key": "ID",
+          "value": "LimanTamAdi",
+          "required": true,
+          "master": "BosaltmaUlkesiId"
+        },
+        {
+          "type": "submit",
+          "display": "Kaydet",
+          "id": "btnSubmit",
+          "lenght": 2,
+          "validateForm": true
+        }
+      ]
+    },
+    {
+      "title": "Sorumlu",
+      "items": [
+        {
+          "type": "modal",
+          "display": "Beyan Sahibi/Temsilcisi",
+          "id": "BeyanSahibiId",
+          "lenght": 6,
+          "source": "OzelTuzelSahis.json",
+          "required": true,
+          "disabled": false,
+          "windowsize": "750",
+          "key": "ID",
+          "value": "AdiUnvani",
+          "searchURL": "SearchBeyanSahibi",
+          "placeholder": "kimlik no ile arama yapabilirsiniz"
+        },
+        {
+          "type": "modal",
+          "display": "Taşıyıcı Firma",
+          "id": "TasiyiciFirmaID",
+          "lenght": 6,
+          "source": "TasiyiciFirma.json",
+          "required": true,
+          "disabled": false,
+          "windowsize": "750",
+          "key": "ID",
+          "value": "AdiUnvani",
+          "searchURL": "SearchBeyanSahibi",
+          "placeholder": "kimlik no ile arama yapabilirsiniz"
+        }
+      ]
+    },
+    {
+      "title": "Taşıt Bilgileri",
+      "items": [
+        {
+          "type": "modal",
+          "display": "Taşıt Bilgileri",
+          "id": "TasitID",
+          "lenght": 6,
+          "source": "TasitBilgileri.json",
+          "required": true,
+          "disabled": false,
+          "windowsize": "750",
+          "key": "ID",
+          "value": "Ad",
+          "searchURL": "TasitSearch",
+          "placeholder": "Araç adı veya numara ile arama yapabilirsiniz"
+        }
+      ]
+    },
+    {
+      "title": "Referans Bilgileri",
+      "items": [
+        {
+          "type": "checkbox",
+          "display": "Kurye",
+          "id": "Kurye",
+          "lenght": 3,
+          "disabled": false,
+          "value": "0"
+        },
+        {
+          "type": "checkbox",
+          "display": "Emniyet ve Güvenlik(EG)",
+          "id": "EmniyetGuvenlik",
+          "lenght": 3,
+          "disabled": false,
+          "value": "0"
+        }
+      ]
+    }
+  ]
+}

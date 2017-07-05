@@ -1,0 +1,90 @@
+﻿{
+  "form": "TasiyiciFirma",
+  "url": "SahisKaydet",
+  "id": "TasiyiciFirmaForm",
+  "databaseOBJ": "OzelTuzelSahis",
+  "pageGroup": [
+    {
+      "title": "Sahış Bilgileri",
+      "items": [
+        {
+          "type": "dropdown",
+          "display": "Kimlik Türü",
+          "id": "KimlikTurID",
+          "lenght": 4,
+          "url": "GumrukOperations/GetKimlikTurleri",
+          "key": "ID",
+          "value": "KimlikTuru",
+          "required": true
+        },
+        {
+          "type": "textbox",
+          "display": "Kimlik No",
+          "id": "KimlikNo",
+          "lenght": 5,
+          "required": true,
+          "disabled": false
+        },
+        {
+          "type": "textbox",
+          "display": "Vergi Dairesi Kodu",
+          "id": "VergiDairesiKodu",
+          "lenght": 4,
+          "disabled": false
+        },
+        {
+          "type": "textbox",
+          "display": "Adı Ünvani",
+          "id": "AdiUnvani",
+          "lenght": 10
+        },
+        {
+          "type": "textbox",
+          "display": "Cadde Sokak No",
+          "id": "CaddeSokak",
+          "lenght": 10
+        },
+        {
+          "type": "textbox",
+          "display": "İl İlçe",
+          "id": "İlİlce",
+          "lenght": 6
+        },
+        {
+          "type": "textbox",
+          "display": "Posta Kodu",
+          "id": "PostaKodu",
+          "lenght": 6
+        },
+        {
+          "type": "dropdown",
+          "display": "Ülke Türü",
+          "id": "UlkeID",
+          "lenght": 4,
+          "url": "GumrukOperations/GetUlkeler",
+          "key": "ID",
+          "value": "UlkeTamAdi",
+          "required": true
+        },
+        {
+          "type": "textbox",
+          "display": "Telefon",
+          "id": "Telefon",
+          "lenght": 4
+        },
+        {
+          "type": "textbox",
+          "display": "Fax",
+          "id": "Fax",
+          "lenght": 4
+        },
+        {
+          "type": "submit",
+          "display": "Taşıyıcı Firma Kaydet",
+          "id": "btnTasiyiciFirma",
+          "lenght": 4
+        }
+      ]
+    }
+  ]
+}

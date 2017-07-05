@@ -1,0 +1,75 @@
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\WinApp.exe.config
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\WinApp.exe
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\WinApp.pdb
+D:\4S Projeler\4SOperations\WinApp\obj\Debug\Gumruk.WinApp.csprojResolveAssemblyReference.cache
+D:\4S Projeler\4SOperations\WinApp\obj\Debug\WinApp.Form1.resources
+D:\4S Projeler\4SOperations\WinApp\obj\Debug\WinApp.Properties.Resources.resources
+D:\4S Projeler\4SOperations\WinApp\obj\Debug\Gumruk.WinApp.csproj.GenerateResource.Cache
+D:\4S Projeler\4SOperations\WinApp\obj\Debug\WinApp.exe
+D:\4S Projeler\4SOperations\WinApp\obj\Debug\WinApp.pdb
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\Excel.4.5.pdb
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.Entity.dll
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.UnitOfWork.dll
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.Repository.dll
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.DayaLayer.dll
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\EntityFramework.dll
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.Entity.pdb
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.UnitOfWork.pdb
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.Repository.pdb
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.DayaLayer.pdb
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\EntityFramework.xml
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\EntityFramework.SqlServer.dll
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\EntityFramework.SqlServer.xml
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\Newtonsoft.Json.dll
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\WinApp.exe.config
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\obj\Debug\WinApp.exe
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\obj\Debug\WinApp.pdb
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\WinApp.exe
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\WinApp.pdb
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\EntityFramework.dll
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\Gumruk.Entity.dll
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\Gumruk.UnitOfWork.dll
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\Gumruk.Repository.dll
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\Gumruk.DayaLayer.dll
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\Gumruk.Entity.pdb
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\Gumruk.UnitOfWork.pdb
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\EntityFramework.xml
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\Excel.4.5.pdb
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\Gumruk.Repository.pdb
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\bin\Debug\Gumruk.DayaLayer.pdb
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\obj\Debug\Gumruk.WinApp.csprojResolveAssemblyReference.cache
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\obj\Debug\WinApp.Form1.resources
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\obj\Debug\WinApp.Properties.Resources.resources
+C:\Users\serkanisel\Desktop\veritabanı metaveri dökümanları\4SOperations\WinApp\obj\Debug\Gumruk.WinApp.csproj.GenerateResource.Cache
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\WinApp.exe.config
+E:\4S Projeler\4SOperations\WinApp\obj\Debug\WinApp.exe
+E:\4S Projeler\4SOperations\WinApp\obj\Debug\WinApp.pdb
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\WinApp.exe
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\WinApp.pdb
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\EntityFramework.dll
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\EntityFramework.SqlServer.dll
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.Entity.dll
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.UnitOfWork.dll
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\Newtonsoft.Json.dll
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.Repository.dll
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.DayaLayer.dll
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.Entity.pdb
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.UnitOfWork.pdb
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\EntityFramework.xml
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\EntityFramework.SqlServer.xml
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\Excel.4.5.pdb
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\Newtonsoft.Json.xml
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.Repository.pdb
+E:\4S Projeler\4SOperations\WinApp\bin\Debug\Gumruk.DayaLayer.pdb
+E:\4S Projeler\4SOperations\WinApp\obj\Debug\Gumruk.WinApp.csprojResolveAssemblyReference.cache
+E:\4S Projeler\4SOperations\WinApp\obj\Debug\WinApp.Form1.resources
+E:\4S Projeler\4SOperations\WinApp\obj\Debug\WinApp.Properties.Resources.resources
+E:\4S Projeler\4SOperations\WinApp\obj\Debug\Gumruk.WinApp.csproj.GenerateResource.Cache

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ca8476e32e73459ba8501ccde4c3a55a" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="GumrukDBModel.app_module_procedures" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GumrukDBModel.customs_articles" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GumrukDBModel.customs_circulars" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GumrukDBModel.customs_codes" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GumrukDBModel.d_b_column_types" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GumrukDBModel.d_b_schema_procedures" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GumrukDBModel.d_b_schemas" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GumrukDBModel.d_b_tables" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GumrukDBModel.migrations" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GumrukDBModel.users" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GumrukDBModel.password_resets" Width="1.5" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.d_b_columns" Width="1.5" PointX="9.375" PointY="9.75" />
+        <AssociationConnector Association="GumrukDBModel.FK_d_b_tables_d_b_schemas" />
+        <AssociationConnector Association="GumrukDBModel.FK_d_b_columns_d_b_tables" />
+        <AssociationConnector Association="GumrukDBModel.FK_d_b_columns_d_b_column_types" />
+        <EntityTypeShape EntityType="GumrukDBModel.d_b_column_lookups" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.d_b_table_explanation" Width="1.5" PointX="11.375" PointY="4.75" />
+        <AssociationConnector Association="GumrukDBModel.FK_d_b_table_explanation_users" />
+        <EntityTypeShape EntityType="GumrukDBModel.d_b_column_explanations" Width="1.5" PointX="3" PointY="9.875" />
+        <AssociationConnector Association="GumrukDBModel.FK_d_b_column_explanations_users" />
+        <EntityTypeShape EntityType="GumrukDBModel.app_base_modules" Width="1.5" PointX="11.375" PointY="9.125" />
+        <EntityTypeShape EntityType="GumrukDBModel.app_module_operations" Width="1.5" PointX="15.875" PointY="9" />
+        <EntityTypeShape EntityType="GumrukDBModel.app_sub_modules" Width="1.5" PointX="13.625" PointY="9" />
+        <AssociationConnector Association="GumrukDBModel.FK_app_sub_modules_app_base_modules" />
+        <AssociationConnector Association="GumrukDBModel.FK_app_module_operations_app_sub_modules" />
+        <AssociationConnector Association="GumrukDBModel.FK_d_b_column_explanations_d_b_columns" />
+        <AssociationConnector Association="GumrukDBModel.FK_d_b_table_explanation_d_b_tables" />
+        <EntityTypeShape EntityType="GumrukDBModel.d_b_column_links" Width="1.5" PointX="11.625" PointY="12.75" />
+        <AssociationConnector Association="GumrukDBModel.FK_d_b_column_links_d_b_columns" />
+        <AssociationConnector Association="GumrukDBModel.FK_d_b_column_lookups_d_b_columns" />
+        <AssociationConnector Association="GumrukDBModel.FK_app_module_operations_d_b_tables" />
+        <EntityTypeShape EntityType="GumrukDBModel.ERxml" Width="1.5" PointX="5.375" PointY="12.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.GumrukIdareleri" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.KimlikTurleri" Width="1.5" PointX="2.75" PointY="13.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.Limanlar" Width="1.5" PointX="13.75" PointY="3.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.OzelTuzelSahis" Width="1.5" PointX="14.75" PointY="12.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.OzetBeyan" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.TasimaSekilleri" Width="1.5" PointX="4.75" PointY="15.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.TasitBilgileri" Width="1.5" PointX="6.75" PointY="15.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.Ulkeler" Width="1.5" PointX="8.75" PointY="15.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.BeyanTurleri" Width="1.5" PointX="0.75" PointY="16.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.DBErrorMessages" Width="1.5" PointX="11.375" PointY="16.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.SQLProcedures" Width="1.5" PointX="15.375" PointY="16.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.SQLKeys" Width="1.5" PointX="17.375" PointY="12.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.SQLProceduresComments" Width="1.5" PointX="17.375" PointY="15.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.SQLProceduresProcedure" Width="1.5" PointX="18.375" PointY="4.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.Modules" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.ModulesFiles" Width="1.5" PointX="18.75" PointY="7.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.SubModules" Width="1.5" PointX="0.75" PointY="19.75" />
+        <AssociationConnector Association="GumrukDBModel.FK_SubModules_Modules" />
+        <AssociationConnector Association="GumrukDBModel.FK_ModulesFiles_SubModules" />
+        <EntityTypeShape EntityType="GumrukDBModel.SQLProcedureModules" Width="1.5" PointX="17.625" PointY="19.5" />
+        <AssociationConnector Association="GumrukDBModel.FK_SQLProcedureModules_SQLProcedures" />
+        <AssociationConnector Association="GumrukDBModel.FK_SQLProcedureModules_SubModules" />
+        <AssociationConnector Association="GumrukDBModel.FK_Modules_Modules" />
+        <AssociationConnector Association="GumrukDBModel.FK_SubModules_SubModules" />
+        <EntityTypeShape EntityType="GumrukDBModel.ModulesTables" Width="1.5" PointX="3.375" PointY="18.75" />
+        <AssociationConnector Association="GumrukDBModel.FK_ModulesTables_d_b_tables" />
+        <AssociationConnector Association="GumrukDBModel.FK_SQLProcedures_d_b_schemas" />
+        <EntityTypeShape EntityType="GumrukDBModel.ObjType" Width="1.5" PointX="9.375" PointY="19.75" />
+        <EntityTypeShape EntityType="GumrukDBModel.DBObjects" Width="1.5" PointX="11.625" PointY="19.5" />
+        <EntityTypeShape EntityType="GumrukDBModel.DBObjectsChilds" Width="1.5" PointX="5.375" PointY="19.75" />
+        <AssociationConnector Association="GumrukDBModel.FK_DBObjects_ObjType" />
+        <EntityTypeShape EntityType="GumrukDBModel.InnerModule" Width="1.5" PointX="19.375" PointY="10.75" />
+        <AssociationConnector Association="GumrukDBModel.FK_SQLProcedureModules_ModulesFiles" />
+        <AssociationConnector Association="GumrukDBModel.FK_ModulesTables_ModulesFiles" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

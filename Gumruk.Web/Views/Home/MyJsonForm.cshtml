@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyJsonForm</title>
+    <link href="~/webix/webix.css" rel="stylesheet" />
+    <script src="~/webix/webix.js"></script>
+</head>
+<body>
+    <div id="formContainer"></div>
+    <script type="text/javascript" charset="utf-8">
+        var elementsToDisplay = [];
+
+        function buildForm() {
+            webix.ui({
+                container:"formContainer",
+                view: "form",
+                width: 300,
+                id: "form1",
+                elements: elementsToDisplay
+            ,
+            });
+        }
+        webix.ajax("../../Gumruk.Web/Files/JsonForm.json", function (text, data, XmlHttpRequest) {
+            console.log(text);
+            elementsToDisplay = JSON.parse(text);
+            buildForm();
+        });
+
+        </script>
+</body>
+</html>

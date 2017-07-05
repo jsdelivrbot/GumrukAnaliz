@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gümrük Bakanlığı Analiz Portalı</title>
+    <link rel="stylesheet" href="~/webix/webix.css" type="text/css">
+    <script src="~/webix/webix.js" type="text/javascript"></script>
+    
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/bootstrap-toggle.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-toggle.min.js"></script>
+    <script src="~/Scripts/jQueryRotateCompressed.js"></script>
+    <script src="~/Scripts/jquery.mark.js"></script>
+    <script src="~/Scripts/mark.js"></script>
+    <style>
+        .vcenter {
+            display: inline-block;
+            vertical-align: middle;
+            float: none;
+        }
+
+        .bigger {
+            overflow: hidden;
+            max-width: 100px;
+            width: 40px;
+            -webkit-transition: max-width .5s ease;
+            transition: max-width .5s ease;
+            font-size: 12px;
+            margin-top: 8px;
+            height: 35px;
+            border: 1px solid #fff;
+        }
+
+            .bigger:focus {
+                max-width: 600px;
+                width: 550px;
+                color: #fff;
+                margin-top: 8px;
+                height: 35px;
+                border-bottom: 1px solid #fff;
+                font-size: 12px;
+            }
+
+        .form-control::-webkit-input-placeholder {
+            color: #b2dbfb;
+            font-size: 12px;
+        }
+
+        .form-control:-moz-placeholder {
+            color: #b2dbfb;
+            font-size: 12px;
+        }
+
+        .form-control::-moz-placeholder {
+            color: #b2dbfb;
+            font-size: 12px;
+        }
+
+        .form-control:-ms-input-placeholder {
+            color: #b2dbfb;
+            font-size: 12px;
+        }
+
+  
+    </style>
+</head>
+<body>
+    <div id="loading" style="display:none;z-index:1000;">
+        @* <img src="~/Content/rolling.svg" style="width:70px;height:70px; display: block;margin-left: auto;margin-right: auto;margin-top:250px;" />*@
+    </div>
+    <div class="container-fluid navbar-inverse" style="box-shadow: 3px 3px 2px #9c9c9c;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="@Url.Action("Index", "Home")"><img src="~/Content/logo.png" id="imgLogo" style="width:60px;height:60px;" /></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+            <ul class="nav navbar-nav">
+                <li><a href="@Url.Action("GetSchemasPage","Home")"><span class="glyphicon glyphicon-menu-hamburger"></span> Schemas</a></li>
+                <li><a href="@Url.Action("Index","Modules")"><span class="glyphicon glyphicon-list-alt"></span> Modules</a></li>
+                <li><a href="@Url.Action("GetAllProcedures","StoredProcedures")"><span class="glyphicon glyphicon-hdd"></span> Stored Procedures</a></li>
+                <li><a href="@Url.Action("Index","ER")"><span class="glyphicon glyphicon-object-align-left"></span> Designer</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <input type="text" class="form-control bigger" id="txtSearch" placeholder="search" onkeydown="SearchFunction(event)" />
+                </li>
+                <li style="display:none;" id="saveButton"><a href="#" id="btnSave">Save Screen</a></li>
+                <li style="display:none;" id="li_zoomOut"><a href="#" id="zoomOut"><span class="glyphicon glyphicon-zoom-in"></span></a></li>
+                <li style="display:none;" id="li_zoomIn"><a href="#" id="zoomIn"><span class="glyphicon glyphicon-zoom-out"></span></a></li>
+                <li style="display:none;" id="li_zoomNumber"><a href="#" id="zoomNumber">%100</a></li>
+                <li class="dropdown">
+                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        @if (((Gumruk.Entity.users)HttpContext.Current.Session["CurrentUser"]) != null)
+                        {
+                            <span class="glyphicon glyphicon-user"></span>
+                            string name = ((Gumruk.Entity.users)HttpContext.Current.Session["CurrentUser"]).name;
+                            @name;
+                        }
+                        else
+                        {
+                            <span style="color:#b2dbfb;"><span class="glyphicon glyphicon-user"></span> No User </span>
+                        }<span class="sr-only">(current)</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @if (((Gumruk.Entity.users)HttpContext.Current.Session["CurrentUser"]) != null && ((Gumruk.Entity.users)HttpContext.Current.Session["CurrentUser"]).isempty == true)
+                        {
+                            <li><a href="@Url.Action("NewUser","Home")" class="fa fa-user-plus" aria-hidden="false"> &nbsp;&nbsp;New User</a></li>
+                        }
+                        <li><a href="@Url.Action("ChangePassword","Home")" class="fa fa-key" aria-hidden="true">&nbsp;&nbsp;Change Password</a></li>
+                        <li><a href="@Url.Action("Logout","Home")" class="fa fa-sign-out" aria-hidden="true">&nbsp;&nbsp;Exit</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+
+    <!-- Modal -->
+    <div id="genericModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="modalTitle"></h4>
+                </div>
+                <div class="modal-body" id="genericModalBody">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="absolute col-lg-8 col-md-12 col-sm-12 col-xs-12" id="searchLayoutResult" style="display:none;padding-top:10px;">
+
+            </div>
+        </div>
+        <div class="row" id="bodyContent">
+            @RenderBody()
+        </div>
+    </div>
+
+
+    <script>
+        function SearchFunction(e) {
+
+            if (e.keyCode == 13) {
+                var selectedtext = $("#txtSearch").val();
+
+                if (selectedtext != "") {
+                    var selectedtext = $("#txtSearch").val();
+
+                    $.ajax({
+                        url: '@Url.Action("SearchProcedures", "StoredProcedures")',
+                        type: "POST",
+                        cache: false,
+                        async: false,
+                        data: { searchText: selectedtext, fromLayout: true },
+                        success: function (text, data) {
+                            $("#searchLayoutResult").html(text);
+                            $("#searchLayoutResult").slideDown();
+
+                        },
+                        error: function (jqXhr, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                }
+                else {
+
+                }
+            }
+        }
+        function ShowDesigner() {
+
+            $("#modalBodyDesigner").html($("#area").html());
+
+            $("#saveScreenModal").modal();
+        }
+
+        function savePicture() {
+            var newdiv = $("#modalBodyDesigner");
+
+            html2canvas(newdiv, {
+                onrendered: function (canvas) {
+                    //document.body.appendChild(canvas);
+
+                    // Convert and download as image
+                    Canvas2Image.saveAsPNG(canvas);
+                    //$("#img-out").append(canvas);
+                    // Clean up
+                    //document.body.removeChild(canvas);
+                }
+            });
+        }
+
+        $(document).ajaxStart(function () {
+            $("#loading").css("display", "block");
+            rotation();
+        });
+        $(document).ajaxComplete(function () {
+            $("#loading").css("display", "none");
+            $("#imgLogo").stopRotate();
+        });
+
+
+
+        $("#txtSearch").focusout(function () {
+            $("#txtSearch").val("");
+        });
+
+
+        function CloseSearhWindow() {
+            $("#searchLayoutResult").slideUp();
+        }
+        var rotation = function () {
+            $("#imgLogo").rotate({
+                angle: 0,
+                animateTo: 360,
+                callback: rotation,
+                easing: function (x, t, b, c, d) {        // t: current time, b: begInnIng value, c: change In value, d: duration
+                    return c * (t / d) + b;
+                }
+            });
+        }
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>EPPlus.Extensions</id>
+    <version>1.0.0.0</version>
+    <title>EPPlus.Extensions</title>
+    <authors>cole.mike</authors>
+    <owners>cole.mike</owners>
+    <licenseUrl>https://raw.githubusercontent.com/mikecole/EPPlus.Extensions/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mikecole/EPPlus.Extensions</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Extension methods for EPPlus.</description>
+    <summary />
+    <tags>excel ooxml epplus</tags>
+    <dependencies>
+      <dependency id="EPPlus" version="3.1.3.3" />
+    </dependencies>
+  </metadata>
+</package>

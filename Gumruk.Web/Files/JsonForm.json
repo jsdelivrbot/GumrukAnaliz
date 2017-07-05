@@ -1,0 +1,6 @@
+﻿	[{ "view":"text", "value":"dummy@email.com", "label":"Email" },
+			{ "view":"text", "type":"password", "value":"123pass", "label":"Password"},
+			{ "margin":5, "cols":[
+				{ "view":"button", "value":"Login" , "type":"form" },
+				{ "view":"button", "value":"Cancel" }
+			]}]

@@ -1,0 +1,45 @@
+﻿{
+  "form": "User",
+  "url": "SaveUser",
+  "id": "NewUserForm",
+  "pageTitle": "Yeni Kullanıcı",
+  "pageGroup": [
+    {
+      "title": "",
+      "items": [
+        {
+          "type": "textbox",
+          "display": "Email",
+          "id": "Email",
+          "lenght": 6,
+          "required": true,
+          "disabled": false
+        },
+        {
+          "type": "textbox",
+          "display": "Kullanıcı Adı",
+          "id": "Name",
+          "lenght": 4,
+          "placeholder": "Kullanıcı Adı",
+          "required": true
+
+        },
+        {
+          "type": "password",
+          "display": "Şifre",
+          "id": "password",
+          "lenght": 4,
+          "placeholder": "Şifre",
+          "required": true
+        },
+         {
+          "type": "submit",
+          "display": "Kaydet",
+          "id": "btnSubmit",
+          "lenght": 2,
+          "validateForm": true
+        }
+      ]
+    }
+  ]
+}

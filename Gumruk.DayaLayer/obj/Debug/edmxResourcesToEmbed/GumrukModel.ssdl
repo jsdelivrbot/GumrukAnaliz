@@ -1,0 +1,875 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GumrukDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="app_base_modules">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="app_module_operations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="d_b_tables_id" Type="int" Nullable="false" />
+    <Property Name="operation" Type="varchar" MaxLength="100" />
+    <Property Name="query" Type="text" />
+    <Property Name="app_sub_module_id" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="Explanation" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="app_module_procedures">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="db_schema_procedure_id" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="app_sub_modules">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+    <Property Name="app_base_module_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="BeyanTurleri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="BeyanTurKodu" Type="varchar" MaxLength="10" />
+    <Property Name="Aciklama" Type="varchar" MaxLength="100" />
+    <Property Name="Rejim" Type="char" MaxLength="1" />
+    <Property Name="TasimaSekli" Type="smallint" />
+  </EntityType>
+  <EntityType Name="customs_articles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="no" Type="int" Nullable="false" />
+    <Property Name="content" Type="text" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="customs_circulars">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="content" Type="text" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="customs_codes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="content" Type="text" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="d_b_column_explanations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="db_column_id" Type="int" Nullable="false" />
+    <Property Name="details" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+    <Property Name="userId" Type="int" />
+  </EntityType>
+  <EntityType Name="d_b_column_links">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="column_from_id" Type="int" Nullable="false" />
+    <Property Name="column_to_id" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="d_b_column_lookups">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="column_from_id" Type="int" Nullable="false" />
+    <Property Name="column_to_id" Type="int" Nullable="false" />
+    <Property Name="explanation" Type="varchar" MaxLength="255" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="d_b_column_types">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="d_b_columns">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="db_column_type_id" Type="int" Nullable="false" />
+    <Property Name="length" Type="int" Nullable="false" />
+    <Property Name="scale" Type="int" Nullable="false" />
+    <Property Name="isnull" Type="bit" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="d_b_tablesId" Type="int" Nullable="false" />
+    <Property Name="isunique" Type="bit" />
+    <Property Name="precision" Type="int" />
+    <Property Name="isempty" Type="bit" />
+    <Property Name="distinctnum" Type="int" />
+    <Property Name="isprimary" Type="bit" />
+    <Property Name="tobe" Type="bit" />
+    <Property Name="samenameexist" Type="int" />
+  </EntityType>
+  <EntityType Name="d_b_schema_procedures">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="code" Type="text" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="d_b_schemas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="details" Type="text" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="d_b_table_explanation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="db_table_id" Type="int" Nullable="false" />
+    <Property Name="details" Type="varchar" MaxLength="1000" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+    <Property Name="userId" Type="int" />
+  </EntityType>
+  <EntityType Name="d_b_tables">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="details" Type="text" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="d_b_schemasId" Type="int" Nullable="false" />
+    <Property Name="isempty" Type="bit" />
+    <Property Name="isView" Type="bit" />
+  </EntityType>
+  <EntityType Name="DBErrorMessages">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Descrip" Type="text" />
+    <Property Name="Descren" Type="text" />
+  </EntityType>
+  <EntityType Name="DBObjects">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="objName" Type="varchar" MaxLength="255" />
+    <Property Name="objType" Type="int" />
+    <Property Name="schemaName" Type="varchar" MaxLength="100" />
+    <Property Name="schemaID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GumrukWikiDB.dbo.DBObjectsChilds' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DBObjectsChilds">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentID" Type="int" />
+    <Property Name="ChildID" Type="int" />
+  </EntityType>
+  <EntityType Name="ERxml">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="schemaid" Type="int" />
+    <Property Name="tablesid" Type="varchar" MaxLength="255" />
+    <Property Name="xmlData" Type="text" />
+    <Property Name="ErName" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="GumrukIdareleri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GumrukIdaresiAdi" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="InnerModule">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContainModuleID" Type="int" />
+    <Property Name="ModuleID" Type="int" />
+    <Property Name="ModFileName" Type="varchar" MaxLength="255" />
+    <Property Name="Method" Type="varchar" MaxLength="1000" />
+    <Property Name="ContainFileName" Type="varchar" MaxLength="255" />
+    <Property Name="SubContainsModuleID" Type="int" />
+  </EntityType>
+  <EntityType Name="KimlikTurleri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KimlikTuru" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Limanlar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UlkeID" Type="int" />
+    <Property Name="LimanKodu" Type="varchar" MaxLength="10" />
+    <Property Name="LimanAdi" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="migrations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="migration" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="batch" Type="int" Nullable="false" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="Modules">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+    <Property Name="modType" Type="int" />
+  </EntityType>
+  <EntityType Name="ModulesFiles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Body" Type="text" />
+    <Property Name="SubModuleID" Type="int" />
+    <Property Name="ModuleID" Type="int" />
+    <Property Name="formattedBody" Type="text" />
+    <Property Name="LineCount" Type="int" />
+  </EntityType>
+  <EntityType Name="ModulesTables">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="d_b_tablesID" Type="int" />
+    <Property Name="subModuleID" Type="int" />
+    <Property Name="moduleID" Type="int" />
+    <Property Name="fileID" Type="int" />
+    <Property Name="lineNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="ObjType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="objType" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="OzelTuzelSahis">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KimlikTurID" Type="int" />
+    <Property Name="KimlikNo" Type="varchar" MaxLength="20" />
+    <Property Name="VergiDairesiKodu" Type="varchar" MaxLength="20" />
+    <Property Name="AdiUnvani" Type="varchar" MaxLength="100" />
+    <Property Name="CaddeSokak" Type="varchar" MaxLength="100" />
+    <Property Name="İlIlce" Type="varchar" MaxLength="100" />
+    <Property Name="PostaKodu" Type="int" />
+    <Property Name="UlkeID" Type="int" />
+    <Property Name="Telefon" Type="varchar" MaxLength="18" />
+    <Property Name="Faks" Type="varchar" MaxLength="18" />
+  </EntityType>
+  <EntityType Name="OzetBeyan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BeyanTuruId" Type="int" />
+    <Property Name="Rejim" Type="char" MaxLength="1" />
+    <Property Name="TasimaSekli" Type="int" />
+    <Property Name="GumrukIdaresi" Type="int" />
+    <Property Name="KalemSayisi" Type="int" />
+    <Property Name="EkBelgeSayisi" Type="int" />
+    <Property Name="IlkVarisCikisYeri" Type="int" />
+    <Property Name="TescilTarihi" Type="datetime" />
+    <Property Name="OnayTarihi" Type="datetime" />
+    <Property Name="KapanisTarihi" Type="datetime" />
+    <Property Name="YuklemeUlkesiId" Type="int" />
+    <Property Name="YukelemeLimaniId" Type="int" />
+    <Property Name="BosaltmaUlkesiId" Type="int" />
+    <Property Name="BosaltmaLimanıId" Type="int" />
+    <Property Name="BeyanSahibiId" Type="int" />
+    <Property Name="TasiyiciFirmaId" Type="int" />
+    <Property Name="TasitID" Type="int" />
+    <Property Name="OncekiBeyanNoAnaKonsimentoNo" Type="varchar" MaxLength="100" />
+    <Property Name="GrupTasimaSenediNo" Type="varchar" MaxLength="100" />
+    <Property Name="TirAtaKarneNo" Type="varchar" MaxLength="100" />
+    <Property Name="Kurye" Type="bit" />
+    <Property Name="EmniyetGuvenlik" Type="bit" />
+    <Property Name="Diger" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="password_resets">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="token" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="SQLKeys">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SqlKey" Type="varchar" MaxLength="100" />
+    <Property Name="Color" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="SQLProcedureModules">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SQLProcedureID" Type="int" />
+    <Property Name="ModuleID" Type="int" Nullable="false" />
+    <Property Name="SubModuleID" Type="int" Nullable="false" />
+    <Property Name="FileID" Type="int" />
+    <Property Name="lineNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="SQLProcedures">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="400" />
+    <Property Name="body" Type="text" />
+    <Property Name="formattedBody" Type="text" />
+    <Property Name="mid" Type="int" />
+    <Property Name="isFormatted" Type="bit" />
+    <Property Name="schema_id" Type="int" />
+    <Property Name="sqlText" Type="text" />
+    <Property Name="LineCount" Type="int" />
+    <Property Name="CharCount" Type="int" />
+    <Property Name="IfCount" Type="int" />
+  </EntityType>
+  <EntityType Name="SQLProceduresComments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Details" Type="varchar" MaxLength="4000" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="userID" Type="int" />
+    <Property Name="SQLProceduresID" Type="int" />
+    <Property Name="position" Type="int" />
+  </EntityType>
+  <EntityType Name="SQLProceduresProcedure">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SQLProcedureID" Type="int" />
+    <Property Name="innerSQLProcedureID" Type="int" />
+  </EntityType>
+  <EntityType Name="SubModules">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="ModuleID" Type="int" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <EntityType Name="TasimaSekilleri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="TasimaSekli" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="TasitBilgileri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="varchar" MaxLength="255" />
+    <Property Name="Numarasi" Type="varchar" MaxLength="100" />
+    <Property Name="ReferansNumarasi" Type="varchar" MaxLength="100" />
+    <Property Name="UlkeID" Type="int" />
+    <Property Name="DorseNo1" Type="int" />
+    <Property Name="Uyruk" Type="int" />
+    <Property Name="DorseNo2" Type="int" />
+    <Property Name="Uyruk2" Type="int" />
+    <Property Name="VarisTarihiVeSaati" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Ulkeler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UlkeKodu" Type="varchar" MaxLength="5" />
+    <Property Name="UlkeAdi" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="remember_token" Type="varchar" MaxLength="100" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="isempty" Type="bit" />
+  </EntityType>
+  <Association Name="FK_app_module_operations_app_sub_modules">
+    <End Role="app_sub_modules" Type="Self.app_sub_modules" Multiplicity="1" />
+    <End Role="app_module_operations" Type="Self.app_module_operations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="app_sub_modules">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="app_module_operations">
+        <PropertyRef Name="app_sub_module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_app_module_operations_d_b_tables">
+    <End Role="d_b_tables" Type="Self.d_b_tables" Multiplicity="1" />
+    <End Role="app_module_operations" Type="Self.app_module_operations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_tables">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="app_module_operations">
+        <PropertyRef Name="d_b_tables_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_app_sub_modules_app_base_modules">
+    <End Role="app_base_modules" Type="Self.app_base_modules" Multiplicity="1" />
+    <End Role="app_sub_modules" Type="Self.app_sub_modules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="app_base_modules">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="app_sub_modules">
+        <PropertyRef Name="app_base_module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_column_explanations_d_b_columns">
+    <End Role="d_b_columns" Type="Self.d_b_columns" Multiplicity="1" />
+    <End Role="d_b_column_explanations" Type="Self.d_b_column_explanations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_columns">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_column_explanations">
+        <PropertyRef Name="db_column_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_column_explanations_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="d_b_column_explanations" Type="Self.d_b_column_explanations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_column_explanations">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_column_links_d_b_columns">
+    <End Role="d_b_columns" Type="Self.d_b_columns" Multiplicity="1" />
+    <End Role="d_b_column_links" Type="Self.d_b_column_links" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_columns">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_column_links">
+        <PropertyRef Name="column_from_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_column_lookups_d_b_columns">
+    <End Role="d_b_columns" Type="Self.d_b_columns" Multiplicity="1" />
+    <End Role="d_b_column_lookups" Type="Self.d_b_column_lookups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_columns">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_column_lookups">
+        <PropertyRef Name="column_from_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_columns_d_b_tables">
+    <End Role="d_b_tables" Type="Self.d_b_tables" Multiplicity="1" />
+    <End Role="d_b_columns" Type="Self.d_b_columns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_tables">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_columns">
+        <PropertyRef Name="d_b_tablesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_table_explanation_d_b_tables">
+    <End Role="d_b_tables" Type="Self.d_b_tables" Multiplicity="1" />
+    <End Role="d_b_table_explanation" Type="Self.d_b_table_explanation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_tables">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_table_explanation">
+        <PropertyRef Name="db_table_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_table_explanation_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="d_b_table_explanation" Type="Self.d_b_table_explanation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_table_explanation">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_d_b_tables_d_b_schemas">
+    <End Role="d_b_schemas" Type="Self.d_b_schemas" Multiplicity="1" />
+    <End Role="d_b_tables" Type="Self.d_b_tables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_schemas">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="d_b_tables">
+        <PropertyRef Name="d_b_schemasId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DBObjects_ObjType">
+    <End Role="ObjType" Type="Self.ObjType" Multiplicity="0..1" />
+    <End Role="DBObjects" Type="Self.DBObjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DBObjects">
+        <PropertyRef Name="objType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Modules_Modules">
+    <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
+    <End Role="Modules1" Type="Self.Modules" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Modules">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Modules1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModulesFiles_SubModules">
+    <End Role="SubModules" Type="Self.SubModules" Multiplicity="0..1" />
+    <End Role="ModulesFiles" Type="Self.ModulesFiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubModules">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ModulesFiles">
+        <PropertyRef Name="SubModuleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModulesTables_d_b_tables">
+    <End Role="d_b_tables" Type="Self.d_b_tables" Multiplicity="0..1" />
+    <End Role="ModulesTables" Type="Self.ModulesTables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_b_tables">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ModulesTables">
+        <PropertyRef Name="d_b_tablesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModulesTables_ModulesFiles">
+    <End Role="ModulesFiles" Type="Self.ModulesFiles" Multiplicity="0..1" />
+    <End Role="ModulesTables" Type="Self.ModulesTables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ModulesFiles">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ModulesTables">
+        <PropertyRef Name="fileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SQLProcedureModules_ModulesFiles">
+    <End Role="ModulesFiles" Type="Self.ModulesFiles" Multiplicity="0..1" />
+    <End Role="SQLProcedureModules" Type="Self.SQLProcedureModules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ModulesFiles">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SQLProcedureModules">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SQLProcedureModules_SubModules">
+    <End Role="SubModules" Type="Self.SubModules" Multiplicity="1" />
+    <End Role="SQLProcedureModules" Type="Self.SQLProcedureModules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubModules">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SQLProcedureModules">
+        <PropertyRef Name="SubModuleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubModules_Modules">
+    <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
+    <End Role="SubModules" Type="Self.SubModules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modules">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubModules">
+        <PropertyRef Name="ModuleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubModules_SubModules">
+    <End Role="SubModules" Type="Self.SubModules" Multiplicity="1" />
+    <End Role="SubModules1" Type="Self.SubModules" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SubModules">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubModules1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GumrukDBModelStoreContainer">
+    <EntitySet Name="app_base_modules" EntityType="Self.app_base_modules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="app_module_operations" EntityType="Self.app_module_operations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="app_module_procedures" EntityType="Self.app_module_procedures" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="app_sub_modules" EntityType="Self.app_sub_modules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BeyanTurleri" EntityType="Self.BeyanTurleri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customs_articles" EntityType="Self.customs_articles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customs_circulars" EntityType="Self.customs_circulars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customs_codes" EntityType="Self.customs_codes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_b_column_explanations" EntityType="Self.d_b_column_explanations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_b_column_links" EntityType="Self.d_b_column_links" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_b_column_lookups" EntityType="Self.d_b_column_lookups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_b_column_types" EntityType="Self.d_b_column_types" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_b_columns" EntityType="Self.d_b_columns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_b_schema_procedures" EntityType="Self.d_b_schema_procedures" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_b_schemas" EntityType="Self.d_b_schemas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_b_table_explanation" EntityType="Self.d_b_table_explanation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_b_tables" EntityType="Self.d_b_tables" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DBErrorMessages" EntityType="Self.DBErrorMessages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DBObjects" EntityType="Self.DBObjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ERxml" EntityType="Self.ERxml" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GumrukIdareleri" EntityType="Self.GumrukIdareleri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InnerModule" EntityType="Self.InnerModule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KimlikTurleri" EntityType="Self.KimlikTurleri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Limanlar" EntityType="Self.Limanlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="migrations" EntityType="Self.migrations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ModulesFiles" EntityType="Self.ModulesFiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ModulesTables" EntityType="Self.ModulesTables" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ObjType" EntityType="Self.ObjType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OzelTuzelSahis" EntityType="Self.OzelTuzelSahis" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OzetBeyan" EntityType="Self.OzetBeyan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="password_resets" EntityType="Self.password_resets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SQLKeys" EntityType="Self.SQLKeys" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SQLProcedureModules" EntityType="Self.SQLProcedureModules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SQLProcedures" EntityType="Self.SQLProcedures" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SQLProceduresComments" EntityType="Self.SQLProceduresComments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SQLProceduresProcedure" EntityType="Self.SQLProceduresProcedure" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubModules" EntityType="Self.SubModules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TasimaSekilleri" EntityType="Self.TasimaSekilleri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TasitBilgileri" EntityType="Self.TasitBilgileri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ulkeler" EntityType="Self.Ulkeler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DBObjectsChilds" EntityType="Self.DBObjectsChilds" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DBObjectsChilds].[ID] AS [ID], 
+    [DBObjectsChilds].[ParentID] AS [ParentID], 
+    [DBObjectsChilds].[ChildID] AS [ChildID]
+    FROM [dbo].[DBObjectsChilds] AS [DBObjectsChilds]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_app_module_operations_app_sub_modules" Association="Self.FK_app_module_operations_app_sub_modules">
+      <End Role="app_sub_modules" EntitySet="app_sub_modules" />
+      <End Role="app_module_operations" EntitySet="app_module_operations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_app_module_operations_d_b_tables" Association="Self.FK_app_module_operations_d_b_tables">
+      <End Role="d_b_tables" EntitySet="d_b_tables" />
+      <End Role="app_module_operations" EntitySet="app_module_operations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_app_sub_modules_app_base_modules" Association="Self.FK_app_sub_modules_app_base_modules">
+      <End Role="app_base_modules" EntitySet="app_base_modules" />
+      <End Role="app_sub_modules" EntitySet="app_sub_modules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_column_explanations_d_b_columns" Association="Self.FK_d_b_column_explanations_d_b_columns">
+      <End Role="d_b_columns" EntitySet="d_b_columns" />
+      <End Role="d_b_column_explanations" EntitySet="d_b_column_explanations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_column_explanations_users" Association="Self.FK_d_b_column_explanations_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="d_b_column_explanations" EntitySet="d_b_column_explanations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_column_links_d_b_columns" Association="Self.FK_d_b_column_links_d_b_columns">
+      <End Role="d_b_columns" EntitySet="d_b_columns" />
+      <End Role="d_b_column_links" EntitySet="d_b_column_links" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_column_lookups_d_b_columns" Association="Self.FK_d_b_column_lookups_d_b_columns">
+      <End Role="d_b_columns" EntitySet="d_b_columns" />
+      <End Role="d_b_column_lookups" EntitySet="d_b_column_lookups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_columns_d_b_tables" Association="Self.FK_d_b_columns_d_b_tables">
+      <End Role="d_b_tables" EntitySet="d_b_tables" />
+      <End Role="d_b_columns" EntitySet="d_b_columns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_table_explanation_d_b_tables" Association="Self.FK_d_b_table_explanation_d_b_tables">
+      <End Role="d_b_tables" EntitySet="d_b_tables" />
+      <End Role="d_b_table_explanation" EntitySet="d_b_table_explanation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_table_explanation_users" Association="Self.FK_d_b_table_explanation_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="d_b_table_explanation" EntitySet="d_b_table_explanation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_d_b_tables_d_b_schemas" Association="Self.FK_d_b_tables_d_b_schemas">
+      <End Role="d_b_schemas" EntitySet="d_b_schemas" />
+      <End Role="d_b_tables" EntitySet="d_b_tables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DBObjects_ObjType" Association="Self.FK_DBObjects_ObjType">
+      <End Role="ObjType" EntitySet="ObjType" />
+      <End Role="DBObjects" EntitySet="DBObjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Modules_Modules" Association="Self.FK_Modules_Modules">
+      <End Role="Modules" EntitySet="Modules" />
+      <End Role="Modules1" EntitySet="Modules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModulesFiles_SubModules" Association="Self.FK_ModulesFiles_SubModules">
+      <End Role="SubModules" EntitySet="SubModules" />
+      <End Role="ModulesFiles" EntitySet="ModulesFiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModulesTables_d_b_tables" Association="Self.FK_ModulesTables_d_b_tables">
+      <End Role="d_b_tables" EntitySet="d_b_tables" />
+      <End Role="ModulesTables" EntitySet="ModulesTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModulesTables_ModulesFiles" Association="Self.FK_ModulesTables_ModulesFiles">
+      <End Role="ModulesFiles" EntitySet="ModulesFiles" />
+      <End Role="ModulesTables" EntitySet="ModulesTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SQLProcedureModules_ModulesFiles" Association="Self.FK_SQLProcedureModules_ModulesFiles">
+      <End Role="ModulesFiles" EntitySet="ModulesFiles" />
+      <End Role="SQLProcedureModules" EntitySet="SQLProcedureModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SQLProcedureModules_SubModules" Association="Self.FK_SQLProcedureModules_SubModules">
+      <End Role="SubModules" EntitySet="SubModules" />
+      <End Role="SQLProcedureModules" EntitySet="SQLProcedureModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubModules_Modules" Association="Self.FK_SubModules_Modules">
+      <End Role="Modules" EntitySet="Modules" />
+      <End Role="SubModules" EntitySet="SubModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubModules_SubModules" Association="Self.FK_SubModules_SubModules">
+      <End Role="SubModules" EntitySet="SubModules" />
+      <End Role="SubModules1" EntitySet="SubModules" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

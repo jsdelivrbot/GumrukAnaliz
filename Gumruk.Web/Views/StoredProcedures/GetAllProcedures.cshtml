@@ -1,0 +1,674 @@
+﻿@model List<Gumruk.Entity.SQLProcedures>
+@using Gumruk.Web.Models
+@*<link href="~/Content/w3.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+<script src="~/Scripts/dragscroll.js"></script>
+<div class="container-fluid" style="padding-top:20px;">
+    <div class="row">
+        <div class="col-lg-2 col-md-4 col-sm4 col-xs-4">
+            @Html.Dropdown4S("schemas", "", "false", "false", "", 12, "Home/GetSchemaNames?getTableCount=false", "id", "value")
+        </div>
+        <div id="divLetters" class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="padding:0px;;margin:0px;border-bottom:1px solid #fff;padding-bottom:3px;">
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group">
+                    <a href="javascript:void(0)" id="all" class="btn btn-default  btn-md" onclick="GetList('all')">All</a>
+                    <a href="javascript:void(0)" id="a" class="btn btn-default  btn-md" onclick="GetList('a')">A</a>
+                    <a href="javascript:void(0)" id="b" class="btn btn-default  btn-md" onclick="GetList('b')">B</a>
+                    <a href="javascript:void(0)" id="c" class="btn btn-default  btn-md" onclick="GetList('c')">C</a>
+                    <a href="javascript:void(0)" id="d" class="btn btn-default  btn-md" onclick="GetList('d')">D</a>
+                    <a href="javascript:void(0)" id="e" class="btn btn-default  btn-md" onclick="GetList('e')">E</a>
+                    <a href="javascript:void(0)" id="f" class="btn btn-default  btn-md" onclick="GetList('f')">F</a>
+                    <a href="javascript:void(0)" id="g" class="btn btn-default  btn-md" onclick="GetList('g')">G</a>
+                    <a href="javascript:void(0)" id="h" class="btn btn-default  btn-md" onclick="GetList('h')">H</a>
+                    <a href="javascript:void(0)" id="i" class="btn btn-default  btn-md" onclick="GetList('i')">I</a>
+                    <a href="javascript:void(0)" id="j" class="btn btn-default  btn-md" onclick="GetList('j')">J</a>
+                    <a href="javascript:void(0)" id="k" class="btn btn-default  btn-md" onclick="GetList('k')">K</a>
+                    <a href="javascript:void(0)" id="l" class="btn btn-default  btn-md" onclick="GetList('l')">L</a>
+                    <a href="javascript:void(0)" id="m" class="btn btn-default  btn-md" onclick="GetList('m')">M</a>
+                    <a href="javascript:void(0)" id="n" class="btn btn-default  btn-md" onclick="GetList('n')">N</a>
+                    <a href="javascript:void(0)" id="o" class="btn btn-default  btn-md" onclick="GetList('o')">O</a>
+                    <a href="javascript:void(0)" id="p" class="btn btn-default  btn-md" onclick="GetList('p')">P</a>
+                    <a href="javascript:void(0)" id="r" class="btn btn-default  btn-md" onclick="GetList('r')">R</a>
+                    <a href="javascript:void(0)" id="s" class="btn btn-default  btn-md" onclick="GetList('s')">S</a>
+                    <a href="javascript:void(0)" id="t" class="btn btn-default  btn-md" onclick="GetList('t')">T</a>
+                    <a href="javascript:void(0)" id="u" class="btn btn-default  btn-md" onclick="GetList('u')">U</a>
+                    <a href="javascript:void(0)" id="v" class="btn btn-default  btn-md" onclick="GetList('v')">V</a>
+                    <a href="javascript:void(0)" id="y" class="btn btn-default  btn-md" onclick="GetList('y')">Y</a>
+                    <a href="javascript:void(0)" id="x" class="btn btn-default  btn-md" onclick="GetList('x')">X</a>
+                    <a href="javascript:void(0)" id="w" class="btn btn-default  btn-md" onclick="GetList('w')">W</a>
+                    <a href="javascript:void(0)" id="q" class="btn btn-default  btn-md" onclick="GetList('q')">Q</a>
+                    <a href="javascript:void(0)" id="z" class="btn btn-default  btn-md" onclick="GetList('z')">Z</a>
+                </div>
+            </div>
+            @*<a href="javascript:void(0)" class="btn btn-default  btn-md" onclick="getSelectionText()"><span class="glyphicon glyphicon-search"></span></a>*@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-4 col-sm4 col-xs-4">
+            <div id="procedures" style="height:800px; overflow-y: auto;border-right:1px solid #fff;">
+                @foreach (var item in Model)
+                {
+                    @*<a href="javascript:void(0)" id="link_@item.ID" onclick="getProcedure('@item.ID')" class="btn btn-sm">@item.name</a>
+                        <br />*@<a href="javascript:void(0)" id="link_@item.ID" onclick="getProcedure('@item.ID')" class="btn btn-sm"></a>
+                        <br />
+                    Html.Partial("GetAllProceduresByLetter", Model);
+                }
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-8 col-sm-8 col-xs-8" id="codePage" style="display:none;">
+            <div class="row hidden">
+                <div class="pull-left">
+                    <span id="lblProcedureID" style="color:#0681db;font-weight:bold;font-style:italic;"></span>
+                </div>
+                <div class="pull-right">
+                    <label id="divPosition" class="hidden"></label>
+                </div>
+            </div>
+            <div class="row">
+                <pre id="resultSQL" style="height:800px;overflow-x:auto;overflow-y:auto;" onkeydown="return GirisYapildi(event)" onclick="buttonGiydir()"><img src="~/Content/loading.gif" /> </pre>
+                <input type="hidden" id="hdnID" />
+                <input type="hidden" id="hdnCommentEntry" />
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" id="divFlowChart" style="display:none;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display:block;">
+                <div class="panel panel-primary">
+                    <div class="panel-heading info"><a data-toggle="collapse" href="#divFlowChartBody" class="white">Flow Chart</a></div>
+                    <div id="divFlowChartBody" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <img src="" id="imgFlowChart" style="width:100px;height:100px;cursor:pointer;" onclick="openNav(this)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="divProperties" style="display:none;">
+                <div class="panel panel-primary">
+                    <div class="panel-heading info"><a data-toggle="collapse" href="#divPropertiesBody" class="white">Properties</a></div>
+                    <div id="divPropertiesBody" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <button type="button" class="btn btn-default btn-md">&nbsp;&nbsp;if&nbsp;&nbsp;<br><span class="badge" id="IfCount"></span></i></button>
+                            <button type="button" class="btn btn-default btn-md">line<br><span class="badge" id="lineCount">15</span></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="divChildObjects" style="display:none;">
+                <div class="panel panel-primary">
+                    <div class="panel-heading info">
+                        <a data-toggle="collapse" href="#divChildComponentsBody" class="white">Dependencies</a>
+                    </div>
+                    <div id="divChildComponentsBody" class="panel-collapse collapse in overflowY" style="max-height:300px;">
+                        <div class="panel-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panel-collapse collapse" id="divModules" style="display:none;">
+                <div class="panel panel-primary">
+                    <div class="panel-heading info"><a data-toggle="collapse" href="#divModulesBody" class="white">Modules</a></div>
+                    <div id="divModulesBody" class="panel-collapse collapse in">
+                        <div class="panel-body" id="proceduresModules" style="max-height:300px;overflow-y:auto;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="divCommentPanel" style="display:none;">
+                <div class="panel panel-primary">
+                    <div class="panel-heading info"><a data-toggle="collapse" href="#divCommentsBody" class="white">Comments</a></div>
+                    <div id="divCommentsBody" class="panel-collapse collapse in">
+                        <div class="panel-body" id="divComments">
+
+                        </div>
+                        <div class="panel-footer">
+                            @*<a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="$('#divProceduresComment').slideToggle();"> <span class="glyphicon glyphicon-plus"></span> Add</a>*@
+                            <textarea id="proceduresText" style="height:40px;background-color:#fff;" class="form-control col-lg-12"></textarea>
+                            <a href="javascript:void(0)" class="btn btn-warning btn-sm" onclick="CommentAdd()">Kaydet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="myModal" class="modal fade in" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header panel-heading panel-primary">
+                    <div class="panel-heading info">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h5 class="modal-title" style="color:#fff;">Procedures Search</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="searchResult">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <input type="hidden" id="zoomCount" />
+
+    <div class="container-fluid overflowX overflowY dragscroll" style="margin: 0 auto;position:fixed;top:0px;width:100%;height:100%;display:none;left:0px;background-color:rgba(0,0,0,0.8);cursor: grab; cursor : -o-grab; cursor : -moz-grab; cursor : -webkit-grab;" id="myNav">
+        <div class="row">
+            <div class="col-lg-12" style="position:fixed;padding:0px;">
+                <div class="pull-left">
+                    <span class="btn  btn-md btn-primary" onclick="zoomin()"><span class="fa fa-plus-circle"></span></span>
+                    <span class="btn  btn-md btn-primary" onclick="zoomout()"><span class="fa fa-minus-circle"></span></span>
+                </div>
+                <div class="pull-right">
+                    <span class="btn  btn-md btn-danger" onclick="closeNav()"><span class="fa fa-close"></span></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="imgDiv">
+                <img src="" id="img01" style="margin-left:auto;margin-right:auto;display:block;"/>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<input type="hidden" id="hdnPosition" />
+<input type="hidden" id="hdnLetter" />
+<input type="hidden" id="tabsSelected" />
+<style>
+    .red {
+        color: #ff0000;
+    }
+</style>
+<script>
+    function zoomImg() {
+        $('#imgFlowChart').zoomify(); // 1s duration
+    }
+    function zoomin() {
+        var zoomin = $("#zoomCount").val();
+        zoomin = parseFloat(zoomin) + 0.1;
+        console.log(zoomin);
+        $("#imgDiv").animate({ 'zoom': zoomin }, 400);
+        $("#zoomCount").val(zoomin);
+    }
+
+    function zoomout() {
+        var zoomin = $("#zoomCount").val();
+        zoomin = parseFloat(zoomin) - 0.1;
+        console.log(zoomin);
+        $("#imgDiv").animate({ 'zoom': zoomin }, 400);
+        $("#zoomCount").val(zoomin);
+    }
+    function openNav(element) {
+        document.getElementById("img01").src = element.src;
+        $("#myNav").fadeIn();
+    }
+
+    function closeNav() {
+        $("#myNav").fadeOut();
+    }
+
+    function buttonGiydir() {
+        var ID = $('#hdnID').val();
+        changeButtonCSS(ID);
+    }
+    $(function () {
+        $("#resultSQL").bind('mouseup', function (e) {
+
+            if (window.getSelection) {
+                selectedtext = window.getSelection().toString();
+            }
+            else if (document.selection && document.selection.type != "Control") {
+                selectedtext = document.selection.createRange().text;
+            }
+
+            if (selectedtext != "") {
+                $.ajax({
+                    url: 'SearchProcedures',
+                    type: "POST",
+                    cache: false,
+                    async: false,
+                    data: { searchText: selectedtext, fromLayout: false },
+                    success: function (text, data) {
+                        $("#searchResult").html(text);
+
+                        if (text != null)
+                            $("#myModal").modal();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            }
+        });
+    });
+
+    function GirisYapildi(e) {
+        return false;
+    }
+
+    function updateProcedure() {
+        var ID = $('#hdnID').val();
+        var htmlFormat = $("#resultSQL").html();
+        var comm = $("#hdnCommentEntry").val();
+
+        $.ajax({
+            url: 'ProceduresUpdate',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { ID: ID, bodyFormatted: htmlFormat, comment: comm },
+            success: function (text, data) {
+                $("#hdnCommentEntry").val("");
+                $("#resultSQL").html(text["formattedBody"]);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+    $('pre').each(function () {
+        this.contentEditable = true;
+        this.spellcheck = false;
+    });
+
+    function CommentAdd() {
+        var ID = $('#hdnID').val();
+        var cmmnt = $("#proceduresText").val();
+        var position = $("#hdnPosition").val();
+        var sqlText = $("#resultSQL").text();
+
+        $.ajax({
+            url: 'ProceduresAddComment',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { comment: cmmnt, procedureID: ID, position: position, sqlText: sqlText },
+            success: function (text, data) {
+                $("#divComments").html(text);
+                $("#proceduresText").val("");
+
+                getProcedure(ID);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+
+
+    }
+
+    function getSelectionText() {
+        var text = "";
+        if (window.getSelection) {
+            selectedtext = window.getSelection().toString();
+        }
+        else if (document.selection && document.selection.type != "Control") {
+            selectedtext = document.selection.createRange().text;
+        }
+
+        $.ajax({
+            url: 'SearchProcedures',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { searchText: selectedtext },
+            success: function (text, data) {
+                $("#searchResult").html(text);
+                $("#myModal").modal();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+    function GetList(letter) {
+        $("#divCommentPanel").fadeOut();
+        $("#divProperties").fadeOut();
+        $("#divFlowChart").fadeOut();
+        $("#hdnLetter").val(letter);
+        $("#codePage").fadeOut();
+        $("#divModules").fadeOut();
+        $("#divChildObjects").fadeOut();
+        $("#divLetters a").removeClass("btn-primary");
+        $("#divLetters a").addClass("btn-default");
+
+        var lett = "#" + letter;
+        $(lett).removeClass("btn-default");
+        $(lett).addClass("btn-primary");
+
+        $.ajax({
+            url: 'GetAllProceduresByLetter',
+            type: "POST",
+            cache: false,
+            async: true,
+            data: { letter: letter, schemaID: $("#schemas").val() },
+            success: function (text, data) {
+                $("#procedures").html(text);
+
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+    function changeButtonCSS(ID) {
+        var linkname = "#link_" + ID;
+
+        $("#procedures a").removeClass("btn-sm btn-primary");
+        $(linkname).addClass("btn-sm btn-primary");
+    }
+    function getProcedure(ID) {
+        $('#hdnID').val(ID);
+        $("#divCommentPanel").fadeIn();
+        $("#divModules").fadeIn();
+        $("#codePage").fadeIn();
+        $("#divProperties").fadeIn();
+        $("#divFlowChart").fadeIn();
+        $("#divChildObjects").fadeIn();
+        var TXT = $("#resultSQL").text();
+        sqlText = TXT;
+
+        console.log(ID);
+
+        //commentler çekiliyor ilgili div'e basılıyor.
+        $.ajax({
+            url: 'GetProceduresCommentsByID',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { procedureID: ID },
+            success: function (text, data) {
+                $("#divComments").html(text);
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+
+        var name = "#link_" + ID;
+        var procName = $(name).text();
+        $.ajax({
+            url: 'GetProceduresChildsByID',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { procedureName: procName },
+            success: function (text, data) {
+                $("#divChildComponentsBody").html(text);
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+
+        //$.ajax({
+        //    url: 'GetSQLProcedureModules',
+        //    type: "POST",
+        //    cache: false,
+        //    async: false,
+        //    data: { procedureID: ID },
+        //    success: function (text, data) {
+        //        $("#divComments").html(text);
+
+        //    },
+        //    error: function (jqXhr, textStatus, errorThrown) {
+        //        alert("bir hata oluştu");
+        //    }
+        //});
+
+        //seçilen Procedure getiriliyor. ID'sine göre.
+        $.ajax({
+            url: 'GetProcedureByID',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { id: ID, TXT: "" },
+            success: function (text, data) {
+                console.log(text["isFormatted"]);
+
+                var path = text["name"];
+                var sqlName = path.split('.');
+
+                path = "../SqlProcedurePNG/" + sqlName[0] + ".png";
+                $('#imgFlowChart').attr("src", path);
+                $("#h2Header").text(sqlName[0]);
+
+                if (text["isFormatted"] == true) {
+                    var strName = text["name"];
+                    $('#resultSQL').html(text["formattedBody"]);
+                    $("#lblProcedureID").html(strName.toUpperCase());
+
+                    $("#codePage").fadeIn();
+                    $("#divModules").fadeIn();
+                    $("#IfCount").html(text["IfCount"]);
+
+                }
+                //if (text["sqlText"] == null) {
+                //    $.ajax({
+                //        url: 'UpdateSQLText',
+                //        type: "POST",
+                //        cache: false,
+                //        async: false,
+                //        data: { ID: ID, sqlText: $('#resultSQL').text() },
+                //        success: function (text, data) {
+                //        },
+                //        error: function (jqXhr, textStatus, errorThrown) {
+                //            alert("bir hata oluştu");
+                //        }
+                //    });
+                //}
+
+                //line count ekleniyor.
+                $("#lineCount").html(text["LineCount"]);
+                $("#IfCount").html(text["IfCount"]);
+                //procedure'nin geçtiği moduller listeleniyor.
+                LoadModules(text["ID"]);
+
+                //body'si formatlandırılan kayıt için tekrar formatlama işlemi yapılmıyor.
+                if (text["isFormatted"] == true)
+                    return false;
+
+                //body'si formatlanmamış olan kayıt formatlama api'sine gönderilip formatlı hali ile alınıyor.
+                $.ajax({
+                    url: 'http://sqlformat.org/api/v1/format',
+                    type: 'POST',
+                    dataType: 'json',
+                    crossDomain: true,
+                    data: { sql: text["body"], reindent: 1 },
+                    success: onSuccess,
+                    error: function myfunction() {
+                        $('#resultSQL').html(text["Body"]);
+                    }
+                });
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function LoadModules(ID) {
+
+        $.ajax({
+            url: 'GetSQLProcedureModules',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { procedureID: ID },
+            success: function (text, data) {
+                $("#proceduresModules").html(text);
+                $("#divModules").fadeIn();
+                changeButtonCSS(ID);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    //fotmatlama api'si başarılı bir şekilde cevap dönmüş ise bu method çalışır.
+    function onSuccess(data) {
+
+        $.ajax({
+            url: 'SaveFormattedSQL',
+            type: 'POST',
+            dataType: 'json',
+            async: false,
+            data: { ID: $('#hdnID').val(), sql: data["result"], schemaID: $("#schemas :selected").text() },
+            success: function myfunction2(text, data) {
+
+                $('#resultSQL').html(text['formattedBody']);
+                $("#codePage").fadeIn();
+                $("#divModules").fadeIn();
+                var id = $('#hdnID').val();
+
+                var link = "#link_" + id;
+
+            }
+        });
+    }
+
+    function getCaretCharacterOffsetWithin(element) {
+        console.log(element.id);
+        if (element.id == "resultSQL") {
+            var caretOffset = 0;
+            if (typeof window.getSelection != "undefined") {
+                var range = window.getSelection().getRangeAt(0);
+                var preCaretRange = range.cloneRange();
+                preCaretRange.selectNodeContents(element);
+                preCaretRange.setEnd(range.endContainer, range.endOffset);
+                caretOffset = preCaretRange.toString().length;
+            } else if (typeof document.selection != "undefined" && document.selection.type != "Control") {
+                var textRange = document.selection.createRange();
+                var preCaretTextRange = document.body.createTextRange();
+                preCaretTextRange.moveToElementText(element);
+                preCaretTextRange.setEndPoint("EndToEnd", textRange);
+                caretOffset = preCaretTextRange.text.length;
+            }
+
+            return caretOffset;
+        }
+    }
+
+    function showCaretPos() {
+        var el = document.getElementById("resultSQL");
+        var caretPosEl = document.getElementById("divPosition");
+        $("#hdnPosition").val(getCaretCharacterOffsetWithin(el));
+        $("#divPosition").html(getCaretCharacterOffsetWithin(el));
+    }
+
+    document.getElementById("resultSQL").onmouseup = showCaretPos;
+
+    //dropdown change method
+    $("#schemas").change(function () {
+        SchemaDegisti();
+    });
+
+
+
+    function SchemaDegisti() {
+        var letter = $("#hdnLetter").val();
+
+
+        $("#divCommentPanel").fadeOut();
+        $("#divModules").fadeOut();
+        $("#codePage").fadeOut();
+        $("#divProperties").fadeOut();
+        $("#divChildObjects").fadeOut();
+        $("#divFlowChart").fadeOut();
+        $.ajax({
+            url: 'GetAllProceduresByLetter',
+            type: "POST",
+            cache: false,
+            async: true,
+            data: { letter: letter, schemaID: $("#schemas").val() },
+            success: function (text, data) {
+                $("#procedures").html(text);
+                //$('#resultSQL').html("");
+                tabChanger();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function tabChanger() {
+        var selectedtab = $("#tabsSelected").val();
+        if (selectedtab == "sp") {
+            $('.nav-tabs a[href="#sp"]').tab('show');
+        }
+        else {
+            $('.nav-tabs a[href="#func"]').tab('show');
+        }
+    }
+    $(document).ready(function () {
+        
+        $("#zoomCount").val(1);
+        $("#schemas").val(12);
+
+        $.ajax({
+            url: 'GetAllProceduresByLetter',
+            type: "POST",
+            cache: false,
+            async: true,
+            data: { letter: "all", schemaID: $("#schemas").val() },
+            success: function (text, data) {
+                $("#procedures").html(text);
+                //$('#resultSQL').html("");
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+
+        $("#all").removeClass("btn-default");
+        $("#all").addClass("btn-primary");
+    });
+
+</script>
+
+
+<style>
+    .selectedButton {
+        display: block;
+        background-color: #045793;
+        color: #fff;
+        min-width: 200px;
+        min-height: 20px;
+    }
+
+    .overlay {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0, 0.9);
+        overflow-x: hidden;
+        transition: 0.5s;
+    }
+
+    .overlay-content {
+        /*position: relative;*/
+        top: 0px;
+        width: 100%;
+        text-align: center;
+        margin-top: 0px;
+    }
+</style>

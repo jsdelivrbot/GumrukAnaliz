@@ -1,0 +1,5 @@
+D:\4S Projeler\4SOperations\Gumruk.Entity\bin\Release\Gumruk.Entity.dll
+D:\4S Projeler\4SOperations\Gumruk.Entity\bin\Release\Gumruk.Entity.pdb
+D:\4S Projeler\4SOperations\Gumruk.Entity\obj\Release\Gumruk.Entity.dll
+D:\4S Projeler\4SOperations\Gumruk.Entity\obj\Release\Gumruk.Entity.pdb
+D:\4S Projeler\4SOperations\Gumruk.Entity\obj\Release\Gumruk.Entity.csprojResolveAssemblyReference.cache

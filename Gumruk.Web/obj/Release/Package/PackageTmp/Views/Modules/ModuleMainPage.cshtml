@@ -1,0 +1,177 @@
+﻿@model List<Gumruk.Entity.Modules>
+@using Gumruk.Web.Models
+
+<div class="padding15 col-lg-2 col-md-2 col-sm-2 col-xs-4 constantDiv">
+   @Html.Partial("ModulesTabs",Model)
+</div>
+
+<div class="col-lg-7 col-md-6 col-sm-6 col-xs-5" id="modulesFiles">
+
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-4 col-xs-5 padding15" id="SubModuleComponents">
+    <div class="panel panel-primary" id="SP">
+        <div class="panel-heading info"><a data-toggle="collapse" href="#divPropertiesSP" class="white">Stored Procedures</a></div>
+        <div id="divPropertiesSP" class="panel-collapse collapse in">
+            <div class="panel-body " id="divSPs" style="padding:0px;max-height:300px;overflow-y:auto;overflow-x:auto; margin-bottom:10px;">
+
+            </div>
+        </div>
+        <div class="panel panel-footer">
+            <span style="font-size:10px;">Modul içerisindeki SP ve Fonksiyonların listesi.</span>
+        </div>
+    </div>
+
+    <div class="panel panel-primary" id="tables">
+        <div class="panel-heading info"><a data-toggle="collapse" href="#divPropertiesTables" class="white">Tables</a></div>
+        <div id="divPropertiesTables" class="panel-collapse collapse in">
+            <div class="panel-body padding25" id="divTables" style="max-height:300px;overflow-y:auto;margin-bottom:10px;">
+
+            </div>
+        </div>
+        <div class="panel panel-footer">
+            <span style="font-size:10px;">Modul içerisindeki tabloların listesi.</span>
+        </div>
+    </div>
+    <div class="panel panel-primary" id="InnerModules">
+        <div class="panel-heading info"><a data-toggle="collapse" href="#divinnerModules" class="white">Calling Modules</a></div>
+        <div id="divinnerModules" class="panel-collapse collapse in">
+            <div class="panel-body" id="innerMods" style="padding:0px;max-height:300px;overflow-y:auto;margin-bottom:10px;">
+
+            </div>
+        </div>
+        <div class="panel panel-footer">
+            <span style="font-size:10px;">Modul içerisinden çağırılan diğer modüllerin listesi.</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    function GetSubModulesFiles(ID) {
+
+        $.ajax({
+            url: 'Modules/SubModulesFiles',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { subModuleID: ID },
+            success: function (text, data) {
+                $("#modulesFiles").html(text);
+                removeCSSMainModule("linkModuleFile_", ID, "primary");
+                GetSQlProcedures(ID);
+                GetSubModulesTables(ID);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+
+        $.ajax({
+            url: '@Url.Action("GetInnerModulesByModID", "Modules")',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { ID: ID },
+            success: function (text, data) {
+                $("#innerMods").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+        function GetModulesFiles(ID) {
+
+            $.ajax({
+                url: 'Modules/ModulesFiles',
+                type: "POST",
+                cache: false,
+                async: false,
+                data: { ModuleID: ID },
+                success: function (text, data) {
+                    $("#modulesFiles").html(text);
+                    GetSQlProceduresByModuleID(ID);
+                    GetModulesTables(ID);
+                    removeCSSMainModule("linkModule_", ID,"danger");
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("bir hata oluştu");
+                }
+            });
+
+     
+    }
+
+    function GetSQlProcedures(ID) {
+        $.ajax({
+            url: 'Modules/GetSubModulesSPs',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { subModuleID: ID },
+            success: function (text, data) {
+                $("#divSPs").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function GetSQlProceduresByModuleID(ID) {
+        $.ajax({
+            url: 'Modules/GetModulesSPs',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { ModuleID: ID },
+            success: function (text, data) {
+                $("#divSPs").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function GetSubModulesTables(ID) {
+        $.ajax({
+            url: 'Modules/GetSubModulesTables',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { subModuleID: ID },
+            success: function (text, data) {
+                $("#divTables").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function GetModulesTables(ID) {
+        $.ajax({
+            url: 'Modules/GetModulesTables',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { ModuleID: ID },
+            success: function (text, data) {
+                $("#divTables").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+    function removeCSSMainModule(name, ID,color) {
+        var link = "#" + name + ID;
+        var css = "btn-sm btn-" + color;
+        $("#modulesDiv a").removeClass(css);
+        $(link).addClass(css);
+    }
+
+
+</script>

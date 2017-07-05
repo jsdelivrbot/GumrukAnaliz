@@ -1,0 +1,147 @@
+﻿@model Gumruk.Entity.OzelTuzelSahis
+<div class="container-fluid" style="padding:5px;">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            Kimlik Türü
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            @Html.DropDownListFor(model => Model.KimlikTurID, new SelectList(Model.KimlikTurleri, "ID", "KimlikTuru"), new { @class = "form-control" })
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            No
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+            <input type="text" class="form-control" id="txtNo" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            Vergi Dairesi Kodu
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <input type="text" disabled class="form-control" id="txtVergiDairesi" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            Adı Ünvanı
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <input type="text" class="form-control" id="txtAdiUnvani" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            Cadde Sokak No
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <input type="text" class="form-control" id="txtCaddeSokak" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            İl/İlçe
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <input type="text" class="form-control" id="txtIlIlce" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            Posta Kodu
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <input type="text" class="form-control" id="txtPostaKodu" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            ülke Kodu
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            @Html.DropDownListFor(model => Model.UlkeID, new SelectList((IEnumerable<Gumruk.Entity.Ulkeler>)ViewData["Ulkeler"], "ID", "UlkeTamAdi"), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            Telefon
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <input type="text" id="txtTelefon" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            Fax
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <input type="text" id="txtFax" class="form-control" />
+        </div>
+    </div>
+</div>
+<div class="row" id="message" style="display:none;">
+    <div class="alert alert-success col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        Kayıt Yapıldı.
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="SahisKaydet()">Kaydet</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+</div>
+
+<script>
+    function SahisKaydet() {
+
+        var model = {
+
+            ID: 0, UlkeID: $('#UlkeID').val(),
+            KimlikTurID: $('#KimlikTurID').val(),
+            KimlikNo: $('#txtNo').val(),
+            VergiDairesiKodu: $('#txtVergiDairesi').val(),
+            AdiUnvani: $('#txtAdiUnvani').val(),
+            CaddeSokak: $('#txtCaddeSokak').val(),
+            İlIlce: $('#txtIlIlce').val(),
+            PostaKodu: $('#txtPostaKodu').val(),
+            UlkeID: $('#UlkeID').val(),
+            Telefon: $('#txtTelefon').val(),
+            Faks: $('#txtFax').val(),
+        }
+
+        $.ajax({
+            url: 'SahisKaydet',
+            type: "POST",
+            cache: false,
+            data: JSON.stringify(model),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data) {
+                    console.log(data);
+                    $("#message").css("display", "block");
+                    var type = $("#hdnFirmaType").val();
+
+                    if (type == "BeyanSahibi") {
+                        $("#txtBeyanSahibi").val(data.AdiUnvani);
+                        $("#txtVergiNo").val(data.KimlikNo);
+                        $("#hdnBeyanSahibi").val(data.ID);
+                    }
+                    else if (type == "TasiyiciFirma") {
+                        $("#txtTasiyiciFirma").val(data.AdiUnvani);
+                        $("#txtVergiNoTasiyiciFirma").val(data.KimlikNo);
+                        $("#hdnTasiyiciFirma").val(data.ID);
+                    }
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+
+            }
+        });
+
+    }
+</script>

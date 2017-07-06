@@ -1,7 +1,125 @@
 ﻿
 <script src="~/Scripts/go.js"></script>
 <script src="~/Scripts/goSamples.js"></script>
+
+<div class="row" style="margin:10px;">
+    @*<div class="col-xs-1">
+            <a href="javascript:void(0)" onclick="init()" class="btn btn-primary">Create</a>
+        </div>*@
+    <div class="col-xs-2">
+        <input type="file" id="FileUpload1" class="btn btn-primary" />
+    </div>
+    <div class="col-xs-1">
+        <input type="button" id="btnUpload" value="Upload Files" class="btn btn-primary" />
+    </div>
+</div>
+<div class="row" style="margin:10px;">
+    <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; height: 800px"></div>
+</div>
 <script id="code">
+    $(document).ready(function () {
+        $('#btnUpload').click(function () {
+            init();
+            // Checking whether FormData is available in browser
+
+        });
+    });
+
+    function GetNodeData() {
+
+        //if (window.FormData !== undefined) {
+
+        var fileUpload = $("#FileUpload1").get(0);
+        var files = fileUpload.files;
+
+        // Create FormData object
+        var fileData = new FormData();
+
+        // Looping over all files and add it to FormData object
+        for (var i = 0; i < files.length; i++) {
+            fileData.append(files[i].name, files[i]);
+        }
+
+        // Adding one more key to FormData object
+        //fileData.append('username', ‘Manas’);
+
+        $.ajax({
+            url: '@Url.Action("UploadFiles", "Entity")',
+            type: "POST",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+            success: function (text) {
+
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+        //} else {
+        //    alert("FormData is not supported.");
+        //}
+
+       @*$.ajax({
+           url: '@Url.Action("GetNodeData", "Entity")',
+           type: "POST",
+           cache: false,
+           async: false,
+           success: function (text) {
+               returnValue = text;
+               //var path = text["name"];
+               //var sqlName = path.split('.');
+
+               //path = "../SqlProcedurePNG/" + sqlName[0] + ".png";
+               //$('#imgFlowChart').attr("src", path);
+               //$("#h2Header").text(sqlName[0]);
+
+               //if (text["isFormatted"] == true) {
+               //    var strName = text["name"];
+               //    $('#resultSQL').html(text["formattedBody"]);
+               //    $("#lblProcedureID").html(strName.toUpperCase());
+
+               //    $("#codePage").fadeIn();
+               //    $("#divModules").fadeIn();
+               //    $("#IfCount").html(text["IfCount"]);
+
+               //}
+           }
+       });*@
+    }
+
+    function getSessionNodeData() {
+        var returnValue;
+
+        $.ajax({
+            url: '@Url.Action("GetSessionNodeData", "Entity")',
+            type: "POST",
+            cache: false,
+            async: false,
+            success: function (text) {
+                returnValue = text;
+                //var path = text["name"];
+                //var sqlName = path.split('.');
+
+                //path = "../SqlProcedurePNG/" + sqlName[0] + ".png";
+                //$('#imgFlowChart').attr("src", path);
+                //$("#h2Header").text(sqlName[0]);
+
+                //if (text["isFormatted"] == true) {
+                //    var strName = text["name"];
+                //    $('#resultSQL').html(text["formattedBody"]);
+                //    $("#lblProcedureID").html(strName.toUpperCase());
+
+                //    $("#codePage").fadeIn();
+                //    $("#divModules").fadeIn();
+                //    $("#IfCount").html(text["IfCount"]);
+
+                //}
+            }
+        });
+
+        return returnValue;
+    }
     function init() {
         var $ = go.GraphObject.make;  // for conciseness in defining templates -->
 
@@ -120,64 +238,62 @@
               new go.Binding("text", "toText"))
           );
 
+        GetNodeData();
+        getObj = getSessionNodeData();
+        
         // create the model for the E-R diagram
-        var nodeDataArray = [
-          {
-              key: "Products",
-              items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
-                       { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
-                       { name: "SupplierID", iskey: false, figure: "Decision", color: "gray" },
-                       { name: "CategoryID", iskey: false, figure: "Decision", color: "gray" }]
-          },
-          {
-              key: "Suppliers",
-              items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
-                       { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
-                       { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
-                       { name: "Danaveli", iskey: false, figure: "Cube1", color: bluegrad },
-                       { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
-          },
-          {
-              key: "Categories",
-              items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
-                       { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
-                       { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
-                       { name: "Picture", iskey: false, figure: "TriangleUp", color: bluegrad }]
-          },
-          {
-              key: "DDT",
-              items: [{ name: "DDTID", iskey: true, figure: "Decision", color: yellowgrad },
-                       { name: "DDTName", iskey: false, figure: "Cube1", color: bluegrad },
-                       { name: "Tanımı", iskey: false, figure: "Cube1", color: bluegrad },
-                       { name: "Picture", iskey: false, figure: "TriangleUp", color: bluegrad }]
-          },
-          {
-              key: "Order Details",
-              items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
-                       { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
-                       { name: "UnitPrice", iskey: false, figure: "TriangleUp", color: bluegrad },
-                       { name: "Quantity", iskey: false, figure: "TriangleUp", color: bluegrad },
-                       { name: "Discount", iskey: false, figure: "TriangleUp", color: bluegrad }]
-          },
-        ];
+        //var nodeDataArray = [
+        //  {
+        //      key: "Products",
+        //      items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "SupplierID", iskey: false, figure: "Decision", color: "gray" },
+        //               { name: "CategoryID", iskey: false, figure: "Decision", color: "gray" }]
+        //  },
+        //  {
+        //      key: "Suppliers",
+        //      items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Danaveli", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+        //  },
+        //  {
+        //      key: "Categories",
+        //      items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Picture", iskey: false, figure: "TriangleUp", color: bluegrad }]
+        //  },
+        //  {
+        //      key: "DDT",
+        //      items: [{ name: "DDTID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "DDTName", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Tanımı", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Picture", iskey: false, figure: "TriangleUp", color: bluegrad }]
+        //  },
+        //  {
+        //      key: "Order Details",
+        //      items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "UnitPrice", iskey: false, figure: "TriangleUp", color: bluegrad },
+        //               { name: "Quantity", iskey: false, figure: "TriangleUp", color: bluegrad },
+        //               { name: "Discount", iskey: false, figure: "TriangleUp", color: bluegrad }]
+        //  },
+        //];
+
         var linkDataArray = [
           { from: "Products", to: "Suppliers", text: "0..N", toText: "1" },
           { from: "Products", to: "Suppliers", text: "0..N", toText: "1" },
-          { from: "Products", to: "Categories", text: "0..N", toText: "1" },
-          { from: "Order Details", to: "Products", text: "0..N ProductID", toText: "1" },
-          { from: "DDT", to: "Products", text: "0..N", toText: "1" }
+          //{ from: "Products", to: "Categories", text: "0..N", toText: "1" },
+          //{ from: "Order Details", to: "Products", text: "0..N ProductID", toText: "1" },
+          //{ from: "DDT", to: "Products", text: "0..N", toText: "1" }
         ];
-        myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+        //getObj["NodeLinks"]
+        myDiagram.model = new go.GraphLinksModel(getObj["NodeDatas"], getObj["NodeLinks"]);
     }
-</script>
 
-<a href="javascript:void(0)" onclick="init()">Create</a>
-<div id="sample">
-    <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; width: 1600px; height: 1000px"></div>
-    <p>
-        Sample for representing the relationship between various entities.  Try dragging the nodes -- their links will avoid other nodes, by virtue of the <a>Link.AvoidsNodes</a> property assigned to the
-        custom link template's <a>Link.routing</a>. Also note the use of <a href="../intro/buttons.html" target="_blank">Panel Expander Buttons</a> to allow for expandable/collapsible node data.
-    </p>
-    <p>Buttons are defined in <a href="../extensions/Buttons.js">Buttons.js</a>.</p>
-</div>
+   
+   
+</script>
 

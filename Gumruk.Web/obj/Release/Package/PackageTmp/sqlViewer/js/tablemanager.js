@@ -157,8 +157,8 @@ SQL.TableManager.prototype.clear = function(e) { /* remove all tables */
 SQL.TableManager.prototype.remove = function(e) {
 	var titles = this.selection.slice(0);
 	for (var i=0;i<titles.length;i++) { titles[i] = "'"+titles[i].getTitle()+"'"; }
-	var result = confirm(_("confirmtable")+" "+titles.join(", ")+"?");
-	if (!result) { return; }
+	//var result = confirm(_("confirmtable")+" "+titles.join(", ")+"?");
+	//if (!result) { return; }
 	var sel = this.selection.slice(0);
 	for (var i=0;i<sel.length;i++) { this.owner.removeTable(sel[i]); }
 }

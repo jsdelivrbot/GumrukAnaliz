@@ -96,6 +96,7 @@ namespace Gumruk.Web.Controllers
         {
             EntityNodeData nodeDatas = new EntityNodeData();
             List<NodeData> nodes = new List<NodeData>();
+            List<NodeLink> linkNodes = new List<NodeLink>();
             if (Request.Files.Count > 0)
             {
                 HttpFileCollectionBase files = Request.Files;
@@ -125,7 +126,14 @@ namespace Gumruk.Web.Controllers
                     using (var package = new ExcelPackage(file.InputStream))
                     {
                         var currentSheet = package.Workbook.Worksheets;
-                        var workSheet = currentSheet.First();
+                        string sheetName = Session["sheetName"].ToString();
+
+                        ExcelWorksheet workSheet;
+                        if (sheetName == string.Empty)
+                            workSheet = currentSheet.First();
+                        else
+                            workSheet = currentSheet.Where(p => p.Name == sheetName).FirstOrDefault();
+
                         var noOfCol = workSheet.Dimension.End.Column;
                         var noOfRow = workSheet.Dimension.End.Row;
 
@@ -135,6 +143,8 @@ namespace Gumruk.Web.Controllers
                         string LinkColumn;
                         string LinkType;
                         string pk;
+                        string toColumn;
+                        string datatype;
 
                         List<string> tables = new List<string>();
                         NodeData newNoteData = null;
@@ -142,10 +152,12 @@ namespace Gumruk.Web.Controllers
                         {
                             tableName = (workSheet.Cells[rowIterator, 1].Value == null) ? "" : workSheet.Cells[rowIterator, 1].Value.ToString();
                             columnName = (workSheet.Cells[rowIterator, 2].Value == null) ? "" : workSheet.Cells[rowIterator, 2].Value.ToString();
-                            lookupTable = (workSheet.Cells[rowIterator, 3].Value == null) ? "" : workSheet.Cells[rowIterator, 3].Value.ToString();
-                            LinkColumn = (workSheet.Cells[rowIterator, 4].Value == null) ? "" : workSheet.Cells[rowIterator, 4].Value.ToString();
-                            LinkType = (workSheet.Cells[rowIterator, 5].Value == null) ? "" : workSheet.Cells[rowIterator, 5].Value.ToString();
-                            pk = (workSheet.Cells[rowIterator, 6].Value == null) ? "" : workSheet.Cells[rowIterator, 6].Value.ToString();
+                            datatype = (workSheet.Cells[rowIterator, 3].Value == null) ? "" : " (" +workSheet.Cells[rowIterator, 3].Value.ToString()+ ") ";
+                            lookupTable = (workSheet.Cells[rowIterator, 4].Value == null) ? "" : workSheet.Cells[rowIterator, 4].Value.ToString();
+                            LinkColumn = (workSheet.Cells[rowIterator, 5].Value == null) ? "" : workSheet.Cells[rowIterator, 5].Value.ToString();
+                            toColumn = (workSheet.Cells[rowIterator, 6].Value == null) ? "" : workSheet.Cells[rowIterator, 6].Value.ToString();
+                            LinkType = (workSheet.Cells[rowIterator, 7].Value == null) ? "" : workSheet.Cells[rowIterator, 7].Value.ToString();
+                            pk = (workSheet.Cells[rowIterator, 8].Value == null) ? "" : workSheet.Cells[rowIterator, 8].Value.ToString();
 
                             //veriler excel'den alındı. İlgili tablolara atılması gerekiyor. 
                             if (tableName != string.Empty && !tables.Contains(tableName))
@@ -160,24 +172,36 @@ namespace Gumruk.Web.Controllers
                             if (tableName != string.Empty)
                             {
                                 NodeDataSubitems newNodeDataSubItem;
-                                newNodeDataSubItem = new NodeDataSubitems(columnName, (pk == "true") ? true : false, (pk == "true") ? "Decision" : "Cube1", "bluegrad");
+                                newNodeDataSubItem = new NodeDataSubitems((pk == "true") ? columnName +datatype+ " PK" : columnName+datatype, (pk == "true") ? true : false, (pk == "true") ? "Decision" : "Cylinder1", (pk == "true") ? "yellow" : "white");
                                 newNoteData.items.Add(newNodeDataSubItem);
+                            }
+
+                            if (lookupTable != string.Empty && LinkColumn != string.Empty)
+                            {
+                                string[] tmpType = null;
+                                if (LinkType != string.Empty)
+                                    tmpType = LinkType.Split('-');
+
+                                string toText = "";
+                                string fromText = "";
+                                if (tmpType != null && tmpType.Count() > 0)
+                                {
+                                    toText = tmpType[1];
+                                    fromText = tmpType[0];
+                                }
+
+                                NodeLink linkNode = new NodeLink(tableName, lookupTable, fromText + "    " + columnName, toText + "  " + toColumn);
+                                linkNodes.Add(linkNode);
                             }
                         } // for end
                     }//using end
 
                     nodeDatas.NodeDatas = nodes;
-
+                    nodeDatas.NodeLinks = linkNodes;
                 }//if end
 
-                List<NodeLink> linkNodes = new List<NodeLink>();
-                NodeLink linkNode = new NodeLink("Products", "Suppliers", "0..N SupplierID", "1");
-                linkNodes.Add(linkNode);
 
-                linkNode = new NodeLink("Products", "Categories", "1 CotegoryID", "1");
-                linkNodes.Add(linkNode);
 
-                nodeDatas.NodeLinks = linkNodes;
             }
             Session["UploadedEntity"] = nodeDatas;
 
@@ -190,6 +214,13 @@ namespace Gumruk.Web.Controllers
             EntityNodeData nodeDatas = (EntityNodeData)Session["UploadedEntity"];
 
             return Json(nodeDatas, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SetSheetName(string sheetName)
+        {
+            Session["sheetName"] = sheetName;
+            return Content("");
         }
     }
 }

@@ -1,24 +1,99 @@
-﻿
-<script src="~/Scripts/go.js"></script>
+﻿<script src="~/Scripts/go.js"></script>
 <script src="~/Scripts/goSamples.js"></script>
 
 <div class="row" style="margin:10px;">
     @*<div class="col-xs-1">
             <a href="javascript:void(0)" onclick="init()" class="btn btn-primary">Create</a>
         </div>*@
-    <div class="col-xs-2">
+
+    <div class="col-lg-2  col-md-2  col-xs-12">
         <input type="file" id="FileUpload1" class="btn btn-primary" />
     </div>
-    <div class="col-xs-1">
-        <input type="button" id="btnUpload" value="Upload Files" class="btn btn-primary" />
+    <div class="col-lg-2 col-lg-2 col-xs-12">
+        <input type="button" id="btnUpload" value="Create Diagram" class="btn btn-primary" />
+    </div>
+    <div class="col-lg-2 col-lg-2 col-xs-12">
+        <input type="text" id="txtSheetName" placeholder="Sheet Name" />
+    </div>
+    <div class="col-lg-3 col-lg-3 col-xs-12">
+        Canvas Height: <input type="number" id="txtNewHeight" value="800" />
+        <a href="javascript:void(0)" class="btn btn-primary" onclick="Resize()">Resize Canvas</a>
+    </div>
+    <div class="col-lg-3 col-lg-3 col-xs-12">
+        <a href="~/Files/templateEntity.xlsx" class="btn btn-default">Sample File</a>
+        <a href="javascript:void(0)" data-toggle="modal" data-target="#readMeModal" class="btn btn-default">Read Me</a>
     </div>
 </div>
-<div class="row" style="margin:10px;">
+
+
+<div id="readMeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Entity Relationship Designer</h4>
+            </div>
+            <div class="modal-body" id="moduleModalBody">
+                <p>
+                    Yan tarafta bulunan "Sample File" butonunu kullanarak
+                    örnek dosyayı indiriniz.
+                </p>
+                <p>
+                    Dosyadaki kolonların açıklamaları şu şekildedir.<br />
+
+                    <b>Table :</b>  Tablonun ismidir.<br />
+                    <b>Field :  </b>Kolonun ismidir.<br />
+                    <b>DataType :  </b>Kolonun tipidir(sayısal,karakter,tarih vb...). (burada kullanılan değerler en son sırada yer alan DataType sheet'inde listelenmiştir.)<br />
+                    <b>LookUpTable :</b> İlişkili olduğu tablonun ismi bu alana girilir. Örnekde products tablosu supplier tablosu ile ilişkilidir.<br />
+                    <b>FromColumn : </b>İlişki kurulan kolonun adıdır.(Field kolonu ile aynı olmalıdır.)<br />
+                    <b>ToColumn : </b>İlişki kurulan tablodaki, ilişkili kolondur.(Genelde isimleri aynıdır.Farklı olma durumları düşünülerek konuldu.)<br />
+                    <b>LinkType : </b>İlişki tipidir. One to Many, one to one vb...<br />
+                    <b>PK : </b>Kolonun primary key olup olmadığı bilgisidir.<br />
+                </p>
+
+                <p>
+                    Örnek dosya baz alınarak hazırlamış olduğunuz dosyayı "Dosya Seç" butonu ile sisteme
+                    upload ediniz.
+                </p>
+                <p>
+                    Sheet Name kısmına excel dosyanızdaki çalışma sheet'inin ismini giriniz.(Bu kısım boş bırakılırsa default olarak ilk sheet alınır.)
+                </p>
+                <p>
+                    Upload işlemi sonrası "create diagram" butonu ile diagramı çizdirebilirsiniz.
+                </p>
+
+                <p>
+                    Diagramı çizdirdiğimiz canvas'ın yükseklik boyutu 800 pixeldir. Sığmaması durumunda
+                    800 yazan kutucuğu istenilen boyut girilerek ve  "resize canvas" butonu tıklanarak
+                    canvas boyutu değiştirilebilir.
+                </p>
+
+                <p class="alert"><b>Not:</b> Excel'de değişklik yaparsanız tekrar yüklemeniz gerekmektedir. Sheetler arası çizim yaptırmak için tekrar yüklemek gerekmemektedir.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row" style="margin:10px;" id="diagramDiv">
     <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; height: 800px"></div>
 </div>
 <script id="code">
+    function Resize() {
+        var height = $("#txtNewHeight").val() + "px";
+        console.log(height);
+        $("#myDiagramDiv").css("height", height);
+    }
     $(document).ready(function () {
         $('#btnUpload').click(function () {
+            $("#myDiagramDiv").remove();
+            var height = $("#txtNewHeight").val() + "px";
+
+            $("#diagramDiv").append("<div id='myDiagramDiv' style='background-color: white; border: solid 1px black; height: " + height + "'></div>");
             init();
             // Checking whether FormData is available in browser
 
@@ -28,7 +103,7 @@
     function GetNodeData() {
 
         //if (window.FormData !== undefined) {
-
+        var value;
         var fileUpload = $("#FileUpload1").get(0);
         var files = fileUpload.files;
 
@@ -40,8 +115,21 @@
             fileData.append(files[i].name, files[i]);
         }
 
+        var sheetName = $("#txtSheetName").val();
         // Adding one more key to FormData object
         //fileData.append('username', ‘Manas’);
+
+        $.ajax({
+            url: '@Url.Action("SetSheetName", "Entity")',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { sheetName: sheetName },
+            success: function (text) {
+          
+            }
+        });
+
 
         $.ajax({
             url: '@Url.Action("UploadFiles", "Entity")',
@@ -49,8 +137,10 @@
             contentType: false, // Not to set any content header
             processData: false, // Not to process data
             data: fileData,
+            async: false,
             success: function (text) {
-
+                value = text;
+                return value;
             },
             error: function (err) {
                 alert(err.statusText);
@@ -60,7 +150,7 @@
         //    alert("FormData is not supported.");
         //}
 
-       @*$.ajax({
+        @*$.ajax({
            url: '@Url.Action("GetNodeData", "Entity")',
            type: "POST",
            cache: false,
@@ -86,6 +176,8 @@
                //}
            }
        });*@
+
+        return value;
     }
 
     function getSessionNodeData() {
@@ -121,6 +213,9 @@
         return returnValue;
     }
     function init() {
+
+
+
         var $ = go.GraphObject.make;  // for conciseness in defining templates -->
 
         myDiagram =
@@ -145,11 +240,12 @@
           $(go.Panel, "Horizontal",
             $(go.Shape,
               { desiredSize: new go.Size(10, 10) },
-              new go.Binding("figure", "figure"),
-              new go.Binding("fill", "color")),
+            new go.Binding("figure", "figure"),
+             new go.Binding("fill", "color")
+              ),
             $(go.TextBlock,
               {
-                  stroke: "#333333",
+                  stroke: "#777",
                   font: "12px tahoma"
               },
               new go.Binding("text", "name"))
@@ -164,8 +260,8 @@
                 layoutConditions: go.Part.LayoutStandard & ~go.Part.LayoutNodeSized,
                 fromSpot: go.Spot.AllSides,
                 toSpot: go.Spot.AllSides,
-                isShadowed: true,
-                shadowColor: "#fff"
+                isShadowed: false,
+                shadowColor: "#ccc"
             },
             new go.Binding("location", "location").makeTwoWay(),
             // whenever the PanelExpanderButton changes the visible property of the "LIST" panel,
@@ -173,16 +269,16 @@
             new go.Binding("desiredSize", "visible", function (v) { return new go.Size(NaN, NaN); }).ofObject("LIST"),
             // define the node's outer shape, which will surround the Table
             $(go.Shape, "Rectangle",
-              { fill: lightgrad, stroke: "#756875", strokeWidth: 1 }),
+              { fill: lightgrad, stroke: "#756875", strokeWidth: 0.5 }),
             $(go.Panel, "Table",
-              { margin: 8, stretch: go.GraphObject.Fill },
+              { margin: 12, stretch: go.GraphObject.Fill },
               $(go.RowColumnDefinition, { row: 0, sizing: go.RowColumnDefinition.None }),
               // the table header
               $(go.TextBlock,
                 {
                     row: 0, alignment: go.Spot.Center,
                     margin: new go.Margin(0, 14, 0, 2),  // leave room for Button
-                    font: "12px tahoma"
+                    font: "13px tahoma"
                 },
                 new go.Binding("text", "key")),
               // the collapse/expand button
@@ -193,7 +289,7 @@
                 {
                     name: "LIST",
                     row: 1,
-                    padding: 3,
+                    padding: 15,
                     alignment: go.Spot.TopLeft,
                     defaultAlignment: go.Spot.Left,
                     stretch: go.GraphObject.Horizontal,
@@ -215,7 +311,7 @@
                 curve: go.Link.JumpOver
             },
             $(go.Shape,  // the link shape
-              { stroke: "#303B45", strokeWidth: 2.5 }),
+              { stroke: "#ddd", strokeWidth: 1.5 }),
             $(go.TextBlock,  // the "from" label
               {
                   textAlign: "center",
@@ -238,9 +334,9 @@
               new go.Binding("text", "toText"))
           );
 
-        GetNodeData();
+        getObj = GetNodeData();
         getObj = getSessionNodeData();
-        
+
         // create the model for the E-R diagram
         //var nodeDataArray = [
         //  {
@@ -293,7 +389,6 @@
         myDiagram.model = new go.GraphLinksModel(getObj["NodeDatas"], getObj["NodeLinks"]);
     }
 
-   
-   
-</script>
 
+
+</script>

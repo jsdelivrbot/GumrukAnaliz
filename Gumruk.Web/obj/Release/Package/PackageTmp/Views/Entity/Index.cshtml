@@ -1,0 +1,393 @@
+﻿<script src="~/Scripts/go.js"></script>
+<script src="~/Scripts/goSamples.js"></script>
+
+<div class="row" style="margin:10px;">
+    @*<div class="col-xs-1">
+            <a href="javascript:void(0)" onclick="init()" class="btn btn-primary">Create</a>
+        </div>*@
+
+    <div class="col-lg-2  col-md-2  col-xs-12">
+        <input type="file" id="FileUpload1" class="btn btn-primary" />
+    </div>
+    <div class="col-lg-2 col-lg-2 col-xs-12">
+        <input type="button" id="btnUpload" value="Create Diagram" class="btn btn-primary" />
+    </div>
+    <div class="col-lg-2 col-lg-2 col-xs-12">
+        <input type="text" id="txtSheetName" placeholder="Sheet Name" />
+    </div>
+    <div class="col-lg-3 col-lg-3 col-xs-12">
+        Canvas Height: <input type="number" id="txtNewHeight" value="800" />
+        <a href="javascript:void(0)" class="btn btn-primary" onclick="Resize()">Resize Canvas</a>
+    </div>
+    <div class="col-lg-3 col-lg-3 col-xs-12">
+        <a href="~/Files/templateEntity.xlsx" class="btn btn-default">Sample File</a>
+        <a href="javascript:void(0)" data-toggle="modal" data-target="#readMeModal" class="btn btn-default">Read Me</a>
+    </div>
+</div>
+
+
+<div id="readMeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Entity Relationship Designer</h4>
+            </div>
+            <div class="modal-body" id="moduleModalBody">
+                <p>
+                    Yan tarafta bulunan "Sample File" butonunu kullanarak
+                    örnek dosyayı indiriniz.
+                </p>
+                <p>
+                    Dosyadaki kolonların açıklamaları şu şekildedir.<br />
+
+                    <b>Table :</b>  Tablonun ismidir.<br />
+                    <b>Field :  </b>Kolonun ismidir.<br />
+                    <b>LookUpTable :</b> İlişkili olduğu tablonun ismi bu alana girilir. Örnekde products tablosu supplier tablosu ile ilişkilidir.<br />
+                    <b>FromColumn : </b>İlişki kurulan kolonun adıdır.(Field kolonu ile aynı olmalıdır.)<br />
+                    <b>ToColumn : </b>İlişki kurulan tablodaki, ilişkili kolondur.(Genelde isimleri aynıdır.Farklı olma durumları düşünülerek konuldu.)<br />
+                    <b>LinkType : </b>İlişki tipidir. One to Many, one to one vb...<br />
+                    <b>PK : </b>Kolonun primary key olup olmadığı bilgisidir.<br />
+                </p>
+
+                <p>
+                    Örnek dosya baz alınarak hazırlamış olduğunuz dosyayı "Dosya Seç" butonu ile sisteme
+                    upload ediniz.
+                </p>
+                <p>
+                    Sheet Name kısmına excel dosyanızdaki çalışma sheet'inin ismini giriniz.(Bu kısım boş bırakılırsa default olarak ilk sheet alınır.)
+                </p>
+                <p>
+                    Upload işlemi sonrası "create diagram" butonu ile diagramı çizdirebilirsiniz.
+                </p>
+
+                <p>
+                    Diagramı çizdirdiğimiz canvas'ın yükseklik boyutu 800 pixeldir. Sığmaması durumunda
+                    800 yazan kutucuğu istenilen boyut girilerek ve  "resize canvas" butonu tıklanarak
+                    canvas boyutu değiştirilebilir.
+                </p>
+
+                <p class="alert"><b>Not:</b> Excel'de değişklik yaparsanız tekrar yüklemeniz gerekmektedir. Sheetler arası çizim yaptırmak için tekrar yüklemek gerekmemektedir.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row" style="margin:10px;" id="diagramDiv">
+    <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; height: 800px"></div>
+</div>
+<script id="code">
+    function Resize() {
+        var height = $("#txtNewHeight").val() + "px";
+        console.log(height);
+        $("#myDiagramDiv").css("height", height);
+    }
+    $(document).ready(function () {
+        $('#btnUpload').click(function () {
+            $("#myDiagramDiv").remove();
+            var height = $("#txtNewHeight").val() + "px";
+
+            $("#diagramDiv").append("<div id='myDiagramDiv' style='background-color: white; border: solid 1px black; height: " + height + "'></div>");
+            init();
+            // Checking whether FormData is available in browser
+
+        });
+    });
+
+    function GetNodeData() {
+
+        //if (window.FormData !== undefined) {
+        var value;
+        var fileUpload = $("#FileUpload1").get(0);
+        var files = fileUpload.files;
+
+        // Create FormData object
+        var fileData = new FormData();
+
+        // Looping over all files and add it to FormData object
+        for (var i = 0; i < files.length; i++) {
+            fileData.append(files[i].name, files[i]);
+        }
+
+        var sheetName = $("#txtSheetName").val();
+        // Adding one more key to FormData object
+        //fileData.append('username', ‘Manas’);
+
+        $.ajax({
+            url: '@Url.Action("SetSheetName", "Entity")',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { sheetName: sheetName },
+            success: function (text) {
+          
+            }
+        });
+
+
+        $.ajax({
+            url: '@Url.Action("UploadFiles", "Entity")',
+            type: "POST",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+            async: false,
+            success: function (text) {
+                value = text;
+                return value;
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+        //} else {
+        //    alert("FormData is not supported.");
+        //}
+
+        @*$.ajax({
+           url: '@Url.Action("GetNodeData", "Entity")',
+           type: "POST",
+           cache: false,
+           async: false,
+           success: function (text) {
+               returnValue = text;
+               //var path = text["name"];
+               //var sqlName = path.split('.');
+
+               //path = "../SqlProcedurePNG/" + sqlName[0] + ".png";
+               //$('#imgFlowChart').attr("src", path);
+               //$("#h2Header").text(sqlName[0]);
+
+               //if (text["isFormatted"] == true) {
+               //    var strName = text["name"];
+               //    $('#resultSQL').html(text["formattedBody"]);
+               //    $("#lblProcedureID").html(strName.toUpperCase());
+
+               //    $("#codePage").fadeIn();
+               //    $("#divModules").fadeIn();
+               //    $("#IfCount").html(text["IfCount"]);
+
+               //}
+           }
+       });*@
+
+        return value;
+    }
+
+    function getSessionNodeData() {
+        var returnValue;
+
+        $.ajax({
+            url: '@Url.Action("GetSessionNodeData", "Entity")',
+            type: "POST",
+            cache: false,
+            async: false,
+            success: function (text) {
+                returnValue = text;
+                //var path = text["name"];
+                //var sqlName = path.split('.');
+
+                //path = "../SqlProcedurePNG/" + sqlName[0] + ".png";
+                //$('#imgFlowChart').attr("src", path);
+                //$("#h2Header").text(sqlName[0]);
+
+                //if (text["isFormatted"] == true) {
+                //    var strName = text["name"];
+                //    $('#resultSQL').html(text["formattedBody"]);
+                //    $("#lblProcedureID").html(strName.toUpperCase());
+
+                //    $("#codePage").fadeIn();
+                //    $("#divModules").fadeIn();
+                //    $("#IfCount").html(text["IfCount"]);
+
+                //}
+            }
+        });
+
+        return returnValue;
+    }
+    function init() {
+
+
+
+        var $ = go.GraphObject.make;  // for conciseness in defining templates -->
+
+        myDiagram =
+          $(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
+            {
+                initialContentAlignment: go.Spot.Center,
+                allowDelete: false,
+                allowCopy: false,
+                layout: $(go.ForceDirectedLayout),
+                "undoManager.isEnabled": true
+            });
+
+        // define several shared Brushes
+        var bluegrad = $(go.Brush, "Linear", { 0: "rgb(150, 150, 250)", 0.5: "rgb(150, 150, 150)", 1: "rgb(150, 150, 150)" });
+        var greengrad = $(go.Brush, "Linear", { 0: "rgb(158, 209, 159)", 1: "rgb(67, 101, 56)" });
+        var redgrad = $(go.Brush, "Linear", { 0: "rgb(206, 106, 100)", 1: "rgb(180, 56, 50)" });
+        var yellowgrad = $(go.Brush, "Linear", { 0: "rgb(254, 221, 50)", 1: "rgb(254, 182, 50)" });
+        var lightgrad = $(go.Brush, "Linear", { 1: "#fff", 0: "#fff" });
+
+        // the template for each attribute in a node's array of item data
+        var itemTempl =
+          $(go.Panel, "Horizontal",
+            $(go.Shape,
+              { desiredSize: new go.Size(10, 10) },
+            new go.Binding("figure", "figure"),
+             new go.Binding("fill", "color")
+              ),
+            $(go.TextBlock,
+              {
+                  stroke: "#777",
+                  font: "12px tahoma"
+              },
+              new go.Binding("text", "name"))
+          );
+
+        // define the Node template, representing an entity
+        myDiagram.nodeTemplate =
+          $(go.Node, "Auto",  // the whole node panel
+            {
+                selectionAdorned: true,
+                resizable: true,
+                layoutConditions: go.Part.LayoutStandard & ~go.Part.LayoutNodeSized,
+                fromSpot: go.Spot.AllSides,
+                toSpot: go.Spot.AllSides,
+                isShadowed: false,
+                shadowColor: "#ccc"
+            },
+            new go.Binding("location", "location").makeTwoWay(),
+            // whenever the PanelExpanderButton changes the visible property of the "LIST" panel,
+            // clear out any desiredSize set by the ResizingTool.
+            new go.Binding("desiredSize", "visible", function (v) { return new go.Size(NaN, NaN); }).ofObject("LIST"),
+            // define the node's outer shape, which will surround the Table
+            $(go.Shape, "Rectangle",
+              { fill: lightgrad, stroke: "#756875", strokeWidth: 0.5 }),
+            $(go.Panel, "Table",
+              { margin: 12, stretch: go.GraphObject.Fill },
+              $(go.RowColumnDefinition, { row: 0, sizing: go.RowColumnDefinition.None }),
+              // the table header
+              $(go.TextBlock,
+                {
+                    row: 0, alignment: go.Spot.Center,
+                    margin: new go.Margin(0, 14, 0, 2),  // leave room for Button
+                    font: "13px tahoma"
+                },
+                new go.Binding("text", "key")),
+              // the collapse/expand button
+              $("PanelExpanderButton", "LIST",  // the name of the element whose visibility this button toggles
+                { row: 0, alignment: go.Spot.TopRight }),
+              // the list of Panels, each showing an attribute
+              $(go.Panel, "Vertical",
+                {
+                    name: "LIST",
+                    row: 1,
+                    padding: 15,
+                    alignment: go.Spot.TopLeft,
+                    defaultAlignment: go.Spot.Left,
+                    stretch: go.GraphObject.Horizontal,
+                    itemTemplate: itemTempl
+                },
+                new go.Binding("itemArray", "items"))
+            )  // end Table Panel
+          );  // end Node
+
+        // define the Link template, representing a relationship
+        myDiagram.linkTemplate =
+          $(go.Link,  // the whole link panel
+            {
+                selectionAdorned: true,
+                layerName: "Foreground",
+                reshapable: true,
+                routing: go.Link.AvoidsNodes,
+                corner: 5,
+                curve: go.Link.JumpOver
+            },
+            $(go.Shape,  // the link shape
+              { stroke: "#ddd", strokeWidth: 1.5 }),
+            $(go.TextBlock,  // the "from" label
+              {
+                  textAlign: "center",
+                  font: "12px tahoma",
+                  stroke: "#1967B3",
+                  segmentIndex: 0,
+                  segmentOffset: new go.Point(NaN, NaN),
+                  segmentOrientation: go.Link.OrientUpright
+              },
+              new go.Binding("text", "text")),
+            $(go.TextBlock,  // the "to" label
+              {
+                  textAlign: "center",
+                  font: "12px tahoma",
+                  stroke: "#1967B3",
+                  segmentIndex: -1,
+                  segmentOffset: new go.Point(NaN, NaN),
+                  segmentOrientation: go.Link.OrientUpright
+              },
+              new go.Binding("text", "toText"))
+          );
+
+        getObj = GetNodeData();
+        getObj = getSessionNodeData();
+
+        // create the model for the E-R diagram
+        //var nodeDataArray = [
+        //  {
+        //      key: "Products",
+        //      items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "SupplierID", iskey: false, figure: "Decision", color: "gray" },
+        //               { name: "CategoryID", iskey: false, figure: "Decision", color: "gray" }]
+        //  },
+        //  {
+        //      key: "Suppliers",
+        //      items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Danaveli", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+        //  },
+        //  {
+        //      key: "Categories",
+        //      items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Picture", iskey: false, figure: "TriangleUp", color: bluegrad }]
+        //  },
+        //  {
+        //      key: "DDT",
+        //      items: [{ name: "DDTID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "DDTName", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Tanımı", iskey: false, figure: "Cube1", color: bluegrad },
+        //               { name: "Picture", iskey: false, figure: "TriangleUp", color: bluegrad }]
+        //  },
+        //  {
+        //      key: "Order Details",
+        //      items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        //               { name: "UnitPrice", iskey: false, figure: "TriangleUp", color: bluegrad },
+        //               { name: "Quantity", iskey: false, figure: "TriangleUp", color: bluegrad },
+        //               { name: "Discount", iskey: false, figure: "TriangleUp", color: bluegrad }]
+        //  },
+        //];
+
+        var linkDataArray = [
+          { from: "Products", to: "Suppliers", text: "0..N", toText: "1" },
+          { from: "Products", to: "Suppliers", text: "0..N", toText: "1" },
+          //{ from: "Products", to: "Categories", text: "0..N", toText: "1" },
+          //{ from: "Order Details", to: "Products", text: "0..N ProductID", toText: "1" },
+          //{ from: "DDT", to: "Products", text: "0..N", toText: "1" }
+        ];
+        //getObj["NodeLinks"]
+        myDiagram.model = new go.GraphLinksModel(getObj["NodeDatas"], getObj["NodeLinks"]);
+    }
+
+
+
+</script>

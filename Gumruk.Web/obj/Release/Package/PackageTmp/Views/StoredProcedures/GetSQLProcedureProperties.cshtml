@@ -6,7 +6,6 @@
         <thead>
             <tr>
                 <th>Module Name</th>
-                <th>Sub Module Name</th>
                 <th>File Name</th>
             </tr>
         </thead>
@@ -19,13 +18,12 @@
                     { 
                     <tr id="tr_@item.ID">
                         <td>
-                            @item.ModulesFiles.SubModules.Modules.Name
-                        </td>
-                        <td>
+                            @item.ModulesFiles.SubModules.Modules.Name<br />
                             @item.ModulesFiles.SubModules.Name
                         </td>
                         <td>
-                            @item.ModulesFiles.Name
+                            @item.ModulesFiles.Name<br />
+                            <span style="font-size:10px;font-weight:bold;color:#c2c2c2;">line </span> @item.lineNumber
                         </td>
                     </tr>
                     }

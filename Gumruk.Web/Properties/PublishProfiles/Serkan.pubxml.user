@@ -10,6 +10,633 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATnxUWD/L8UaZ/WlnMze3agAAAAACAAAAAAADZgAAwAAAABAAAACJKrdfUCzXIQi9BUAVah9fAAAAAASAAACgAAAAEAAAAIAlDzi7/LGPiOJ0C5hk23IYAAAAo9UjkLWrR6F+hj77Iy8JDAw/gh17zpQKFAAAAGszTYiWnxLVVNPLXcKwSKUA/gQc</EncryptedPassword>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="assets/css/api.css">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/css/bootstrap.min.css">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/css/highlight.css">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-icons_444444_256x240.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-icons_555555_256x240.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-icons_777620_256x240.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-icons_777777_256x240.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-icons_cc0000_256x240.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-icons_ffffff_256x240.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/css/jquery-ui.min.css">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/css/main.css">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/banner.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/banner2.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/banner3.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/book.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/sample.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/absolute.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/addRemoveColumns.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/adornmentButtons.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/arrowheads.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/BalloonLink.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/barCharts.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/basic.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/beatPaths.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/BPMN.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/candlestickCharts.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/canvases.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/checkboxes.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/classHierarchy.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/cLayout.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/ColumnResizing.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/comments.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/conceptMap.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/contentAlign.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/curvedLinkReshaping.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/curviness.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/customContextMenu.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/customExpandCollapse.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/customTextEditingTool.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/dataFlow.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/dataFlowVertical.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/dataInspector.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/dataVisualization.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/debugInspector.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/decisionTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/Dimensioning.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/distances.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/DOMTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/doubleCircle.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/doubleTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/DragCreating.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/draggableLink.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/draggablePorts.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/dragUnoccupied.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/DragZooming.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/DrawCommandHandler.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/dynamicPieChart.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/dynamicports.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/entityRelationship.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/euler.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/extensions.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/familyTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/familyTreeJP.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/faultTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/fdLayout.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/Fishbone.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/FloorPlanEditor.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/floorPlanMonitor.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/FloorPlanner.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/flowBuilder.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/flowchart.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/flowgrammer.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/FreehandDrawing.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/friendWheel.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/gantt.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/genogram.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/GeometryReshaping.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/gLayout.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/grafcet.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/grouping.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/GuidedDragging.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/hoverButtons.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/htmlDragDrop.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/htmlinteraction.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/htmlLightBoxContextMenu.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/Hyperlink.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/icons.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/incrementalTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/instrumentGauge.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/interactiveForce.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/ivrTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/jQueryDragDrop.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/kanban.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/kittenMonitor.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/ldLayout.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/leaflet.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/learn.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/LinkLabelDragging.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/LinkLabelOnPathDragging.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/LinkShifting.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/linksToLinks.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/LocalStorageCommandHandler.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/localView.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/logicCircuit.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/macros.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/magnifier.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/mindMap.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/minimal.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/multiArrow.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/multiNodePathLinks.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/navigation.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/network.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/NodeLabelDragging.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/NonRealtimeDragging.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/orgChartAssistants.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/orgChartEditor.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/orgChartExtras.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/orgChartStatic.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/orthogonalLinkReshaping.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/pageflow.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/Parallel.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/ParallelRoute.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/parseTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/pathAnimation.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/pert.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/pieCharts.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/pipes.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/pipeTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/planogram.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/PolygonDrawing.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/PolylineLinking.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/PortShifting.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/processFlow.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/productionProcess.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/radial.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/radialPartition.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/realtimeDragSelecting.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/records.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/regrouping.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/regroupingScaled.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/relationships.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/ResizeMultiple.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/robot.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/RotateMultiple.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/roundedGroups.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/ruleredDiagram.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/sankey.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/ScrollingTable.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/scrollModes.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/seatingchart.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/SectorReshaping.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/selectableFields.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/selectablePorts.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/sequenceDiagram.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/sequentialFunction.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/Serpentine.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/shapes.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/sharedStates.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/shopFloorMonitor.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/snapLinkReshaping.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/sparklineGraphs.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/Spiral.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/spreadsheet.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/statechart.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/swimbands.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/swimlanes.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/swimLanesVertical.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/systemDynamics.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/Table.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/tabs.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/taperedLinks.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/TextEditor.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/thermometer.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/tiger.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/timeline.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/tLayout.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/tournament.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/TreeMap.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/treeMapper.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/treeView.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/triStateCheckBoxTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/twoHalves.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/umlClass.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/unlisted.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/updateDemo.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/virtualized.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/virtualizedForceLayout.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/virtualizedTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/visualTree.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/screenshots/visualTreeGrouping.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/site1.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/site2.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/site3.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/site4.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/site5.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/site6.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/site7.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/images/site8.png">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/js/api.js">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/js/bootstrap.min.js">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/js/goDoc.js">
+      <publishTime>06/07/2017 15:22:48</publishTime>
+    </File>
+    <File Include="assets/js/goSamples.js">
+      <publishTime>06/07/2017 13:42:03</publishTime>
+    </File>
+    <File Include="assets/js/highlight.js">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/js/jquery-ui.min.js">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
+    <File Include="assets/js/jquery.min.js">
+      <publishTime>06/30/2017 09:15:36</publishTime>
+    </File>
     <File Include="bin/App_global.asax.compiled">
       <publishTime>12/23/2016 17:12:54</publishTime>
     </File>
@@ -38,10 +665,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2017 10:33:36</publishTime>
     </File>
     <File Include="bin/Gumruk.UnitOfWork.dll">
-      <publishTime>05/03/2017 10:33:38</publishTime>
+      <publishTime>07/07/2017 17:22:10</publishTime>
     </File>
     <File Include="bin/Gumruk.Web.dll">
-      <publishTime>05/03/2017 10:33:38</publishTime>
+      <publishTime>07/10/2017 12:29:04</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>12/16/2016 17:00:07</publishTime>
@@ -125,7 +752,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/24/2017 11:45:06</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>05/02/2017 15:33:20</publishTime>
+      <publishTime>03/05/2017 14:42:42</publishTime>
     </File>
     <File Include="Content/Style.css">
       <publishTime>02/27/2017 17:06:55</publishTime>
@@ -12556,6 +13183,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Files/TasiyiciFirma.json">
       <publishTime>02/22/2017 14:17:35</publishTime>
     </File>
+    <File Include="Files/templateEntity.xlsx">
+      <publishTime>07/07/2017 17:08:32</publishTime>
+    </File>
     <File Include="fonts/font-license.txt">
       <publishTime>11/23/2016 16:46:22</publishTime>
     </File>
@@ -20081,7 +20711,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/26/2017 15:45:58</publishTime>
     </File>
     <File Include="sqlViewer/js/tablemanager.js">
-      <publishTime>01/26/2017 12:43:32</publishTime>
+      <publishTime>06/30/2017 14:32:43</publishTime>
     </File>
     <File Include="sqlViewer/js/toggle.js">
       <publishTime>01/13/2017 14:02:58</publishTime>
@@ -20170,6 +20800,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="sqlViewer/styles/style.css">
       <publishTime>01/26/2017 16:12:54</publishTime>
     </File>
+    <File Include="Views/Entity/Index.cshtml">
+      <publishTime>07/10/2017 11:48:30</publishTime>
+    </File>
     <File Include="Views/ER/Diagrams.cshtml">
       <publishTime>03/27/2017 15:38:07</publishTime>
     </File>
@@ -20180,7 +20813,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/26/2017 12:09:25</publishTime>
     </File>
     <File Include="Views/ER/TablesView.cshtml">
-      <publishTime>05/02/2017 15:30:48</publishTime>
+      <publishTime>05/07/2017 10:02:21</publishTime>
     </File>
     <File Include="Views/ER/View1.cshtml">
       <publishTime>01/23/2017 11:46:31</publishTime>
@@ -20204,7 +20837,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/30/2017 12:30:45</publishTime>
     </File>
     <File Include="Views/GumrukOperations/OzetBeyan.cshtml">
-      <publishTime>02/28/2017 16:59:23</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/GumrukOperations/TasitinUlkesi.cshtml">
       <publishTime>02/07/2017 12:06:25</publishTime>
@@ -20303,13 +20936,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/27/2017 17:08:24</publishTime>
     </File>
     <File Include="Views/Modules/SubModulesFiles.cshtml">
-      <publishTime>05/02/2017 15:22:56</publishTime>
+      <publishTime>03/05/2017 11:47:59</publishTime>
     </File>
     <File Include="Views/Shared/ErrorView.cshtml">
       <publishTime>03/17/2017 11:22:41</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/02/2017 15:33:08</publishTime>
+      <publishTime>07/10/2017 11:11:37</publishTime>
     </File>
     <File Include="Views/StoredProcedures/ColumnsView.cshtml">
       <publishTime>03/27/2017 14:25:32</publishTime>
@@ -20318,13 +20951,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/20/2017 14:39:45</publishTime>
     </File>
     <File Include="Views/StoredProcedures/GetAllProcedures.cshtml">
-      <publishTime>05/02/2017 15:00:46</publishTime>
+      <publishTime>05/18/2017 10:26:32</publishTime>
     </File>
     <File Include="Views/StoredProcedures/GetAllProceduresByLetter.cshtml">
       <publishTime>03/21/2017 14:19:29</publishTime>
     </File>
     <File Include="Views/StoredProcedures/GetSQLProcedureProperties.cshtml">
-      <publishTime>04/28/2017 16:28:53</publishTime>
+      <publishTime>03/05/2017 11:57:43</publishTime>
     </File>
     <File Include="Views/StoredProcedures/ProceduresCommentList.cshtml">
       <publishTime>03/09/2017 10:58:06</publishTime>
@@ -20337,6 +20970,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Test/DragableText.cshtml">
       <publishTime>04/26/2017 12:01:47</publishTime>
+    </File>
+    <File Include="Views/Test/FileUplaod.cshtml">
+      <publishTime>06/07/2017 09:56:50</publishTime>
     </File>
     <File Include="Views/Test/Index.cshtml">
       <publishTime>04/21/2017 11:22:48</publishTime>

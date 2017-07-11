@@ -1,5 +1,6 @@
 ﻿@model ICollection<Gumruk.Entity.d_b_tables>
 
+
 @if (bool.Parse(ViewData["checkBox"].ToString()) == false)
 {<span><strong>table count</strong> @Model.Count</span>}
 
@@ -39,6 +40,11 @@
 
 
 <script>
+    $("#checkAll").change(function () {
+        $("input:checkbox").prop('checked', $(this).prop("checked"));
+    });
+
+
     function plusClicked(ID) {
         var link = "#plus_" + ID;
         var columnsLink = "#tblColumns_" + ID;

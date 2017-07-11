@@ -31,11 +31,13 @@
             url: '@Url.Action("GetModuleFileByID", "Modules")',
             type: "POST",
             cache: false,
-            async: true,
+            async: false,
             data: { ID: ID },
             success: function (text, data) {
                 $("#moduleBody").html(text["formattedBody"]);
                 $(lineCount).text(text["LineCount"]);
+                GetFileTables(ID);
+                GetSQlProceduresByFile(ID);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("bir hata oluştu");
@@ -43,6 +45,40 @@
         });
 
 
+    }
+
+    function GetFileTables(ID) {
+        $.ajax({
+            url: 'Modules/GetFileTables',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { FileID: ID },
+            success: function (text, data) {
+                console.log($("#divTables"));
+
+                $("#divTables").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function GetSQlProceduresByFile(ID) {
+        $.ajax({
+            url: 'Modules/GetSubModulesSPsByFileID',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { FileID: ID },
+            success: function (text, data) {
+                $("#divSPs").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
     }
 
     function removeCSS(name, ID) {

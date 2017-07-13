@@ -190,6 +190,16 @@
             async: false,
             success: function (text) {
                 returnValue = text;
+
+                var nodeData = new Array();
+
+                nodeData=returnValue["NodeDatas"];
+
+                nodeData.forEach(function (entry) {
+                    console.log(entry);
+                });
+
+          
                 //var path = text["name"];
                 //var sqlName = path.split('.');
 
@@ -245,8 +255,8 @@
               ),
             $(go.TextBlock,
               {
-                  stroke: "#777",
-                  font: "12px tahoma"
+                  stroke: "#333",
+                  font: "13px tahoma"
               },
               new go.Binding("text", "name"))
           );
@@ -315,7 +325,7 @@
             $(go.TextBlock,  // the "from" label
               {
                   textAlign: "center",
-                  font: "12px tahoma",
+                  font: "13px tahoma",
                   stroke: "#1967B3",
                   segmentIndex: 0,
                   segmentOffset: new go.Point(NaN, NaN),
@@ -325,7 +335,7 @@
             $(go.TextBlock,  // the "to" label
               {
                   textAlign: "center",
-                  font: "12px tahoma",
+                  font: "13px tahoma",
                   stroke: "#1967B3",
                   segmentIndex: -1,
                   segmentOffset: new go.Point(NaN, NaN),

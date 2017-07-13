@@ -145,19 +145,24 @@ namespace Gumruk.Web.Controllers
                         string pk;
                         string toColumn;
                         string datatype;
+                        string tableExp;
+                        string columnExp;
 
                         List<string> tables = new List<string>();
                         NodeData newNoteData = null;
                         for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                         {
-                            tableName = (workSheet.Cells[rowIterator, 1].Value == null) ? "" : workSheet.Cells[rowIterator, 1].Value.ToString();
-                            columnName = (workSheet.Cells[rowIterator, 2].Value == null) ? "" : workSheet.Cells[rowIterator, 2].Value.ToString();
-                            datatype = (workSheet.Cells[rowIterator, 3].Value == null) ? "" : " (" +workSheet.Cells[rowIterator, 3].Value.ToString()+ ") ";
-                            lookupTable = (workSheet.Cells[rowIterator, 4].Value == null) ? "" : workSheet.Cells[rowIterator, 4].Value.ToString();
-                            LinkColumn = (workSheet.Cells[rowIterator, 5].Value == null) ? "" : workSheet.Cells[rowIterator, 5].Value.ToString();
-                            toColumn = (workSheet.Cells[rowIterator, 6].Value == null) ? "" : workSheet.Cells[rowIterator, 6].Value.ToString();
-                            LinkType = (workSheet.Cells[rowIterator, 7].Value == null) ? "" : workSheet.Cells[rowIterator, 7].Value.ToString();
-                            pk = (workSheet.Cells[rowIterator, 8].Value == null) ? "" : workSheet.Cells[rowIterator, 8].Value.ToString();
+                            tableExp= (workSheet.Cells[rowIterator, 1].Value == null) ? "" : workSheet.Cells[rowIterator, 1].Value.ToString();
+                            tableName = (workSheet.Cells[rowIterator, 2].Value == null) ? "" : workSheet.Cells[rowIterator, 2].Value.ToString();
+                            columnName = (workSheet.Cells[rowIterator, 3].Value == null) ? "" : workSheet.Cells[rowIterator, 3].Value.ToString();
+                            columnExp = (workSheet.Cells[rowIterator, 4].Value == null) ? "" : workSheet.Cells[rowIterator, 4].Value.ToString();
+                            datatype = (workSheet.Cells[rowIterator, 5].Value == null) ? "" : " (" +workSheet.Cells[rowIterator, 5].Value.ToString()+ ") ";
+                            lookupTable = (workSheet.Cells[rowIterator, 6].Value == null) ? "" : workSheet.Cells[rowIterator, 6].Value.ToString();
+                            LinkColumn = (workSheet.Cells[rowIterator, 7].Value == null) ? "" : workSheet.Cells[rowIterator, 7].Value.ToString();
+                            toColumn = (workSheet.Cells[rowIterator, 8].Value == null) ? "" : workSheet.Cells[rowIterator, 8].Value.ToString();
+                            LinkType = (workSheet.Cells[rowIterator, 9].Value == null) ? "" : workSheet.Cells[rowIterator, 9].Value.ToString();
+                            pk = (workSheet.Cells[rowIterator, 10].Value == null) ? "" : workSheet.Cells[rowIterator, 10].Value.ToString();
+                            
 
                             //veriler excel'den alındı. İlgili tablolara atılması gerekiyor. 
                             if (tableName != string.Empty && !tables.Contains(tableName))
@@ -167,6 +172,13 @@ namespace Gumruk.Web.Controllers
                                 newNoteData.items = new List<NodeDataSubitems>();
                                 tables.Add(tableName);
                                 nodes.Add(newNoteData);
+                            }
+
+                            if (tableName != string.Empty && tableExp != string.Empty)
+                            {
+                                NodeDataSubitems newNodeDataSubItem;
+                                newNodeDataSubItem = new NodeDataSubitems(tableExp, false, "Cube2", "Gray");
+                                newNoteData.items.Add(newNodeDataSubItem);
                             }
 
                             if (tableName != string.Empty)
@@ -190,7 +202,7 @@ namespace Gumruk.Web.Controllers
                                     fromText = tmpType[0];
                                 }
 
-                                NodeLink linkNode = new NodeLink(tableName, lookupTable, fromText + "    " + columnName, toText + "  " + toColumn);
+                                NodeLink linkNode = new NodeLink(tableName, lookupTable, fromText + "    " + columnName, toColumn  + "  " + toText);
                                 linkNodes.Add(linkNode);
                             }
                         } // for end

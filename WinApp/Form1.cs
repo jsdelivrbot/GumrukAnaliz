@@ -885,7 +885,19 @@ namespace WinApp
 
         private void button19_Click(object sender, EventArgs e)
         {
+            IGumruk igumruk = new BSGumruk();
+            string  file= File.ReadAllText("D:\\degisentables.txt");
 
+           string[] lines  =file.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+
+            List<d_b_columns> columns;
+            foreach (var line in lines)
+            {
+                string[] col = line.Split(',');
+
+                columns = igumruk.GetColumnByName(col[2]);
+
+            }
         }
 
         private void button20_Click(object sender, EventArgs e)

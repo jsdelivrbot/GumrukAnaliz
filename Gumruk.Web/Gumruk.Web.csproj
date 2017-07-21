@@ -347,6 +347,8 @@
     <Content Include="Scripts\dragscroll.js" />
     <Content Include="Scripts\go-1.7.15-debug.js" />
     <Content Include="Scripts\go-1.7.15.js" />
+    <Content Include="Scripts\go.js" />
+    <Content Include="Scripts\goSamples.js" />
     <Content Include="Scripts\html2canvas.js" />
     <Content Include="Scripts\JavaScript.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -378,6 +380,7 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Files\templateEntity.xlsx" />
+    <Content Include="Files\templateForScript.xlsx" />
     <None Include="Scripts\_references.js" />
     <Content Include="sqlViewer\backend\asp-file\Default.aspx" />
     <Content Include="sqlViewer\backend\cf-mysql\database.sql" />
@@ -644,6 +647,7 @@
     <Content Include="Views\Modules\ModulesTabs.cshtml" />
     <Content Include="Views\Entity\Index.cshtml" />
     <Content Include="Views\Test\FileUplaod.cshtml" />
+    <Content Include="Views\Entity\CreateSQLScript.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

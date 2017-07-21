@@ -229,6 +229,15 @@ namespace Gumruk.UnitOfWork
             return dbColumns;
         }
 
+        public List<d_b_columns> GetColumnByName(string Name)
+        {
+            IRepositoryBase<d_b_columns> _rep = new RepositoryBase<d_b_columns>();
+
+            List<d_b_columns> dbColumns = _rep.GetList(x => x.name == Name);
+
+            return dbColumns;
+        }
+
         public d_b_tables GetTableById(int tableID)
         {
             IRepositoryBase<d_b_tables> _rep = new RepositoryBase<d_b_tables>();

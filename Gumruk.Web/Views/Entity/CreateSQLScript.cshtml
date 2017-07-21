@@ -1,0 +1,78 @@
+﻿
+<div class="row" style="margin:10px;">
+    @*<div class="col-xs-1">
+            <a href="javascript:void(0)" onclick="init()" class="btn btn-primary">Create</a>
+        </div>*@
+
+    <div class="col-lg-2  col-md-3  col-xs-12">
+        <input type="file" id="FileUpload1" class="btn btn-primary" />
+    </div>
+    <div class="col-lg-3 col-md-2 col-xs-12">
+        <input type="button" id="btnUpload" value="Create Script " class="btn btn-primary" />
+    </div>
+    <div class="col-lg-2 col-md-2 col-xs-12">
+        <input type="text" id="txtSheetName" placeholder="Sheet Name" />
+    </div>
+    <div class="col-lg-3 col-lg-3 col-xs-12">
+        <a href="~/Files/templateForScript.xlsx" class="btn btn-default">Sample File</a>
+        @*<a href="javascript:void(0)" data-toggle="modal" data-target="#readMeModal" class="btn btn-default">Read Me</a>*@
+    </div>
+</div>
+<div class="row" style="margin:10px;">
+    <textarea id="txtSQLScript" class="col-xs-12" style="border:2px solid #0094ff;height:800px;" >
+
+    </textarea>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#btnUpload').click(function () {
+            createScript();
+        });
+    });
+
+    function createScript() {
+
+        //if (window.FormData !== undefined) {
+        var fileUpload = $("#FileUpload1").get(0);
+        var files = fileUpload.files;
+
+        // Create FormData object
+        var fileData = new FormData();
+
+        // Looping over all files and add it to FormData object
+        for (var i = 0; i < files.length; i++) {
+            fileData.append(files[i].name, files[i]);
+        }
+
+        var sheetName = $("#txtSheetName").val();
+        // Adding one more key to FormData object
+        //fileData.append('username', ‘Manas’);
+
+        $.ajax({
+            url: '@Url.Action("SetSheetName", "Entity")',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { sheetName: sheetName },
+            success: function (text) {
+
+            }
+        });
+
+        $.ajax({
+            url: '@Url.Action("UploadFilesForScript", "Entity")',
+            type: "POST",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+            async: false,
+            success: function (text) {
+                $("#txtSQLScript").val(text);
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
+</script>

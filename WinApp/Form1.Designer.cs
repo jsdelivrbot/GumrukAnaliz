@@ -178,7 +178,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(8, 657);
+            this.textBox1.Location = new System.Drawing.Point(11, 761);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(259, 20);
             this.textBox1.TabIndex = 11;
@@ -211,7 +211,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 680);
+            this.label1.Location = new System.Drawing.Point(11, 784);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 25);
             this.label1.TabIndex = 15;
@@ -269,7 +269,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(8, 629);
+            this.label2.Location = new System.Drawing.Point(11, 733);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 25);
             this.label2.TabIndex = 20;
@@ -301,34 +301,38 @@
             // 
             // button19
             // 
+            this.button19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.button19.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.button19.Location = new System.Drawing.Point(13, 569);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(75, 23);
+            this.button19.Size = new System.Drawing.Size(123, 39);
             this.button19.TabIndex = 23;
-            this.button19.Text = "button19";
-            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Text = "Değişen Tabloları Aktar";
+            this.button19.UseVisualStyleBackColor = false;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // button20
             // 
+            this.button20.BackColor = System.Drawing.Color.Teal;
+            this.button20.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.button20.Location = new System.Drawing.Point(142, 524);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(125, 43);
             this.button20.TabIndex = 24;
-            this.button20.Text = "Metaveri Hazırla";
-            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Text = "Metaveri Dökümanı Hazırla";
+            this.button20.UseVisualStyleBackColor = false;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // txtBasSchemaID
             // 
-            this.txtBasSchemaID.Location = new System.Drawing.Point(8, 598);
+            this.txtBasSchemaID.Location = new System.Drawing.Point(11, 702);
             this.txtBasSchemaID.Name = "txtBasSchemaID";
             this.txtBasSchemaID.Size = new System.Drawing.Size(100, 20);
             this.txtBasSchemaID.TabIndex = 25;
             // 
             // txtSonSchemaID
             // 
-            this.txtSonSchemaID.Location = new System.Drawing.Point(114, 598);
+            this.txtSonSchemaID.Location = new System.Drawing.Point(117, 702);
             this.txtSonSchemaID.Name = "txtSonSchemaID";
             this.txtSonSchemaID.Size = new System.Drawing.Size(100, 20);
             this.txtSonSchemaID.TabIndex = 26;
@@ -340,7 +344,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(124, 39);
             this.button21.TabIndex = 27;
-            this.button21.Text = "button21";
+            this.button21.Text = "Excel Export Denemesi";
             this.button21.UseVisualStyleBackColor = false;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -348,7 +352,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 736);
+            this.ClientSize = new System.Drawing.Size(284, 834);
             this.Controls.Add(this.button21);
             this.Controls.Add(this.txtSonSchemaID);
             this.Controls.Add(this.txtBasSchemaID);

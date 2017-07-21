@@ -20,7 +20,10 @@ namespace Gumruk.Web.Models
        
         public string key { get; set; }
 
+        public string description { get; set; }
         public List<NodeDataSubitems> items { get; set; }
+
+        public List<NodeDataTable> tables { get; set; }
     }
 
     public class NodeDataSubitems
@@ -39,7 +42,30 @@ namespace Gumruk.Web.Models
         public string figure { get; set; }
 
         public string color { get; set; }
+
     }
+
+    public class NodeDataTable
+    {
+        public NodeDataTable(string _name, bool _iskey, string _datatype, string _uzunluk, string _description)
+        {
+            name = _name;
+            iskey = _iskey;
+            datatype = _datatype;
+            uzunluk = _uzunluk;
+            description = _description;
+        }
+        public string name { get; set; }
+
+        public bool iskey { get; set; }
+
+        public string datatype { get; set; }
+
+        public string uzunluk { get; set; }
+
+        public string description { get; set; }
+    }
+
 
     public class NodeLink
     {

@@ -43,7 +43,9 @@
                     Dosyadaki kolonların açıklamaları şu şekildedir.<br />
 
                     <b>Table :</b>  Tablonun ismidir.<br />
+                    <b>Table Explanation :</b>  Tablonun kısa bir açıklamasıdır.<br />
                     <b>Field :  </b>Kolonun ismidir.<br />
+                    <b>Column Explanation :  </b>Kolonun açıklamasıdır.<br />
                     <b>DataType :  </b>Kolonun tipidir(sayısal,karakter,tarih vb...). (burada kullanılan değerler en son sırada yer alan DataType sheet'inde listelenmiştir.)<br />
                     <b>LookUpTable :</b> İlişkili olduğu tablonun ismi bu alana girilir. Örnekde products tablosu supplier tablosu ile ilişkilidir.<br />
                     <b>FromColumn : </b>İlişki kurulan kolonun adıdır.(Field kolonu ile aynı olmalıdır.)<br />
@@ -126,7 +128,7 @@
             async: false,
             data: { sheetName: sheetName },
             success: function (text) {
-          
+
             }
         });
 
@@ -193,13 +195,13 @@
 
                 var nodeData = new Array();
 
-                nodeData=returnValue["NodeDatas"];
+                nodeData = returnValue["NodeDatas"];
 
-                nodeData.forEach(function (entry) {
-                    console.log(entry);
-                });
+                //nodeData.forEach(function (entry) {
+                //    console.log(entry);
+                //});
 
-          
+
                 //var path = text["name"];
                 //var sqlName = path.split('.');
 
@@ -232,26 +234,26 @@
           $(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
             {
                 initialContentAlignment: go.Spot.Center,
-                allowDelete: false,
-                allowCopy: false,
+                allowDelete: true,
+                allowCopy: true,
                 layout: $(go.ForceDirectedLayout),
                 "undoManager.isEnabled": true
             });
 
         // define several shared Brushes
-        var bluegrad = $(go.Brush, "Linear", { 0: "rgb(150, 150, 250)", 0.5: "rgb(150, 150, 150)", 1: "rgb(150, 150, 150)" });
-        var greengrad = $(go.Brush, "Linear", { 0: "rgb(158, 209, 159)", 1: "rgb(67, 101, 56)" });
+        var bluegrad = $(go.Brush, "Linear", { 0: "rgb(65,105,225)", 0.5: "rgb(65,105,225)", 1: "rgb(65,105,225)" });
+        var greengrad = $(go.Brush, "Linear", { 0: "rgb(0, 0, 0)", 1: "rgb(0, 0, 200)" });
         var redgrad = $(go.Brush, "Linear", { 0: "rgb(206, 106, 100)", 1: "rgb(180, 56, 50)" });
-        var yellowgrad = $(go.Brush, "Linear", { 0: "rgb(254, 221, 50)", 1: "rgb(254, 182, 50)" });
+        var yellowgrad = $(go.Brush, "Linear", { 1: "rgb(254, 221, 50)", 1: "rgb(254, 182, 50)" });
         var lightgrad = $(go.Brush, "Linear", { 1: "#fff", 0: "#fff" });
 
         // the template for each attribute in a node's array of item data
         var itemTempl =
           $(go.Panel, "Horizontal",
             $(go.Shape,
-              { desiredSize: new go.Size(10, 10) },
-            new go.Binding("figure", "figure"),
-             new go.Binding("fill", "color")
+              { stroke: "#fff",desiredSize: new go.Size(10, 10) },
+             new go.Binding("figure", "figure"),
+             new go.Binding("fill", "color"),
               ),
             $(go.TextBlock,
               {
@@ -270,7 +272,7 @@
                 layoutConditions: go.Part.LayoutStandard & ~go.Part.LayoutNodeSized,
                 fromSpot: go.Spot.AllSides,
                 toSpot: go.Spot.AllSides,
-                isShadowed: false,
+                isShadowed: true,
                 shadowColor: "#ccc"
             },
             new go.Binding("location", "location").makeTwoWay(),
@@ -347,6 +349,30 @@
         getObj = GetNodeData();
         getObj = getSessionNodeData();
 
+        //gelen datanın itemları üzerinde foreach yapılıyor. burada
+        var nodaDataArray = [];
+        getObj["NodeDatas"].forEach(function (entry) {
+            var item = { key: entry["key"], items: [] };
+
+            var items = [];
+            entry["items"].forEach(function (node) {
+
+                if(node["figure"]!="Cube1")
+                    node["color"]="white";
+                else if(node["color"]=="blue")
+                    node["color"]=bluegrad;
+                else
+                    node["color"]=yellowgrad;
+
+                items.push(node);
+            });
+
+            item["items"] = items;
+            nodaDataArray.push(item);
+
+        });
+
+
         // create the model for the E-R diagram
         //var nodeDataArray = [
         //  {
@@ -396,7 +422,7 @@
           //{ from: "DDT", to: "Products", text: "0..N", toText: "1" }
         ];
         //getObj["NodeLinks"]
-        myDiagram.model = new go.GraphLinksModel(getObj["NodeDatas"], getObj["NodeLinks"]);
+        myDiagram.model = new go.GraphLinksModel(nodaDataArray, getObj["NodeLinks"]);
     }
 
 

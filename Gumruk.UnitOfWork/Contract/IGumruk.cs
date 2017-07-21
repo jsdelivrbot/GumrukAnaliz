@@ -28,6 +28,7 @@ namespace Gumruk.UnitOfWork.Contract
         d_b_schemas GetSchema(int schemaID);
 
         d_b_columns GetColumnById(int columnID);
+        List<d_b_columns> GetColumnByName(string Name);
 
         d_b_tables GetTableById(int tableID);
 

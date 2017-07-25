@@ -9,10 +9,11 @@ using System.Web.Mvc;
 
 namespace Gumruk.Web.Controllers
 {
+    [AuthenticationAction]
     public class EntityController : BaseController
     {
         // GET: Entity
-        [AuthenticationAction]
+        
         public ActionResult Index()
         {
             return View();
@@ -331,7 +332,7 @@ namespace Gumruk.Web.Controllers
 
                             if (lookupTable != string.Empty && LinkColumn != string.Empty)
                             {
-                                NodeLink linkNode = new NodeLink(tableName, lookupTable, columnName, toColumn);
+                                NodeLink linkNode = new NodeLink(tableName, lookupTable, LinkColumn, toColumn);
                                 linkNodes.Add(linkNode);
                             }
                         } // for end
@@ -377,7 +378,7 @@ namespace Gumruk.Web.Controllers
                 sql += "CREATE TABLE " + node.key + " (" + "\n";
                 foreach (var column in node.tables)
                 {
-                    if (column.datatype == "varchar")
+                    if (column.uzunluk!=string.Empty && (column.datatype == "VARCHAR" || column.datatype=="DECIMAL"))
                         sql += column.name + " " + column.datatype + "(" + column.uzunluk + ")" + (column.iskey == true ? " primary key not null" : " ") + ",\n";
                     else
                         sql += column.name + " " + column.datatype + " " + (column.iskey == true ? " primary key not null" : " ") + ",\n";
@@ -392,7 +393,7 @@ namespace Gumruk.Web.Controllers
                 foreach (var node in nodeDatas.NodeLinks)
                 {
                     sql += "ALTER TABLE [" + node.from+ "]\n";
-                    sql += "ADD CONSTRAINT FK_" +  node.from+"_"+node.to+node.text + "\n";
+                    sql += "ADD CONSTRAINT [FK "+ node.from+" "+node.to+" ("+node.text+"="+node.toText+")]"+ "\n";
                     sql += "FOREIGN KEY ("+node.text+")"+" REFERENCES ["+node.to.ToUpperInvariant()+"]("+node.toText+")\n" ;
                     sql += "\n";
                 }

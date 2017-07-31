@@ -22,6 +22,7 @@ using System.Collections;
 using Word = Microsoft.Office.Interop.Word;
 using System.Reflection;
 using Gumruk.Entity.Model;
+using OfficeOpenXml;
 
 namespace WinApp
 {
@@ -886,9 +887,9 @@ namespace WinApp
         private void button19_Click(object sender, EventArgs e)
         {
             IGumruk igumruk = new BSGumruk();
-            string  file= File.ReadAllText("D:\\degisentables.txt");
+            string file = File.ReadAllText("D:\\degisentables.txt");
 
-           string[] lines  =file.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+            string[] lines = file.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
 
             List<d_b_columns> columns;
             foreach (var line in lines)
@@ -1250,9 +1251,9 @@ namespace WinApp
         {
             IGumruk iGumruk = new BSGumruk();
 
-            List<d_b_columns> columns1=iGumruk.GetAllColumns();
+            List<d_b_columns> columns1 = iGumruk.GetAllColumns();
             //List<d_b_tables> tables;
-   
+
 
             string filename = "D:\\Columns.xlsx";
 
@@ -1335,6 +1336,193 @@ namespace WinApp
             }
             //put a breakpoint here and check datatable
             return dataTable;
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = @"D:\";
+            openFileDialog1.Title = "Browse Text Files";
+
+            openFileDialog1.CheckFileExists = true;
+            openFileDialog1.CheckPathExists = true;
+
+            openFileDialog1.DefaultExt = "txt";
+            openFileDialog1.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            openFileDialog1.ReadOnlyChecked = true;
+            openFileDialog1.ShowReadOnly = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = openFileDialog1.FileName;
+            }
+            else
+                return;
+
+            FileStream file = File.OpenRead(textBox1.Text);
+
+            using (var package = new ExcelPackage(file))
+            {
+                var currentSheet = package.Workbook.Worksheets;
+                string sheetName = string.Empty;
+
+                ExcelWorksheet workSheet;
+                if (sheetName == string.Empty)
+                    workSheet = currentSheet.First();
+                else
+                    workSheet = currentSheet.Where(p => p.Name == sheetName).FirstOrDefault();
+
+                var noOfCol = workSheet.Dimension.End.Column;
+                var noOfRow = workSheet.Dimension.End.Row;
+
+                string tableName;
+                string columnName;
+                string lookupTable;
+                string LinkColumn;
+                string LinkType;
+                string pk;
+                string toColumn;
+                string datatype;
+                string tableExp;
+                string columnExp;
+                string uzunluk;
+
+                string frekans;
+                string mevzuat;
+                string referans;
+                string referansKaynak;
+                string referansVeri;
+                string referansVeriListesi;
+
+                Word._Application objApp;
+                Word._Document objDoc;
+
+                for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
+                {
+                    tableExp = (workSheet.Cells[rowIterator, 1].Value == null) ? "" : workSheet.Cells[rowIterator, 1].Value.ToString();
+                    tableName = ((workSheet.Cells[rowIterator, 2].Value == null) ? "" : workSheet.Cells[rowIterator, 2].Value.ToString()).ToUpperInvariant();
+                    columnName = (workSheet.Cells[rowIterator, 3].Value == null) ? "" : workSheet.Cells[rowIterator, 3].Value.ToString();
+                    columnExp = (workSheet.Cells[rowIterator, 4].Value == null) ? "" : workSheet.Cells[rowIterator, 4].Value.ToString();
+                    datatype = (workSheet.Cells[rowIterator, 5].Value == null) ? "" : workSheet.Cells[rowIterator, 5].Value.ToString();
+                    uzunluk = (workSheet.Cells[rowIterator, 6].Value == null) ? "" : workSheet.Cells[rowIterator, 6].Value.ToString();
+                    lookupTable = ((workSheet.Cells[rowIterator, 7].Value == null) ? "" : workSheet.Cells[rowIterator, 7].Value.ToString()).ToUpperInvariant();
+                    LinkColumn = (workSheet.Cells[rowIterator, 8].Value == null) ? "" : workSheet.Cells[rowIterator, 8].Value.ToString();
+                    toColumn = (workSheet.Cells[rowIterator, 9].Value == null) ? "" : workSheet.Cells[rowIterator, 9].Value.ToString();
+                    LinkType = (workSheet.Cells[rowIterator, 10].Value == null) ? "" : workSheet.Cells[rowIterator, 10].Value.ToString();
+                    pk = (workSheet.Cells[rowIterator, 11].Value == null) ? "" : workSheet.Cells[rowIterator, 11].Value.ToString();
+
+                    frekans = (workSheet.Cells[rowIterator, 12].Value == null) ? "" : workSheet.Cells[rowIterator, 12].Value.ToString(); ;
+                    mevzuat = (workSheet.Cells[rowIterator, 13].Value == null) ? "" : workSheet.Cells[rowIterator, 13].Value.ToString();
+                    referans = (workSheet.Cells[rowIterator, 14].Value == null) ? "" : workSheet.Cells[rowIterator, 14].Value.ToString();
+                    referansKaynak = (workSheet.Cells[rowIterator, 15].Value == null) ? "" : workSheet.Cells[rowIterator, 15].Value.ToString();
+                    referansVeri = (workSheet.Cells[rowIterator, 16].Value == null) ? "" : workSheet.Cells[rowIterator, 16].Value.ToString();
+                    referansVeriListesi = (workSheet.Cells[rowIterator, 17].Value == null) ? "" : workSheet.Cells[rowIterator, 17].Value.ToString();
+
+                    Word.Table objTab1; //create table object
+                    Word.Range objWordRng = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range; //go to end of document
+                                                                                                  //Insert a 2 x 2 table, (table with 2 row and 2 column)
+
+                    objTab1 = objDoc.Tables.Add(objWordRng, 6, 2, ref objMiss, ref objMiss); //add table object in word document
+                    objTab1.Range.ParagraphFormat.SpaceAfter = 6;
+
+                    objTab1.Cell(1, 1).Range.Text = "Tablo Adı"; //add some text to cell
+                    objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+
+
+                    objTab1.Cell(2, 1).Range.Text = "Tablo Tanımı"; //add some text to cell
+                    objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+
+                    //columnlar şekilleniyor
+                    objTab1.Cell(1, 2).Range.Text = tableName; //add some text to cell
+                    objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+
+                    objTab1.Cell(2, 2).Range.Text = tableExp; //add some text to cell
+                    objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+
+                    //table.d_b_columns.ToList()[0].d_b_column_lookups.ToList()[0].d_b_Column_to.d_b_tables.name
+
+                    objWordRng = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range;
+                    objWordRng.InsertParagraphAfter(); //put enter in document
+                    if (table.d_b_columns.Count > 0)
+                        objWordRng.InsertAfter("Değişkenler");
+                    else
+                        objWordRng.InsertAfter("");
+
+                    string baglantiliTablolar = "";
+
+                    int a = 1;
+                    if (table.d_b_columns.Count > 0)//tablonun word table'ı yukarıdaki satırlar. Burdan sonrası değişkenlerin word table'ı üretiliyor.
+                    {
+                        Word.Table objTab2; //create table object
+                        Word.Range objWordRng2 = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range; //go to end of document
+
+                        objTab2 = objDoc.Tables.Add(objWordRng2, table.d_b_columns.Count + 1, 2, ref objMiss, ref objMiss); //add table object in word document
+                        objTab2.Range.ParagraphFormat.SpaceAfter = 6;
+
+                        objTab2.Cell(1, 1).Range.Text = "Değişken Adı"; //add some text to cell
+                        objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                        objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                        objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                        objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+
+
+                        objTab2.Cell(1, 2).Range.Text = "Değişken Tanımı"; //add some text to cell
+                        objTab2.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                        objTab2.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                        objTab2.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                        objTab2.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+
+                        foreach (var column in table.d_b_columns)
+                        {
+                            a++;
+                            objTab2.Cell(a, 1).Range.Text = column.name; //add some text to cell
+                            objTab2.Cell(a, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                            objTab2.Cell(a, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                            objTab2.Cell(a, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                            objTab2.Cell(a, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+
+                            if (column.d_b_column_explanations.Count > 0)
+                                objTab2.Cell(a, 2).Range.Text = column.d_b_column_explanations.ToList()[0].details;
+                            else
+                                objTab2.Cell(a, 2).Range.Text = "";
+
+                            objTab2.Cell(a, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                            objTab2.Cell(a, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                            objTab2.Cell(a, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                            objTab2.Cell(a, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+
+                            if (column.d_b_column_lookups.Count > 0)
+                            {
+                                foreach (var lookup in column.d_b_column_lookups)
+                                {
+                                    d_b_columns dbCol = igumruk.GetColumnById(lookup.column_to_id);
+                                    baglantiliTablolar = baglantiliTablolar + " " + dbCol.d_b_tables.name;
+                                    objTab1.Cell(7, 2).Range.Text = baglantiliTablolar; //add some text to cell
+                                }
+                            }
+                        }
+                        objWordRng2 = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range;
+                        objWordRng2.InsertParagraphAfter(); //put enter in document
+                        objWordRng2.InsertAfter("");
+                    }
+                } // for end
+            }
         }
     }
 }

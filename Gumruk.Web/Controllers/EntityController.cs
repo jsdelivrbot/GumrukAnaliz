@@ -376,16 +376,24 @@ namespace Gumruk.Web.Controllers
             foreach (var node in nodeDatas.NodeDatas)
             {
                 sql += "CREATE TABLE " + node.key + " (" + "\n";
+                string primaryKey=string.Empty;
                 foreach (var column in node.tables)
                 {
                     if (column.uzunluk!=string.Empty && (column.datatype == "VARCHAR" || column.datatype=="DECIMAL"))
-                        sql += column.name + " " + column.datatype + "(" + column.uzunluk + ")" + (column.iskey == true ? " primary key not null" : " ") + ",\n";
+                        sql += column.name + " " + column.datatype + "(" + column.uzunluk + ")" +",\n";
                     else
-                        sql += column.name + " " + column.datatype + " " + (column.iskey == true ? " primary key not null" : " ") + ",\n";
+                        sql += column.name + " " + column.datatype + " " + ",\n";
+
+                    if (column.iskey && primaryKey == string.Empty)
+                        primaryKey = column.name;
+                    else if (column.iskey)
+                        primaryKey += "," + column.name;
                 }
+
+                sql += " CONSTRAINT [PK_"+node.key+"] PRIMARY KEY CLUSTERED (" + primaryKey + ")";
                 sql += ") \n";
+                sql += "GO\n";
             }
-            sql += "GO\n";
 
             if (nodeDatas.NodeLinks.Count > 0)
             {

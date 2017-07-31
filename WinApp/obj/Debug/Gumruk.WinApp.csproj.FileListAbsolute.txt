@@ -73,3 +73,5 @@ E:\4S Projeler\4SOperations\WinApp\obj\Debug\Gumruk.WinApp.csprojResolveAssembly
 E:\4S Projeler\4SOperations\WinApp\obj\Debug\WinApp.Form1.resources
 E:\4S Projeler\4SOperations\WinApp\obj\Debug\WinApp.Properties.Resources.resources
 E:\4S Projeler\4SOperations\WinApp\obj\Debug\Gumruk.WinApp.csproj.GenerateResource.Cache
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\EPPlus.dll
+D:\4S Projeler\4SOperations\WinApp\bin\Debug\EPPlus.xml

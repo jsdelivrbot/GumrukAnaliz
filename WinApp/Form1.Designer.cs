@@ -54,6 +54,10 @@
             this.txtBasSchemaID = new System.Windows.Forms.TextBox();
             this.txtSonSchemaID = new System.Windows.Forms.TextBox();
             this.button21 = new System.Windows.Forms.Button();
+            this.button22 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -305,7 +309,7 @@
             this.button19.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.button19.Location = new System.Drawing.Point(13, 569);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(123, 39);
+            this.button19.Size = new System.Drawing.Size(123, 52);
             this.button19.TabIndex = 23;
             this.button19.Text = "Değişen Tabloları Aktar";
             this.button19.UseVisualStyleBackColor = false;
@@ -348,11 +352,45 @@
             this.button21.UseVisualStyleBackColor = false;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(142, 573);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(125, 48);
+            this.button22.TabIndex = 28;
+            this.button22.Text = "Excelden Metavari Dökmanı Hazırla";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(16, 642);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(110, 20);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "Sheet Name : ";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(133, 641);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(137, 20);
+            this.textBox2.TabIndex = 30;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 834);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.button22);
             this.Controls.Add(this.button21);
             this.Controls.Add(this.txtSonSchemaID);
             this.Controls.Add(this.txtBasSchemaID);
@@ -414,6 +452,10 @@
         private System.Windows.Forms.TextBox txtBasSchemaID;
         private System.Windows.Forms.TextBox txtSonSchemaID;
         private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

@@ -23,6 +23,7 @@ using Word = Microsoft.Office.Interop.Word;
 using System.Reflection;
 using Gumruk.Entity.Model;
 using OfficeOpenXml;
+using WinApp.Model;
 
 namespace WinApp
 {
@@ -950,87 +951,87 @@ namespace WinApp
                 //        objTab1 = objDoc.Tables.Add(objWordRng, 7, 2, ref objMiss, ref objMiss); //add table object in word document
                 //        objTab1.Range.ParagraphFormat.SpaceAfter = 6;
 
-                //        objTab1.Cell(1, 1).Range.Text = "Metaveri Adı"; //add some text to cell
+                //        objTab1.Cell(1, 1).Range.Text = "Metaveri Adı"; 
                 //        objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
 
-                //        objTab1.Cell(2, 1).Range.Text = "Metaveri Türü"; //add some text to cell
+                //        objTab1.Cell(2, 1).Range.Text = "Metaveri Türü"; 
                 //        objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                //        objTab1.Cell(3, 1).Range.Text = "Veri Elemanı"; //add some text to cell
+                //        objTab1.Cell(3, 1).Range.Text = "Veri Elemanı"; 
                 //        objTab1.Cell(3, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(3, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(3, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(3, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                //        objTab1.Cell(4, 1).Range.Text = "Veri Seti"; //add some text to cell
+                //        objTab1.Cell(4, 1).Range.Text = "Veri Seti"; 
                 //        objTab1.Cell(4, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(4, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(4, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(4, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                //        objTab1.Cell(5, 1).Range.Text = "Tanımı"; //add some text to cell
+                //        objTab1.Cell(5, 1).Range.Text = "Tanımı"; 
                 //        objTab1.Cell(5, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(5, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(5, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(5, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                //        objTab1.Cell(6, 1).Range.Text = "Açıklama"; //add some text to cell
+                //        objTab1.Cell(6, 1).Range.Text = "Açıklama"; 
                 //        objTab1.Cell(6, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(6, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(6, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(6, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
 
-                //        objTab1.Cell(7, 1).Range.Text = "Güncelleme Zamanı/Periyodu"; //add some text to cell
+                //        objTab1.Cell(7, 1).Range.Text = "Güncelleme Zamanı/Periyodu"; 
                 //        objTab1.Cell(7, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(7, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(7, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(7, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
                 //        //columnlar şekilleniyor
-                //        objTab1.Cell(1, 2).Range.Text = schema.name; //add some text to cell
+                //        objTab1.Cell(1, 2).Range.Text = schema.name; 
                 //        objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                //        objTab1.Cell(2, 2).Range.Text = table.name; //add some text to cell
+                //        objTab1.Cell(2, 2).Range.Text = table.name; 
                 //        objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
                 //        if (table.details != null)
-                //            objTab1.Cell(3, 2).Range.Text = table.details; //add some text to cell
+                //            objTab1.Cell(3, 2).Range.Text = table.details; 
                 //        else if (table.d_b_table_explanation.Count > 0)
-                //            objTab1.Cell(3, 2).Range.Text = table.d_b_table_explanation.ToList()[0].details; //add some text to cell
+                //            objTab1.Cell(3, 2).Range.Text = table.d_b_table_explanation.ToList()[0].details; 
                 //        else
-                //            objTab1.Cell(3, 2).Range.Text = ""; //add some text to cell
+                //            objTab1.Cell(3, 2).Range.Text = ""; 
                 //        objTab1.Cell(3, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(3, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(3, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(3, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                //        objTab1.Cell(4, 2).Range.Text = "Uygulama"; //add some text to cell
+                //        objTab1.Cell(4, 2).Range.Text = "Uygulama"; 
                 //        objTab1.Cell(4, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(4, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(4, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(4, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                //        objTab1.Cell(5, 2).Range.Text = "Anlık"; //add some text to cell
+                //        objTab1.Cell(5, 2).Range.Text = "Anlık"; 
                 //        objTab1.Cell(5, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(5, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(5, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(5, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                //        objTab1.Cell(6, 2).Range.Text = ""; //add some text to cell
+                //        objTab1.Cell(6, 2).Range.Text = ""; 
                 //        objTab1.Cell(6, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(6, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 //        objTab1.Cell(6, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
@@ -1068,87 +1069,87 @@ namespace WinApp
                         objTab1 = objDoc.Tables.Add(objWordRng, 6, 2, ref objMiss, ref objMiss); //add table object in word document
                         objTab1.Range.ParagraphFormat.SpaceAfter = 6;
 
-                        objTab1.Cell(1, 1).Range.Text = "Schema Adı"; //add some text to cell
+                        objTab1.Cell(1, 1).Range.Text = "Schema Adı";
                         objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
 
-                        objTab1.Cell(2, 1).Range.Text = "Tablo Adı"; //add some text to cell
+                        objTab1.Cell(2, 1).Range.Text = "Tablo Adı";
                         objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                        objTab1.Cell(3, 1).Range.Text = "Tablo Tanımı"; //add some text to cell
+                        objTab1.Cell(3, 1).Range.Text = "Tablo Tanımı";
                         objTab1.Cell(3, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(3, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(3, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(3, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                        objTab1.Cell(4, 1).Range.Text = "Veri Kaynağı"; //add some text to cell
+                        objTab1.Cell(4, 1).Range.Text = "Veri Kaynağı";
                         objTab1.Cell(4, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(4, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(4, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(4, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                        objTab1.Cell(5, 1).Range.Text = "Güncelleme Periyodu"; //add some text to cell
+                        objTab1.Cell(5, 1).Range.Text = "Güncelleme Periyodu";
                         objTab1.Cell(5, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(5, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(5, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(5, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                        objTab1.Cell(6, 1).Range.Text = "Tekil Tanımı"; //add some text to cell
+                        objTab1.Cell(6, 1).Range.Text = "Tekil Tanımı";
                         objTab1.Cell(6, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(6, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(6, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(6, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
 
-                        objTab1.Cell(7, 1).Range.Text = "Bağlı Tablolar"; //add some text to cell
+                        objTab1.Cell(7, 1).Range.Text = "Bağlı Tablolar";
                         objTab1.Cell(7, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(7, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(7, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(7, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
                         //columnlar şekilleniyor
-                        objTab1.Cell(1, 2).Range.Text = schema.name; //add some text to cell
+                        objTab1.Cell(1, 2).Range.Text = schema.name;
                         objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                        objTab1.Cell(2, 2).Range.Text = table.name; //add some text to cell
+                        objTab1.Cell(2, 2).Range.Text = table.name;
                         objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
                         if (table.details != null)
-                            objTab1.Cell(3, 2).Range.Text = table.details; //add some text to cell
+                            objTab1.Cell(3, 2).Range.Text = table.details;
                         else if (table.d_b_table_explanation.Count > 0)
-                            objTab1.Cell(3, 2).Range.Text = table.d_b_table_explanation.ToList()[0].details; //add some text to cell
+                            objTab1.Cell(3, 2).Range.Text = table.d_b_table_explanation.ToList()[0].details;
                         else
-                            objTab1.Cell(3, 2).Range.Text = ""; //add some text to cell
+                            objTab1.Cell(3, 2).Range.Text = "";
                         objTab1.Cell(3, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(3, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(3, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(3, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                        objTab1.Cell(4, 2).Range.Text = "Uygulama"; //add some text to cell
+                        objTab1.Cell(4, 2).Range.Text = "Uygulama";
                         objTab1.Cell(4, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(4, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(4, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(4, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                        objTab1.Cell(5, 2).Range.Text = "Anlık"; //add some text to cell
+                        objTab1.Cell(5, 2).Range.Text = "Anlık";
                         objTab1.Cell(5, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(5, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(5, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(5, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
-                        objTab1.Cell(6, 2).Range.Text = ""; //add some text to cell
+                        objTab1.Cell(6, 2).Range.Text = "";
                         objTab1.Cell(6, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(6, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                         objTab1.Cell(6, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
@@ -1179,14 +1180,14 @@ namespace WinApp
                             objTab2 = objDoc.Tables.Add(objWordRng2, table.d_b_columns.Count + 1, 2, ref objMiss, ref objMiss); //add table object in word document
                             objTab2.Range.ParagraphFormat.SpaceAfter = 6;
 
-                            objTab2.Cell(1, 1).Range.Text = "Değişken Adı"; //add some text to cell
+                            objTab2.Cell(1, 1).Range.Text = "Değişken Adı";
                             objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                             objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                             objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                             objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
 
-                            objTab2.Cell(1, 2).Range.Text = "Değişken Tanımı"; //add some text to cell
+                            objTab2.Cell(1, 2).Range.Text = "Değişken Tanımı";
                             objTab2.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                             objTab2.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                             objTab2.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
@@ -1195,7 +1196,7 @@ namespace WinApp
                             foreach (var column in table.d_b_columns)
                             {
                                 a++;
-                                objTab2.Cell(a, 1).Range.Text = column.name; //add some text to cell
+                                objTab2.Cell(a, 1).Range.Text = column.name;
                                 objTab2.Cell(a, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                                 objTab2.Cell(a, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
                                 objTab2.Cell(a, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
@@ -1217,7 +1218,7 @@ namespace WinApp
                                     {
                                         d_b_columns dbCol = igumruk.GetColumnById(lookup.column_to_id);
                                         baglantiliTablolar = baglantiliTablolar + " " + dbCol.d_b_tables.name;
-                                        objTab1.Cell(7, 2).Range.Text = baglantiliTablolar; //add some text to cell
+                                        objTab1.Cell(7, 2).Range.Text = baglantiliTablolar;
                                     }
                                 }
                             }
@@ -1343,7 +1344,7 @@ namespace WinApp
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.InitialDirectory = @"D:\";
-            openFileDialog1.Title = "Browse Text Files";
+            openFileDialog1.Title = "Browse Excel Files";
 
             openFileDialog1.CheckFileExists = true;
             openFileDialog1.CheckPathExists = true;
@@ -1398,9 +1399,8 @@ namespace WinApp
                 string referansVeri;
                 string referansVeriListesi;
 
-                Word._Application objApp;
-                Word._Document objDoc;
-
+                List<MetaTable> listMetaTable = new List<MetaTable>();
+                MetaTable metaTbl = null;
                 for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                 {
                     tableExp = (workSheet.Cells[rowIterator, 1].Value == null) ? "" : workSheet.Cells[rowIterator, 1].Value.ToString();
@@ -1422,107 +1422,135 @@ namespace WinApp
                     referansVeri = (workSheet.Cells[rowIterator, 16].Value == null) ? "" : workSheet.Cells[rowIterator, 16].Value.ToString();
                     referansVeriListesi = (workSheet.Cells[rowIterator, 17].Value == null) ? "" : workSheet.Cells[rowIterator, 17].Value.ToString();
 
-                    Word.Table objTab1; //create table object
-                    Word.Range objWordRng = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range; //go to end of document
-                                                                                                  //Insert a 2 x 2 table, (table with 2 row and 2 column)
-
-                    objTab1 = objDoc.Tables.Add(objWordRng, 6, 2, ref objMiss, ref objMiss); //add table object in word document
-                    objTab1.Range.ParagraphFormat.SpaceAfter = 6;
-
-                    objTab1.Cell(1, 1).Range.Text = "Tablo Adı"; //add some text to cell
-                    objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-
-
-                    objTab1.Cell(2, 1).Range.Text = "Tablo Tanımı"; //add some text to cell
-                    objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(2, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-
-                    //columnlar şekilleniyor
-                    objTab1.Cell(1, 2).Range.Text = tableName; //add some text to cell
-                    objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-
-                    objTab1.Cell(2, 2).Range.Text = tableExp; //add some text to cell
-                    objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                    objTab1.Cell(2, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-
-                    //table.d_b_columns.ToList()[0].d_b_column_lookups.ToList()[0].d_b_Column_to.d_b_tables.name
-
-                    objWordRng = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range;
-                    objWordRng.InsertParagraphAfter(); //put enter in document
-                    if (table.d_b_columns.Count > 0)
-                        objWordRng.InsertAfter("Değişkenler");
-                    else
-                        objWordRng.InsertAfter("");
-
-                    string baglantiliTablolar = "";
-
-                    int a = 1;
-                    if (table.d_b_columns.Count > 0)//tablonun word table'ı yukarıdaki satırlar. Burdan sonrası değişkenlerin word table'ı üretiliyor.
+                    if (tableExp != string.Empty && tableName != string.Empty)
                     {
-                        Word.Table objTab2; //create table object
-                        Word.Range objWordRng2 = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range; //go to end of document
+                        metaTbl = new MetaTable();
+                        metaTbl.Name = tableName;
+                        metaTbl.Aciklama = tableExp;
 
-                        objTab2 = objDoc.Tables.Add(objWordRng2, table.d_b_columns.Count + 1, 2, ref objMiss, ref objMiss); //add table object in word document
-                        objTab2.Range.ParagraphFormat.SpaceAfter = 6;
+                        listMetaTable.Add(metaTbl);
+                    }
 
-                        objTab2.Cell(1, 1).Range.Text = "Değişken Adı"; //add some text to cell
-                        objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                        objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                        objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                        objTab2.Cell(1, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    if (metaTbl != null)
+                    {
+                        MetaColumn metaColumn = new MetaColumn();
+                        metaColumn.name = columnName;
+                        metaColumn.frekans = frekans;
+                        metaColumn.mevzuat = mevzuat;
+                        metaColumn.referans = referans;
+                        metaColumn.referansKaynak = referansKaynak;
+                        metaColumn.referansVeriListesi = referansVeriListesi;
+                        metaColumn.tanimi = columnExp;
+                        metaColumn.PK = (pk == "true" ? true : false);
+                        metaColumn.VeriTipi = datatype;
+                        metaColumn.Uzunluk = uzunluk;
+                        if (metaTbl.MetaColumns == null)
+                            metaTbl.MetaColumns = new List<MetaColumn>();
 
-
-                        objTab2.Cell(1, 2).Range.Text = "Değişken Tanımı"; //add some text to cell
-                        objTab2.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                        objTab2.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                        objTab2.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                        objTab2.Cell(1, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-
-                        foreach (var column in table.d_b_columns)
-                        {
-                            a++;
-                            objTab2.Cell(a, 1).Range.Text = column.name; //add some text to cell
-                            objTab2.Cell(a, 1).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                            objTab2.Cell(a, 1).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                            objTab2.Cell(a, 1).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                            objTab2.Cell(a, 1).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-
-                            if (column.d_b_column_explanations.Count > 0)
-                                objTab2.Cell(a, 2).Range.Text = column.d_b_column_explanations.ToList()[0].details;
-                            else
-                                objTab2.Cell(a, 2).Range.Text = "";
-
-                            objTab2.Cell(a, 2).Range.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                            objTab2.Cell(a, 2).Range.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                            objTab2.Cell(a, 2).Range.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                            objTab2.Cell(a, 2).Range.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-
-                            if (column.d_b_column_lookups.Count > 0)
-                            {
-                                foreach (var lookup in column.d_b_column_lookups)
-                                {
-                                    d_b_columns dbCol = igumruk.GetColumnById(lookup.column_to_id);
-                                    baglantiliTablolar = baglantiliTablolar + " " + dbCol.d_b_tables.name;
-                                    objTab1.Cell(7, 2).Range.Text = baglantiliTablolar; //add some text to cell
-                                }
-                            }
-                        }
-                        objWordRng2 = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range;
-                        objWordRng2.InsertParagraphAfter(); //put enter in document
-                        objWordRng2.InsertAfter("");
+                        metaTbl.MetaColumns.Add(metaColumn);
                     }
                 } // for end
+
+                PrepareWordDocument(listMetaTable);
+
+                MessageBox.Show("Tablo Sayısı:" + listMetaTable.Count().ToString());
             }
         }
+
+        public void PrepareWordDocument(List<MetaTable> tables)
+        {
+            Word._Application objApp;
+            Word._Document objDoc;
+
+            object objMiss = System.Reflection.Missing.Value;
+            object objEndOfDocFlag = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
+
+            //Start Word and create a new document.
+            objApp = new Word.Application();
+            objApp.Visible = true;
+            objDoc = objApp.Documents.Add(ref objMiss, ref objMiss,
+                ref objMiss, ref objMiss);
+
+            //Insert a paragraph at the end of the document.
+            Word.Paragraph objPara2; //define paragraph object
+            object oRng = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range; //go to end of the page
+            objPara2 = objDoc.Content.Paragraphs.Add(ref oRng); //add paragraph at end of document
+            objPara2.Range.Text = "T.C. Gümrük ve Ticaret Bakanlığı Metaveri Dökümanı";
+            objPara2.Format.SpaceAfter = 10; //defind some style
+            objPara2.Range.InsertParagraphAfter(); //insert paragraph
+
+            foreach (var table in tables)
+            {
+                Word.Table objTab1; //create table object
+                Word.Range objWordRng = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range; //go to end of document
+                                                                                              //Insert a 2 x 2 table, (table with 2 row and 2 column)
+
+                objTab1 = objDoc.Tables.Add(objWordRng, 6, 2, ref objMiss, ref objMiss); //add table object in word document
+                objTab1.Range.ParagraphFormat.SpaceAfter = 6;
+
+                objTab1.Borders.InsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                objTab1.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+
+                objTab1.Cell(1, 1).Range.Text = "Tablo Adı";
+                objTab1.Cell(2, 1).Range.Text = "Tablo Tanımı";
+                objTab1.Cell(3, 1).Range.Text = "Referans";
+                objTab1.Cell(4, 1).Range.Text = "Referans Kaynak";
+                objTab1.Cell(5, 1).Range.Text = "Frekans";
+                objTab1.Cell(6, 1).Range.Text = "Mevzuat";
+
+                //columnlar şekilleniyor
+                objTab1.Cell(1, 2).Range.Text = table.Name;
+                objTab1.Cell(2, 2).Range.Text = table.Aciklama;
+
+                //referans bilgisi tablo bilgileri arasında yer alacak. Tablonun columnları arasında yapılacak olan bir sorgu ile referans bilgisi boş olmayan ilk column'ın değeri alınıp yazılacak.
+                objTab1.Cell(3, 2).Range.Text = table.MetaColumns.Where(p => p.referans == string.Empty).FirstOrDefault().referans;
+                objTab1.Cell(4, 2).Range.Text = table.MetaColumns.Where(p => p.referans == string.Empty).FirstOrDefault().referansKaynak;
+                objTab1.Cell(5, 2).Range.Text = table.MetaColumns.Where(p => p.referans == string.Empty).FirstOrDefault().frekans;
+                objTab1.Cell(6, 2).Range.Text = table.MetaColumns.Where(p => p.referans == string.Empty).FirstOrDefault().mevzuat;
+
+                objWordRng = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range;
+                objWordRng.InsertParagraphAfter(); //put enter in document
+                if (table.MetaColumns.Count > 0)
+                    objWordRng.InsertAfter("Tablo Değişkenleri");
+                else
+                    objWordRng.InsertAfter("");
+
+                int a = 1;
+                if (table.MetaColumns.Count > 0)
+                {
+                    Word.Table objTab2; //create table object
+                    Word.Range objWordRng2 = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range; //go to end of document
+
+                    objTab2 = objDoc.Tables.Add(objWordRng2, table.MetaColumns.Count + 1, 5, ref objMiss, ref objMiss); //add table object in word document
+                    objTab2.Range.ParagraphFormat.SpaceAfter = 6;
+
+                    objTab2.Borders.InsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                    objTab2.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+
+                    objTab2.Cell(1, 1).Range.Text = "Değişken Adı";
+                    objTab2.Cell(1, 2).Range.Text = "Değişken Tanımı";
+                    objTab2.Cell(1, 3).Range.Text = "Değişken Tipi";
+                    objTab2.Cell(1, 4).Range.Text = "Uzunluk";
+                    objTab2.Cell(1, 5).Range.Text = "Referans Veri Listesi";
+
+                    foreach (var column in table.MetaColumns)
+                    {
+                        a++;
+                        objTab2.Cell(a, 1).Range.Text = column.name + (column.PK == true ? " (Primary Key)" : "");
+                        objTab2.Cell(a, 2).Range.Text = column.tanimi;
+                        objTab2.Cell(a, 3).Range.Text = column.VeriTipi;
+                        objTab2.Cell(a, 4).Range.Text = column.Uzunluk;
+                        objTab2.Cell(a, 5).Range.Text = column.referansVeriListesi;
+                    }
+
+                    objWordRng2 = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range;
+                    objWordRng2.InsertParagraphAfter(); //put enter in document
+                    objWordRng2.InsertAfter("");
+                }
+            }
+            object szPath = "D:\\MetaVeri.docx"; //your file gets saved with name 'test.docx'
+            objDoc.SaveAs(ref szPath);
+        }
+
     }
 }

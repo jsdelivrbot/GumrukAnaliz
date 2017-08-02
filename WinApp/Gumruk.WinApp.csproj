@@ -76,6 +76,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\DataObject.cs" />
+    <Compile Include="Model\MetaColumn.cs" />
+    <Compile Include="Model\MetaTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

@@ -166,7 +166,8 @@
 
                 </div>
                 <div class="col-lg-2">
-                    @item.schemas.name
+                    @if (item.schemas != null)
+                    { @item.schemas.name}
                 </div>
             </div>
         }

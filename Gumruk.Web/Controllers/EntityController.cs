@@ -13,7 +13,7 @@ namespace Gumruk.Web.Controllers
     public class EntityController : BaseController
     {
         // GET: Entity
-        
+
         public ActionResult Index()
         {
             return View();
@@ -293,25 +293,34 @@ namespace Gumruk.Web.Controllers
                         NodeData newNoteData = null;
                         for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                         {
-                            tableExp = (workSheet.Cells[rowIterator, 1].Value == null) ? "" : workSheet.Cells[rowIterator, 1].Value.ToString();
-                            tableName = ((workSheet.Cells[rowIterator, 2].Value == null) ? "" : workSheet.Cells[rowIterator, 2].Value.ToString()).ToUpperInvariant();
-                            columnName = (workSheet.Cells[rowIterator, 3].Value == null) ? "" : workSheet.Cells[rowIterator, 3].Value.ToString();
-                            columnExp = (workSheet.Cells[rowIterator, 4].Value == null) ? "" : workSheet.Cells[rowIterator, 4].Value.ToString();
-                            datatype = (workSheet.Cells[rowIterator, 5].Value == null) ? "" : workSheet.Cells[rowIterator, 5].Value.ToString();
-                            uzunluk = (workSheet.Cells[rowIterator, 6].Value == null) ? "" : workSheet.Cells[rowIterator, 6].Value.ToString();
-                            lookupTable = ((workSheet.Cells[rowIterator, 7].Value == null) ? "" : workSheet.Cells[rowIterator, 7].Value.ToString()).ToUpperInvariant();
-                            LinkColumn = (workSheet.Cells[rowIterator, 8].Value == null) ? "" : workSheet.Cells[rowIterator, 8].Value.ToString();
-                            toColumn = (workSheet.Cells[rowIterator, 9].Value == null) ? "" : workSheet.Cells[rowIterator, 9].Value.ToString();
-                            LinkType = (workSheet.Cells[rowIterator, 10].Value == null) ? "" : workSheet.Cells[rowIterator, 10].Value.ToString();
-                            pk = (workSheet.Cells[rowIterator, 11].Value == null) ? "" : workSheet.Cells[rowIterator, 11].Value.ToString();
+                            tableExp = ((workSheet.Cells[rowIterator, 1].Value == null) ? "" : workSheet.Cells[rowIterator, 1].Value.ToString()).Trim();
+                            tableName = ((workSheet.Cells[rowIterator, 2].Value == null) ? "" : workSheet.Cells[rowIterator, 2].Value.ToString()).Trim().ToUpperInvariant();
+                            columnName = (workSheet.Cells[rowIterator, 3].Value == null) ? "" : workSheet.Cells[rowIterator, 3].Value.ToString().Trim();
+                            columnExp = (workSheet.Cells[rowIterator, 4].Value == null) ? "" : workSheet.Cells[rowIterator, 4].Value.ToString().Trim();
+                            datatype = (workSheet.Cells[rowIterator, 5].Value == null) ? "" : workSheet.Cells[rowIterator, 5].Value.ToString().Trim();
+                            uzunluk = (workSheet.Cells[rowIterator, 6].Value == null) ? "" : workSheet.Cells[rowIterator, 6].Value.ToString().Trim();
+                            lookupTable = ((workSheet.Cells[rowIterator, 7].Value == null) ? "" : workSheet.Cells[rowIterator, 7].Value.ToString()).Trim().ToUpperInvariant();
+                            LinkColumn = (workSheet.Cells[rowIterator, 8].Value == null) ? "" : workSheet.Cells[rowIterator, 8].Value.ToString().Trim();
+                            toColumn = (workSheet.Cells[rowIterator, 9].Value == null) ? "" : workSheet.Cells[rowIterator, 9].Value.ToString().Trim();
+                            LinkType = (workSheet.Cells[rowIterator, 10].Value == null) ? "" : workSheet.Cells[rowIterator, 10].Value.ToString().Trim();
+                            pk = (workSheet.Cells[rowIterator, 11].Value == null) ? "" : workSheet.Cells[rowIterator, 11].Value.ToString().Trim();
 
                             if (toColumn == string.Empty)
                                 toColumn = columnName;
 
-                            if (pk != string.Empty)
+                            //if (pk != string.Empty)
+                            //    boolPK = bool.Parse(pk);
+                            //else
+                            //    boolPK = false;
+
+                            try
+                            {
                                 boolPK = bool.Parse(pk);
-                            else
+                            }
+                            catch (Exception)
+                            {
                                 boolPK = false;
+                            }
                             //veriler excel'den alındı. İlgili tablolara atılması gerekiyor. 
                             if (tableName != string.Empty && !tables.Contains(tableName))
                             {
@@ -323,7 +332,7 @@ namespace Gumruk.Web.Controllers
                                 nodes.Add(newNoteData);
                             }
 
-                            if (tableName != string.Empty)
+                            if (columnName != string.Empty)
                             {
                                 NodeDataTable newNodeDataSubItem;
                                 newNodeDataSubItem = new NodeDataTable(columnName, boolPK, datatype, uzunluk, columnExp);
@@ -372,60 +381,73 @@ namespace Gumruk.Web.Controllers
             string sql = string.Empty;
             nodeDatas = PrepareList();
 
+            #region tablo create
+                    foreach (var node in nodeDatas.NodeDatas)
+                    {
+                        sql += "CREATE TABLE " + node.key + " (" + "\n";
+                        string primaryKey = string.Empty;
+                        bool pkvarmi = false;
+                        foreach (var column in node.tables)
+                        {
+                            column.datatype = column.datatype.ToUpperInvariant();
+                            if (column.uzunluk != string.Empty && (column.datatype == "VARCHAR" || column.datatype == "DECIMAL" || column.datatype == "VARBINARY"))
+                                sql += column.name + " " + column.datatype + "(" + column.uzunluk + ")" + ",\n";
+                            else
+                                sql += column.name + " " + column.datatype + " " + ",\n";
+
+                            if (column.iskey)
+                                pkvarmi = true;
+
+                            if (column.iskey && primaryKey == string.Empty)
+                                primaryKey = column.name;
+                            else if (column.iskey)
+                                primaryKey += "," + column.name;
+                        }
+                        if (pkvarmi)
+                            sql += " CONSTRAINT [PK_" + node.key + "] PRIMARY KEY CLUSTERED (" + primaryKey + ")";
+
+                        sql += ") \n";
+                        sql += "GO\n";
+                    }
+            #endregion
             //table script fonksiyonları yazıldı.
-            foreach (var node in nodeDatas.NodeDatas)
-            {
-                sql += "CREATE TABLE " + node.key + " (" + "\n";
-                string primaryKey=string.Empty;
-                foreach (var column in node.tables)
-                {
-                    if (column.uzunluk!=string.Empty && (column.datatype == "VARCHAR" || column.datatype=="DECIMAL"))
-                        sql += column.name + " " + column.datatype + "(" + column.uzunluk + ")" +",\n";
-                    else
-                        sql += column.name + " " + column.datatype + " " + ",\n";
 
-                    if (column.iskey && primaryKey == string.Empty)
-                        primaryKey = column.name;
-                    else if (column.iskey)
-                        primaryKey += "," + column.name;
-                }
-
-                sql += " CONSTRAINT [PK_"+node.key+"] PRIMARY KEY CLUSTERED (" + primaryKey + ")";
-                sql += ") \n";
-                sql += "GO\n";
-            }
-
-            if (nodeDatas.NodeLinks.Count > 0)
-            {
-                //foreign key tanımları yapılıyor.
-                foreach (var node in nodeDatas.NodeLinks)
-                {
-                    sql += "ALTER TABLE [" + node.from+ "]\n";
-                    sql += "ADD CONSTRAINT [FK "+ node.from+" "+node.to+" ("+node.text+"="+node.toText+")]"+ "\n";
-                    sql += "FOREIGN KEY ("+node.text+")"+" REFERENCES ["+node.to.ToUpperInvariant()+"]("+node.toText+")\n" ;
-                    sql += "\n";
-                }
-            }
-            sql += "GO\n";
-
-            foreach (var node in nodeDatas.NodeDatas)
-            {
-                int firstColumn = 0;
-                foreach (var column in node.tables)
-                {
-                    if(firstColumn==0 && node.description!=string.Empty)// ilk kolonsa tablonun açıklamasını koy.
+            #region relations create
+                    if (nodeDatas.NodeLinks.Count > 0)
                     {
-                        sql += string.Format("EXEC sys.sp_addextendedproperty @name = N'MS_Description', @value = N'{0}' , @level0type = N'SCHEMA',@level0name = N'dbo', @level1type = N'TABLE',@level1name = N'{1}', @level2type = N'COLUMN',@level2name = N'{2}'", node.description.Replace("'", " "), node.key, column.name) + "\n";
-                        sql += "GO\n";
+                        //foreign key tanımları yapılıyor.
+                        foreach (var node in nodeDatas.NodeLinks)
+                        {
+                            sql += "ALTER TABLE [" + node.from + "]\n";
+                            sql += "ADD CONSTRAINT [FK " + node.from + " " + node.to + " (" + node.text + "=" + node.toText + ")]" + "\n";
+                            sql += "FOREIGN KEY (" + node.text + ")" + " REFERENCES [" + node.to.ToUpperInvariant() + "](" + node.toText + ")\n";
+                            sql += "\n";
+                        }
                     }
-                    else if(firstColumn>0 && column.description!=string.Empty) // kolon için açıklama varsa.
+                    sql += "GO\n";
+            #endregion
+
+            #region explanation create 
+                    foreach (var node in nodeDatas.NodeDatas)
                     {
-                        sql += string.Format("EXEC sys.sp_addextendedproperty @name = N'MS_Description', @value = N'{0}' , @level0type = N'SCHEMA',@level0name = N'dbo', @level1type = N'TABLE',@level1name = N'{1}', @level2type = N'COLUMN',@level2name = N'{2}'",column.description.Replace("'"," "), node.key,column.name)+"\n";
-                        sql += "GO\n";
+                        int firstColumn = 0;
+                        foreach (var column in node.tables)
+                        {
+                            if (firstColumn == 0 && node.description != string.Empty)// ilk kolonsa tablonun açıklamasını koy.
+                            {
+                                sql += string.Format("EXEC sys.sp_addextendedproperty  @name = N'MS_Description', @value = N'{0}' , @level0type = N'SCHEMA',@level0name = N'dbo', @level1type = N'TABLE',@level1name = N'{1}', @level2type = N'COLUMN',@level2name = N'{2}'", node.description.Replace("'", " "), node.key, column.name) + "\n";
+                                sql += "GO\n";
+                            }
+                            else if (firstColumn > 0 && column.description != string.Empty) // kolon için açıklama varsa.
+                            {
+                                sql += string.Format("EXEC sys.sp_addextendedproperty @name = N'MS_Description', @value = N'{0}' , @level0type = N'SCHEMA',@level0name = N'dbo', @level1type = N'TABLE',@level1name = N'{1}', @level2type = N'COLUMN',@level2name = N'{2}'", column.description.Replace("'", " "), node.key, column.name) + "\n";
+                                sql += "GO\n";
+                            }
+                            firstColumn++;
+                        }
                     }
-                    firstColumn++;
-                }
-            }
+            #endregion
+
 
             return Content(sql);
         }

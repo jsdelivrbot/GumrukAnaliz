@@ -1479,34 +1479,64 @@ namespace WinApp
             objPara2.Format.SpaceAfter = 10; //defind some style
             objPara2.Range.InsertParagraphAfter(); //insert paragraph
 
+            int index = 0;
             foreach (var table in tables)
             {
+                index++;
                 Word.Table objTab1; //create table object
                 Word.Range objWordRng = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range; //go to end of document
-                                                                                              //Insert a 2 x 2 table, (table with 2 row and 2 column)
+                //Insert a 2 x 2 table, (table with 2 row and 2 column)
 
-                objTab1 = objDoc.Tables.Add(objWordRng, 6, 2, ref objMiss, ref objMiss); //add table object in word document
+                objTab1 = objDoc.Tables.Add(objWordRng, 7, 2, ref objMiss, ref objMiss); //add table object in word document
                 objTab1.Range.ParagraphFormat.SpaceAfter = 6;
 
                 objTab1.Borders.InsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 objTab1.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                objTab1.Cell(1, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
+                objTab1.Cell(2, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
+                objTab1.Cell(3, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
+                objTab1.Cell(4, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
+                objTab1.Cell(5, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
+                objTab1.Cell(6, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
+                objTab1.Cell(7, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
+
+                objTab1.Cell(1, 1).SetWidth(objApp.Application.CentimetersToPoints(3f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(2, 1).SetWidth(objApp.Application.CentimetersToPoints(3f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(3, 1).SetWidth(objApp.Application.CentimetersToPoints(3f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(4, 1).SetWidth(objApp.Application.CentimetersToPoints(3f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(5, 1).SetWidth(objApp.Application.CentimetersToPoints(3f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(6, 1).SetWidth(objApp.Application.CentimetersToPoints(3f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(7, 1).SetWidth(objApp.Application.CentimetersToPoints(3f), Word.WdRulerStyle.wdAdjustNone);
 
                 objTab1.Cell(1, 1).Range.Text = "Tablo Adı";
                 objTab1.Cell(2, 1).Range.Text = "Tablo Tanımı";
-                objTab1.Cell(3, 1).Range.Text = "Referans";
-                objTab1.Cell(4, 1).Range.Text = "Referans Kaynak";
-                objTab1.Cell(5, 1).Range.Text = "Frekans";
-                objTab1.Cell(6, 1).Range.Text = "Mevzuat";
+                objTab1.Cell(3, 1).Range.Text = "Tablo Tipi";
+                objTab1.Cell(4, 1).Range.Text = "Referans";
+                objTab1.Cell(5, 1).Range.Text = "Referans Kaynak";
+                objTab1.Cell(6, 1).Range.Text = "Frekans";
+                objTab1.Cell(7, 1).Range.Text = "Mevzuat";
+
+                objTab1.Cell(1, 2).SetWidth(objApp.Application.CentimetersToPoints(14f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(2, 2).SetWidth(objApp.Application.CentimetersToPoints(14f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(3, 2).SetWidth(objApp.Application.CentimetersToPoints(14f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(4, 2).SetWidth(objApp.Application.CentimetersToPoints(14f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(5, 2).SetWidth(objApp.Application.CentimetersToPoints(14f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(6, 2).SetWidth(objApp.Application.CentimetersToPoints(14f), Word.WdRulerStyle.wdAdjustNone);
+                objTab1.Cell(7, 2).SetWidth(objApp.Application.CentimetersToPoints(14f), Word.WdRulerStyle.wdAdjustNone);
 
                 //columnlar şekilleniyor
                 objTab1.Cell(1, 2).Range.Text = table.Name;
                 objTab1.Cell(2, 2).Range.Text = table.Aciklama;
+                if(table.MetaColumns[0].referans=="Referans" && table.MetaColumns[0].referansKaynak== "BİLGE GÜMRÜK Referans Verileri")
+                    objTab1.Cell(3, 2).Range.Text = "View";
+                else
+                    objTab1.Cell(3, 2).Range.Text = "Tablo";
 
                 //referans bilgisi tablo bilgileri arasında yer alacak. Tablonun columnları arasında yapılacak olan bir sorgu ile referans bilgisi boş olmayan ilk column'ın değeri alınıp yazılacak.
-                objTab1.Cell(3, 2).Range.Text = table.MetaColumns.Where(p => p.referans == string.Empty).FirstOrDefault().referans;
-                objTab1.Cell(4, 2).Range.Text = table.MetaColumns.Where(p => p.referans == string.Empty).FirstOrDefault().referansKaynak;
-                objTab1.Cell(5, 2).Range.Text = table.MetaColumns.Where(p => p.referans == string.Empty).FirstOrDefault().frekans;
-                objTab1.Cell(6, 2).Range.Text = table.MetaColumns.Where(p => p.referans == string.Empty).FirstOrDefault().mevzuat;
+                objTab1.Cell(4, 2).Range.Text = table.MetaColumns[0].referans;
+                objTab1.Cell(5, 2).Range.Text = table.MetaColumns[0].referansKaynak;
+                objTab1.Cell(6, 2).Range.Text = table.MetaColumns[0].frekans;
+                objTab1.Cell(7, 2).Range.Text = table.MetaColumns[0].mevzuat;
 
                 objWordRng = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range;
                 objWordRng.InsertParagraphAfter(); //put enter in document
@@ -1527,6 +1557,19 @@ namespace WinApp
                     objTab2.Borders.InsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
                     objTab2.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
 
+                    objTab2.Cell(1, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
+                    objTab2.Cell(1, 2).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
+                    objTab2.Cell(1, 3).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
+                    objTab2.Cell(1, 4).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
+                    objTab2.Cell(1, 5).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
+
+                    objTab2.Cell(1, 1).SetWidth(objApp.Application.CentimetersToPoints(4f), Word.WdRulerStyle.wdAdjustNone);
+                    objTab2.Cell(1, 2).SetWidth(objApp.Application.CentimetersToPoints(6f), Word.WdRulerStyle.wdAdjustNone);
+                    objTab2.Cell(1, 3).SetWidth(objApp.Application.CentimetersToPoints(2f), Word.WdRulerStyle.wdAdjustNone);
+                    objTab2.Cell(1, 4).SetWidth(objApp.Application.CentimetersToPoints(1f), Word.WdRulerStyle.wdAdjustNone);
+                    objTab2.Cell(1, 5).SetWidth(objApp.Application.CentimetersToPoints(4f), Word.WdRulerStyle.wdAdjustNone);
+
+
                     objTab2.Cell(1, 1).Range.Text = "Değişken Adı";
                     objTab2.Cell(1, 2).Range.Text = "Değişken Tanımı";
                     objTab2.Cell(1, 3).Range.Text = "Değişken Tipi";
@@ -1536,18 +1579,28 @@ namespace WinApp
                     foreach (var column in table.MetaColumns)
                     {
                         a++;
+                        objTab2.Cell(a, 1).SetWidth(objApp.Application.CentimetersToPoints(4f), Word.WdRulerStyle.wdAdjustNone);
+                        objTab2.Cell(a, 2).SetWidth(objApp.Application.CentimetersToPoints(6f), Word.WdRulerStyle.wdAdjustNone);
+                        objTab2.Cell(a, 3).SetWidth(objApp.Application.CentimetersToPoints(2f), Word.WdRulerStyle.wdAdjustNone);
+                        objTab2.Cell(a, 4).SetWidth(objApp.Application.CentimetersToPoints(1f), Word.WdRulerStyle.wdAdjustNone);
+                        objTab2.Cell(a, 5).SetWidth(objApp.Application.CentimetersToPoints(4f), Word.WdRulerStyle.wdAdjustNone);
+
                         objTab2.Cell(a, 1).Range.Text = column.name + (column.PK == true ? " (Primary Key)" : "");
                         objTab2.Cell(a, 2).Range.Text = column.tanimi;
                         objTab2.Cell(a, 3).Range.Text = column.VeriTipi;
                         objTab2.Cell(a, 4).Range.Text = column.Uzunluk;
                         objTab2.Cell(a, 5).Range.Text = column.referansVeriListesi;
+
+
                     }
 
                     objWordRng2 = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range;
                     objWordRng2.InsertParagraphAfter(); //put enter in document
                     objWordRng2.InsertAfter("");
                 }
+
             }
+
             object szPath = "D:\\MetaVeri.docx"; //your file gets saved with name 'test.docx'
             objDoc.SaveAs(ref szPath);
         }

@@ -1365,6 +1365,17 @@ namespace WinApp
                 return;
 
             FileStream file = File.OpenRead(textBox1.Text);
+            string filename = file.Name;
+
+
+            string[] newfilename = filename.Split('\\');
+
+            filename = newfilename[newfilename.Count() - 1];
+
+
+            newfilename = filename.Split('.');
+
+            filename = newfilename[0];
 
             using (var package = new ExcelPackage(file))
             {
@@ -1407,7 +1418,7 @@ namespace WinApp
                     tableName = ((workSheet.Cells[rowIterator, 2].Value == null) ? "" : workSheet.Cells[rowIterator, 2].Value.ToString()).ToUpperInvariant();
                     columnName = (workSheet.Cells[rowIterator, 3].Value == null) ? "" : workSheet.Cells[rowIterator, 3].Value.ToString();
                     columnExp = (workSheet.Cells[rowIterator, 4].Value == null) ? "" : workSheet.Cells[rowIterator, 4].Value.ToString();
-                    datatype = (workSheet.Cells[rowIterator, 5].Value == null) ? "" : workSheet.Cells[rowIterator, 5].Value.ToString();
+                    datatype = (workSheet.Cells[rowIterator, 5].Value == null) ? "" : workSheet.Cells[rowIterator, 5].Value.ToString().ToUpperInvariant();
                     uzunluk = (workSheet.Cells[rowIterator, 6].Value == null) ? "" : workSheet.Cells[rowIterator, 6].Value.ToString();
                     lookupTable = ((workSheet.Cells[rowIterator, 7].Value == null) ? "" : workSheet.Cells[rowIterator, 7].Value.ToString()).ToUpperInvariant();
                     LinkColumn = (workSheet.Cells[rowIterator, 8].Value == null) ? "" : workSheet.Cells[rowIterator, 8].Value.ToString();
@@ -1433,31 +1444,34 @@ namespace WinApp
 
                     if (metaTbl != null)
                     {
-                        MetaColumn metaColumn = new MetaColumn();
-                        metaColumn.name = columnName;
-                        metaColumn.frekans = frekans;
-                        metaColumn.mevzuat = mevzuat;
-                        metaColumn.referans = referans;
-                        metaColumn.referansKaynak = referansKaynak;
-                        metaColumn.referansVeriListesi = referansVeriListesi;
-                        metaColumn.tanimi = columnExp;
-                        metaColumn.PK = (pk == "true" ? true : false);
-                        metaColumn.VeriTipi = datatype;
-                        metaColumn.Uzunluk = uzunluk;
-                        if (metaTbl.MetaColumns == null)
-                            metaTbl.MetaColumns = new List<MetaColumn>();
+                        if (columnName != string.Empty)
+                        {
+                            MetaColumn metaColumn = new MetaColumn();
+                            metaColumn.name = columnName;
+                            metaColumn.frekans = frekans;
+                            metaColumn.mevzuat = mevzuat;
+                            metaColumn.referans = referans;
+                            metaColumn.referansKaynak = referansKaynak;
+                            metaColumn.referansVeriListesi = referansVeriListesi;
+                            metaColumn.tanimi = columnExp;
+                            metaColumn.PK = (pk == "true" ? true : false);
+                            metaColumn.VeriTipi = datatype;
+                            metaColumn.Uzunluk = uzunluk;
+                            if (metaTbl.MetaColumns == null)
+                                metaTbl.MetaColumns = new List<MetaColumn>();
 
-                        metaTbl.MetaColumns.Add(metaColumn);
+                            metaTbl.MetaColumns.Add(metaColumn);
+                        }
                     }
                 } // for end
 
-                PrepareWordDocument(listMetaTable);
+                PrepareWordDocument(listMetaTable, filename);
 
                 MessageBox.Show("Tablo Sayısı:" + listMetaTable.Count().ToString());
             }
         }
 
-        public void PrepareWordDocument(List<MetaTable> tables)
+        public void PrepareWordDocument(List<MetaTable> tables, string filename)
         {
             Word._Application objApp;
             Word._Document objDoc;
@@ -1465,6 +1479,7 @@ namespace WinApp
             object objMiss = System.Reflection.Missing.Value;
             object objEndOfDocFlag = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
 
+            filename = filename.ToUpperInvariant();
             //Start Word and create a new document.
             objApp = new Word.Application();
             objApp.Visible = true;
@@ -1475,7 +1490,7 @@ namespace WinApp
             Word.Paragraph objPara2; //define paragraph object
             object oRng = objDoc.Bookmarks.get_Item(ref objEndOfDocFlag).Range; //go to end of the page
             objPara2 = objDoc.Content.Paragraphs.Add(ref oRng); //add paragraph at end of document
-            objPara2.Range.Text = "T.C. Gümrük ve Ticaret Bakanlığı Metaveri Dökümanı";
+            objPara2.Range.Text = filename + " METAVERİ DÖKÜMANI";
             objPara2.Format.SpaceAfter = 10; //defind some style
             objPara2.Range.InsertParagraphAfter(); //insert paragraph
 
@@ -1492,13 +1507,13 @@ namespace WinApp
 
                 objTab1.Borders.InsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
                 objTab1.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                objTab1.Cell(1, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
-                objTab1.Cell(2, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
-                objTab1.Cell(3, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
-                objTab1.Cell(4, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
-                objTab1.Cell(5, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
-                objTab1.Cell(6, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
-                objTab1.Cell(7, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb(); 
+                objTab1.Cell(1, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
+                objTab1.Cell(2, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
+                objTab1.Cell(3, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
+                objTab1.Cell(4, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
+                objTab1.Cell(5, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
+                objTab1.Cell(6, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
+                objTab1.Cell(7, 1).Range.Shading.BackgroundPatternColor = (Word.WdColor)Color.FromArgb(0, 240, 240, 240).ToArgb();
 
                 objTab1.Cell(1, 1).SetWidth(objApp.Application.CentimetersToPoints(3f), Word.WdRulerStyle.wdAdjustNone);
                 objTab1.Cell(2, 1).SetWidth(objApp.Application.CentimetersToPoints(3f), Word.WdRulerStyle.wdAdjustNone);
@@ -1527,7 +1542,7 @@ namespace WinApp
                 //columnlar şekilleniyor
                 objTab1.Cell(1, 2).Range.Text = table.Name;
                 objTab1.Cell(2, 2).Range.Text = table.Aciklama;
-                if(table.MetaColumns[0].referans=="Referans" && table.MetaColumns[0].referansKaynak== "BİLGE GÜMRÜK Referans Verileri")
+                if (table.MetaColumns[0].referans == "Referans" && table.MetaColumns[0].referansKaynak == "BİLGE GÜMRÜK Referans Verileri")
                     objTab1.Cell(3, 2).Range.Text = "View";
                 else
                     objTab1.Cell(3, 2).Range.Text = "Tablo";
@@ -1579,6 +1594,7 @@ namespace WinApp
                     foreach (var column in table.MetaColumns)
                     {
                         a++;
+
                         objTab2.Cell(a, 1).SetWidth(objApp.Application.CentimetersToPoints(4f), Word.WdRulerStyle.wdAdjustNone);
                         objTab2.Cell(a, 2).SetWidth(objApp.Application.CentimetersToPoints(6f), Word.WdRulerStyle.wdAdjustNone);
                         objTab2.Cell(a, 3).SetWidth(objApp.Application.CentimetersToPoints(2f), Word.WdRulerStyle.wdAdjustNone);
@@ -1601,7 +1617,7 @@ namespace WinApp
 
             }
 
-            object szPath = "D:\\MetaVeri.docx"; //your file gets saved with name 'test.docx'
+            object szPath = "D:\\Metaveriler\\" + filename+" Metaveri"; //your file gets saved with name 'test.docx'
             objDoc.SaveAs(ref szPath);
         }
 
